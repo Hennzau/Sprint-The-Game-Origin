@@ -1,6 +1,6 @@
 import numpy as np
 
-from obstacle import Obstacle
+from level.obstacle import Obstacle
 
 """
 Grid will contain the different obstacles of the level in a board (np.array) of size(height, width).

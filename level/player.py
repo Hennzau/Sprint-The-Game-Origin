@@ -1,8 +1,10 @@
-### Managment of the player object ###
+# Management of the player object #
 
-## Import ##
+# Import #
 import numpy as np
-## ---------------- ##
+
+
+# ---------------- #
 
 
 class Player:

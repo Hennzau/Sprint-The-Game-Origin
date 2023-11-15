@@ -1,6 +1,6 @@
-from grid import Grid
-from player import Player
-from obstacle import colors
+from level.grid import Grid
+from level.player import Player
+from level.obstacle import colors
 
 """
 A Level is an object that contains the grid and players data
