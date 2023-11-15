@@ -11,9 +11,16 @@ class Game:
         self.levels = []
         self.levels.append(Level((20, 20), [(0, 0)], [colors["red"]]))
 
-    def update(self, delta_time):
+    def update(self, delta_time):     
         pass
-
+    
+    def is_open(self):
+        for event in events():
+            if event.type == pygame.QUIT:
+                return False
+            else: 
+                return True
+    
     def render(self):
         # update le rendu
         pass
