@@ -11,7 +11,7 @@ from level.player import Player
 class Game:
     def __init__(self):
         self.levels = []
-        self.cursor = None
+        self.cursor = 0
         self.levels.append(Level((20, 20), [(0, 0)], [colors["red"]]))
         self.is_open = True
 
