@@ -3,9 +3,10 @@
 # Imports #
 import pygame
 
-import render.surface
 from game import Game
+
 from render.surface import Surface
+from render.surface import events, flip
 from level.obstacle import colors
 
 
@@ -20,7 +21,7 @@ def main():
     running = True
 
     while running:
-        for event in render.surface.events():
+        for event in events():
             if event.type == pygame.QUIT:
                 running = False
 
@@ -36,7 +37,7 @@ def main():
         end = pygame.time.get_ticks()
         delta_time = (end - start) / 1000
 
-        render.surface.flip()
+        flip()
 
     pygame.quit()
 
