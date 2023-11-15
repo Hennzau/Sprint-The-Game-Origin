@@ -18,4 +18,8 @@ class Player:
         self.velocity = np.array([x, y])
 
     def update(self, delta_time):
-        self.position = self.position + self.velocity * delta_time
+        if grid.obstacles(int((self.position + self.velocity * delta_time)/50)) is not None:
+            self.position = self.position
+            self.velocity = 0
+        else :
+            self.position = self.position + self.velocity * delta_time
