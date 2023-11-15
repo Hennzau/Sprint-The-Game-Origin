@@ -20,7 +20,8 @@ class Game:
         # code moche
         self.cursor = 0
 
-        self.levels.append(Level((20, 20), [(100, 100)], [colors["red"]]))
+        self.levels.append(Level((20, 20), [(100, 100)], [
+                           colors["red"]], [(100, 200)]))
 
         self.levels[self.cursor].grid.obstacles[10, 5] = Obstacle("blue")
 
