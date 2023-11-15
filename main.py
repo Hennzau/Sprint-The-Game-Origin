@@ -20,10 +20,7 @@ def main():
     delta_time = 0
     running = True
 
-    while running:
-        for event in events():
-            if event.type == pygame.QUIT:
-                running = False
+    while game.is_open():
 
         surface.clear(colors["darkgrey"])
 
@@ -32,7 +29,8 @@ def main():
         game.update(delta_time)
         game.render()
 
-        pygame.draw.rect(surface.surface, colors["red"], pygame.Rect(200, 150, 100, 50))
+        pygame.draw.rect(
+            surface.surface, colors["red"], pygame.Rect(200, 150, 100, 50))
 
         end = pygame.time.get_ticks()
         delta_time = (end - start) / 1000
