@@ -20,8 +20,8 @@ class Game:
         # code moche
         self.cursor = 0
 
-        self.levels.append(Level((20, 20), [(100, 100)], [
-                           colors["red"]], [(100, 200)]))
+        self.levels.append(Level((20, 20), [(1, 1)], [
+                           colors["red"]], [(1, 2)]))
 
         self.levels[self.cursor].grid.obstacles[10, 5] = Obstacle("blue")
 
@@ -45,6 +45,9 @@ class Game:
                         player.update_velocity(0, 200)
 
         self.levels[self.cursor].update(delta_time)
+
+        if self.levels[self.cursor].finished:
+            print("Victoire")
 
     def render(self, surface):
         draw_level(self.levels[self.cursor], surface)
