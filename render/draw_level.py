@@ -5,6 +5,8 @@ from level.level import Level
 """
 draw_level uses both draw_grid and draw_player in order to render the entire level to the user.
 """
+
+
 def draw_level(level, surface):
     draw_grid(level.grid, surface)
     for k in range(len(level.players)):

@@ -16,3 +16,6 @@ class Player:
 
     def update_velocity(self, x, y):
         self.velocity = np.array([x, y])
+
+    def update(self, delta_time):
+        self.position = self.position + self.velocity * delta_time

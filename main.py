@@ -20,22 +20,22 @@ def main():
     delta_time = 0
     running = True
 
-    while game.is_open:
+    clock = pygame.time.Clock()
 
+    while game.is_open:
         surface.clear(colors["darkgrey"])
 
         start = pygame.time.get_ticks()
 
-        game.update(delta_time)
-        game.render()
+        game.update(float (1/60))
+        game.render(surface.surface)
 
         pygame.draw.rect(
             surface.surface, colors["red"], pygame.Rect(200, 150, 100, 50))
 
-        end = pygame.time.get_ticks()
-        delta_time = (end - start) / 1000
-
         flip()
+
+        clock.tick(60)
 
     pygame.quit()
 

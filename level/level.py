@@ -16,3 +16,7 @@ class Level:
                 len(initial_positions)):  # sometimes there is two players and we can imagine a level with even more
 
             self.players.append(Player(initial_colors[k], initial_positions[k][0], initial_positions[k][1], 0, 0))
+
+    def update(self, delta_time):
+        for player in self.players:
+            player.update(delta_time)
