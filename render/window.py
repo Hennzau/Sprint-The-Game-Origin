@@ -14,4 +14,7 @@ class Window:
     
     def clear(self, background_color):
         self.window.fill(background_color)
+    
+    def flip(self):
+        pygame.display.flip()
         
