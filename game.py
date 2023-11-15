@@ -1,5 +1,5 @@
 # importations
-
+import pygame
 from level.level import Level
 from level.obstacle import colors
 
