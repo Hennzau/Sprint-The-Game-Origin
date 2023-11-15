@@ -2,7 +2,7 @@
 
 # Import #
 import numpy as np
-
+from grid import Grid
 
 # ---------------- #
 
@@ -17,5 +17,9 @@ class Player:
     def update_velocity(self, x, y):
         self.velocity = np.array([x, y])
 
-    def update(self, delta_time):
-        self.position = self.position + self.velocity * delta_time
+    def update(self, delta_time, grid):
+        if grid.obstacles(int((self.position + self.velocity * delta_time)/50)) is not None:
+            self.position = self.position
+            self.velocity = 0
+        else :
+            self.position = self.position + self.velocity * delta_time
