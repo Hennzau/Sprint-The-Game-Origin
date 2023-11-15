@@ -20,6 +20,9 @@ class Player:
             self.velocity = np.array([x, y])
 
     def collides(self, next_position, grid):
+        if next_position[0] < 0 or next_position[0] >= grid.size[0]* pixel_size or next_position[1] < 0 or next_position[1] >= grid.size[1] * pixel_size:
+            return True
+
         x = int(next_position[0]/pixel_size)
         y = int(next_position[1]/pixel_size)
 

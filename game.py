@@ -9,6 +9,7 @@ from level.obstacle import Obstacle
 
 from render.draw_level import draw_level
 
+from level.level_builder import build_level_0
 
 # class game which updates the game (logic and render) at each passage through the main loop
 
@@ -20,10 +21,7 @@ class Game:
         # code moche
         self.cursor = 0
 
-        self.levels.append(Level((20, 20), [(1, 1)], [
-                           colors["red"]], [(1, 2)]))
-
-        self.levels[self.cursor].grid.obstacles[10, 5] = Obstacle("blue")
+        self.levels.append(build_level_0())
 
         # code bon
 
@@ -36,13 +34,13 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 for player in (self.levels[self.cursor]).players:
                     if event.key == pygame.K_LEFT:
-                        player.update_velocity(-200, 0)
+                        player.update_velocity(-400, 0)
                     if event.key == pygame.K_RIGHT:
-                        player.update_velocity(200, 0)
+                        player.update_velocity(400, 0)
                     if event.key == pygame.K_UP:
-                        player.update_velocity(0, -200)
+                        player.update_velocity(0, -400)
                     if event.key == pygame.K_DOWN:
-                        player.update_velocity(0, 200)
+                        player.update_velocity(0, 400)
 
         self.levels[self.cursor].update(delta_time)
 

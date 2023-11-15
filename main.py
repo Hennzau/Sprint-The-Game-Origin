@@ -23,15 +23,12 @@ def main():
     clock = pygame.time.Clock()
 
     while game.is_open:
-        surface.clear(colors["darkgrey"])
+        surface.clear(colors["darkblue"])
 
         start = pygame.time.get_ticks()
 
         game.update(float (1/60))
         game.render(surface.surface)
-
-        pygame.draw.rect(
-            surface.surface, colors["red"], pygame.Rect(200, 150, 100, 50))
 
         flip()
 
