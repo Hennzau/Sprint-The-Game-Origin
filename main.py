@@ -31,6 +31,8 @@ def main():
         game.update(delta_time)
         game.render()
 
+        pygame.draw.rect(surface.surface, colors["red"], pygame.Rect(200, 150, 100, 50))
+
         end = pygame.time.get_ticks()
         delta_time = (end - start) / 1000
 
