@@ -1,23 +1,42 @@
-### Main loop of the game###
+# Main loop of the game #
 
-## Imports ##
+# Imports #
 import pygame
+
+import render.surface
 from game import Game
-from render.window import Window
+from render.surface import Surface
 from level.obstacle import colors
-## ----------------- ##
+
+
+# ----------------- #
 
 
 def main():
-    surface = Window(800, 800, "test")
+    surface = Surface(1280, 720, "test")
     game = Game()
-    while True:
-        start = pygame.time.get_ticks()
+
+    delta_time = 0
+    running = True
+
+    while running:
+        for event in render.surface.events():
+            if event.type == pygame.QUIT:
+                running = False
+
         surface.clear(colors["darkgrey"])
+
+        start = pygame.time.get_ticks()
+
+        game.update(delta_time)
+        game.render()
+
         end = pygame.time.get_ticks()
-        deltatime = (end-start)/1000
-        game.update(deltatime)
-        surface.flip()
+        delta_time = (end - start) / 1000
+
+        render.surface.flip()
+
+    pygame.quit()
 
 
 if __name__ == '__main__':
