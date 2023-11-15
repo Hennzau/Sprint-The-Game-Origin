@@ -26,7 +26,7 @@ class Level:
         for i in range(len(self.players)):
             player = self.players[i]
             player.update(delta_time, self.grid)
-            if (np.array([int(player.position[0]/pixel_size), int(player.position[1]/pixel_size)]) != self.final_positions[i]).all():
+            if int(player.position[0]/pixel_size) != self.final_positions[i][0] or int(player.position[1]/pixel_size) != self.final_positions[i][1]:
                 finished = False
         if finished:
             self.finished = True
