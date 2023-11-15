@@ -11,6 +11,3 @@ class Player:
         self.color = color
         self.position = np.array([x_init, y_init])
         self.velocity = np.array([x_velocity, y_velocity])
-
-    def update():
-        pass
