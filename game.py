@@ -11,7 +11,10 @@ from render.draw_level import draw_level
 
 from level.level_builder import build_level_0
 
+from sound import sound_victory
+
 # class game which updates the game (logic and render) at each passage through the main loop
+
 
 class Game:
     def __init__(self):
@@ -46,6 +49,7 @@ class Game:
 
         if self.levels[self.cursor].finished:
             print("Victoire")
+            sound_victory()
 
     def render(self, surface):
         draw_level(self.levels[self.cursor], surface)
