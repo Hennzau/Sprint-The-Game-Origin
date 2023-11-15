@@ -20,7 +20,7 @@ def main():
     delta_time = 0
     running = True
 
-    while game.is_open():
+    while game.is_open:
 
         surface.clear(colors["darkgrey"])
 
