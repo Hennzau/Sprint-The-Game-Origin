@@ -3,6 +3,7 @@
 # Import #
 import numpy as np
 from grid import Grid
+from level.obstacle import pixel_size
 
 # ---------------- #
 
@@ -15,11 +16,30 @@ class Player:
         self.velocity = np.array([x_velocity, y_velocity])
 
     def update_velocity(self, x, y):
-        self.velocity = np.array([x, y])
+        if (self.velocity==np.array([0,0])).all():
+            self.velocity = np.array([x, y])
+
+    def collides(self,next_position,grid):
+        x = int (next_position[0]/pixel_size)
+        y = int (next_position[1]/pixel_size)
+
+        if grid.obstacles[x, y] is None:
+            return False
+        
+        if grid.obstacles[x,y].color_switcher :
+            self.color = grid.obstacles[x,y].color
+            return False
+        
+        if grid.obstacles[x,y].color == self.color :
+            return False
+        
+        return True
 
     def update(self, delta_time, grid):
-        if grid.obstacles(int((self.position + self.velocity * delta_time)/50)) is not None:
+        if self.collides(self.position + self.velocity * delta_time, grid):
             self.position = self.position
-            self.velocity = 0
+            self.velocity = np.array([0,0])
         else :
             self.position = self.position + self.velocity * delta_time
+
+
