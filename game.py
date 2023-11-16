@@ -28,7 +28,7 @@ class Game:
         # code moche
         self.cursor = 0
 
-        self.levels.append(build_level("levels/level0.json"))
+        self.levels.append(build_level("levels/level1.json"))
 
         # code bon
 

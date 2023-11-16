@@ -16,6 +16,7 @@ class Level:
         self.grid = Grid(size)
         self.players = []
         self.final_positions = final_positions
+        self.initial_positions = initial_positions
         self.finished = False
         for k in range(
                 len(initial_positions)):  # sometimes there is two players and we can imagine a level with even more
