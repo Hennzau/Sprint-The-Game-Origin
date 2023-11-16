@@ -5,13 +5,15 @@ from level.obstacle import colors
 from render.surface import events
 
 from level.player import Player
-from level.obstacle import Obstacle
+from level.obstacle import Obstacle, pixel_size
 
 from render.draw_level import draw_level
 
 from level.level_builder import build_level_0
 
 from sound import sound_victory
+from render.surface import Surface
+from level.grid import Grid
 
 # class game which updates the game (logic and render) at each passage through the main loop
 
@@ -53,4 +55,7 @@ class Game:
         self.levels[self.cursor].update(delta_time)
 
     def render(self, surface):
-        draw_level(self.levels[self.cursor], surface)
+        draw_level(self.levels[self.cursor], surface.surface)
+        temp_surface=surface.surface.copy()
+        surface.surface.fill((0,0,0))
+        surface.surface.blit(temp_surface, (int((surface.width-(self.levels[self.cursor].grid.size[0])*pixel_size)/2),int((surface.height-(self.levels[self.cursor].grid.size[1])*pixel_size)/2)))

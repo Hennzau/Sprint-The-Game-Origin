@@ -28,7 +28,7 @@ def main():
         start = pygame.time.get_ticks()
 
         game.update(float (1/60))
-        game.render(surface.surface)
+        game.render(surface)
 
         flip()
 
