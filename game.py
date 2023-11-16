@@ -25,7 +25,7 @@ class Game:
     def __init__(self):
         self.levels = []
         self.cursor = None
-        self.stage = "Main Menu"
+        self.stage = "Launched"
 
         # code moche
         self.cursor = 0
