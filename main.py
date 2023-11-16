@@ -4,7 +4,7 @@
 import pygame
 
 from game import Game
-
+from render.draw_main_menu import draw_main_menu
 from render.surface import Surface
 from render.surface import events, flip
 from level.obstacle import colors
@@ -16,19 +16,18 @@ from level.obstacle import colors
 def main():
     surface = Surface(1280, 720, "test")
     game = Game()
-
-    delta_time = 0
-    running = True
-
     clock = pygame.time.Clock()
 
     while game.is_open:
-        surface.clear(colors["darkblue"])
+        surface.clear((255,255,255))
 
-        start = pygame.time.get_ticks()
+        if game.stage == "Launched":
+            game.update(float (1/60))
+            game.render(surface)
 
-        game.update(float (1/60))
-        game.render(surface.surface)
+        if game.stage == "Main Menu":
+            game.update(float (1/60))
+            draw_main_menu(surface)
 
         flip()
 
