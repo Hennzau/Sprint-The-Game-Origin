@@ -2,10 +2,12 @@ from level.grid import Grid
 from level.player import Player
 from level.obstacle import colors, pixel_size
 import numpy as np
+import pygame
 
 """
 A Level is an object that contains the grid and players data
 """
+victory_event = pygame.event.Event(pygame.USEREVENT)
 
 
 class Level:
@@ -28,5 +30,6 @@ class Level:
             player.update(delta_time, self.grid)
             if int(player.position[0]/pixel_size) != self.final_positions[i][0] or int(player.position[1]/pixel_size) != self.final_positions[i][1]:
                 finished = False
-        if finished:
+        if finished and not self.finished:
+            pygame.event.post(victory_event)
             self.finished = True
