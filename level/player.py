@@ -36,66 +36,64 @@ class Player:
 
         return np.array([x, y])
 
-    def calculate_destination(self, grid, direction):
+    def advance_x(self, grid, r1, r2):
         x, y = self.level_position()
+        i = 0
 
         active_color = self.color
 
+        for j in range(x, r1, r2):
+            if grid.obstacles[j, y] is None:
+                i = j - x
+                continue
+            else:
+                if grid.obstacles[j, y].color_switcher:
+                    active_color = grid.obstacles[j, y].color
+                    i = j - x
+                    continue
+
+                if not grid.obstacles[j, y].color_switcher and not grid.obstacles[j, y].end and not (
+                        grid.obstacles[j, y].color == active_color):
+                    break
+
+        return i
+
+    def advance_y(self, grid, r1, r2):
+        x, y = self.level_position()
+        i = 0
+
+        active_color = self.color
+
+        for j in range(y, r1, r2):
+            if grid.obstacles[x, j] is None:
+                i = j - y
+                continue
+            else:
+                if grid.obstacles[x, j].color_switcher:
+                    active_color = grid.obstacles[x, j].color
+                    i = j - y
+                    continue
+
+                if not grid.obstacles[x, j].color_switcher and not grid.obstacles[x, j].end and not (
+                        grid.obstacles[x, j].color == active_color):
+                    break
+
+        return i
+
+    def calculate_destination(self, grid, direction):
+        x, y = self.level_position()
+
         if direction == "right":
-            i = 0
-            while i < grid.size[0] - x - 1:
-                if grid.obstacles[x + i, y] is not None:
-                    if grid.obstacles[x + i, y].color_switcher:
-                        active_color = grid.obstacles[x + i, y].color
-
-                    if not grid.obstacles[x + i, y].color_switcher and not grid.obstacles[x + i, y].end and not (
-                            grid.obstacles[x + i, y].color == active_color):
-                        return np.array([x + i - 1, y])
-                i += 1
-
-            return np.array([x + i, y])
+            return np.array([x + self.advance_x(grid, grid.size[0], 1), y])
 
         if direction == "left":
-            i = 0
-            while x + i >= 1:
-                if grid.obstacles[x + i, y] is not None:
-                    if grid.obstacles[x + i, y].color_switcher:
-                        active_color = grid.obstacles[x + i, y].color
-
-                    if not grid.obstacles[x + i, y].color_switcher and not grid.obstacles[x + i, y].end and not (
-                            grid.obstacles[x + i, y].color == active_color):
-                        return np.array([x + i + 1, y])
-                i -= 1
-
-            return np.array([x + i, y])
+            return np.array([x + self.advance_x(grid, -1, -1), y])
 
         if direction == "down":
-            i = 0
-            while i < grid.size[1] - y - 1:
-                if grid.obstacles[x, y + i] is not None:
-                    if grid.obstacles[x, y + i].color_switcher:
-                        active_color = grid.obstacles[x, y + i].color
-
-                    if not grid.obstacles[x, y + i].color_switcher and not grid.obstacles[x, y + i].end and not (
-                            grid.obstacles[x, y + i].color == active_color):
-                        return np.array([x, y + i - 1])
-                i += 1
-
-            return np.array([x, y + i])
+            return np.array([x, y + self.advance_y(grid, grid.size[1], 1)])
 
         if direction == "up":
-            i = 0
-            while y + i >= 1:
-                if grid.obstacles[x, y + i] is not None:
-                    if grid.obstacles[x, y + i].color_switcher:
-                        active_color = grid.obstacles[x, y + i].color
-
-                    if not grid.obstacles[x, y + i].color_switcher and not grid.obstacles[x, y + i].end and not (
-                            grid.obstacles[x, y + i].color == active_color):
-                        return np.array([x, y + i + 1])
-                i -= 1
-
-            return np.array([x, y + i])
+            return np.array([x, y + self.advance_y(grid, -1, -1)])
 
     def move_up(self, grid):
         self.bounce_direction = np.array([0, -1])
@@ -129,9 +127,9 @@ class Player:
         if self.bounces:
             self.bounce_time = self.bounce_time + delta_time
             if self.bounce_amplitude == 0:
-                self.bounce_amplitude = 5
+                self.bounce_amplitude = 10
             else:
-                self.bounce_amplitude = self.bounce_amplitude - 20 * delta_time
+                self.bounce_amplitude = self.bounce_amplitude - 40 * delta_time
 
             if self.bounce_time >= 0.25:
                 self.bounce_time = 0
@@ -178,6 +176,7 @@ class Player:
                     self.position[1] = self.position[1] - delta
 
         x, y = self.level_position()
+
         if grid.obstacles[x, y] is not None:
             if grid.obstacles[x, y].color_switcher:
                 self.color = grid.obstacles[x, y].color

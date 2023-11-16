@@ -30,7 +30,7 @@ class Game:
         # code moche
         self.cursor = 0
 
-        self.levels.append(build_level("levels/level0.json"))
+        self.levels.append(build_level("assets/levels/level0.json"))
 
         # code bon
 
@@ -41,7 +41,6 @@ class Game:
             if event.type == pygame.QUIT:
                 self.is_open = False
             if event.type == pygame.USEREVENT:
-                print("Victoire")
                 sound_victory()
             if event.type == pygame.KEYDOWN:
                 for player in (self.levels[self.cursor]).players:
@@ -58,7 +57,10 @@ class Game:
 
     def render(self, surface):
         draw_level(self.levels[self.cursor], surface.surface)
+
         temp_surface = surface.surface.copy()
+
         surface.surface.fill((255, 255, 255))
-        surface.surface.blit(temp_surface, (int((surface.width-(self.levels[self.cursor].grid.size[0])*pixel_size)/2), int(
-            (surface.height-(self.levels[self.cursor].grid.size[1])*pixel_size)/2)))
+        surface.surface.blit(temp_surface,
+                             (int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2), int(
+                                 (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2)))
