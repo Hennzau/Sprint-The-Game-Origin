@@ -17,6 +17,7 @@ class Level:
         self.players = []
         self.final_positions = final_positions
         self.initial_positions = initial_positions
+        self.initial_colors=initial_colors
         self.finished = False
         for k in range(
                 len(initial_positions)):  # sometimes there is two players and we can imagine a level with even more
