@@ -29,17 +29,17 @@ def draw_level(level, surface):
                                     pixel_size / 2), pi / 2, 7 * pi / 4, 2)
         pygame.draw.circle(surface, colors["Volkswagen Taupe"], (
 
-            level.initial_positions[k][0] * pixel_size + pixel_size * 5 / 16,
-            level.initial_positions[k][1] * pixel_size + pixel_size * 5 / 16), 2)
+            level.initial_positions[k][0] * pixel_size + pixel_size * 11 / 32,
+            level.initial_positions[k][1] * pixel_size + pixel_size * 11 / 32), 3)
 
         pygame.draw.arc(surface, level.initial_colors[k],
-                        pygame.Rect(level.initial_positions[k][0] * pixel_size + pixel_size * 3 / 8,
-                                    level.initial_positions[k][1] * pixel_size + pixel_size * 3 / 8, pixel_size / 2,
+                        pygame.Rect(level.initial_positions[k][0] * pixel_size + pixel_size * 7 / 16,
+                                    level.initial_positions[k][1] * pixel_size + pixel_size * 7 / 16, pixel_size / 2,
                                     pixel_size / 2), -pi / 2, 3 * pi / 4, 2)
         pygame.draw.circle(surface, level.initial_colors[k], (
 
-            level.initial_positions[k][0] * pixel_size + pixel_size * 10 / 16,
-            level.initial_positions[k][1] * pixel_size + pixel_size * 10 / 16), 2)
+            level.initial_positions[k][0] * pixel_size + pixel_size * 21 / 32,
+            level.initial_positions[k][1] * pixel_size + pixel_size * 21 / 32), 3)
 
         L = []
         for i in range(10):
