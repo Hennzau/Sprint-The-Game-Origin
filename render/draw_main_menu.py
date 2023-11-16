@@ -8,7 +8,7 @@ def draw_main_menu(surface):
 
     width, height = surface.width, surface.height
 
-    surface.surface.fill(colors["darkblue"])
+    surface.py_surface.fill(colors["darkblue"])
 
     font = pygame.font.Font("assets/fonts/GamepauseddemoRegular-RpmY6.otf", 50)
     font_levels = pygame.font.Font("assets/fontsGamepauseddemoRegular-RpmY6.otf", 20)

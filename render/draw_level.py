@@ -16,10 +16,10 @@ def draw_level(level, surface):
     draw_grid(level.grid, surface)
     for k in range(len(level.players)):
 
-        pygame.draw.rect(surface, colors["ivoire"], pygame.Rect(level.initial_positions[k][0] * pixel_size,
+        pygame.draw.rect(surface, colors["darkblue"], pygame.Rect(level.initial_positions[k][0] * pixel_size,
                                                                 level.initial_positions[k][1] * pixel_size, pixel_size,
                                                                 pixel_size))
-        pygame.draw.rect(surface, colors["ivoire"],
+        pygame.draw.rect(surface, colors["darkblue"],
                          pygame.Rect(level.final_positions[k][0] * pixel_size, level.final_positions[k][1] * pixel_size,
                                      pixel_size, pixel_size))
 
