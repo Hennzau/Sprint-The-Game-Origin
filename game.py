@@ -1,6 +1,6 @@
 # importations
 import pygame
-from level.level import Level
+from level.level import Level, victory_event
 from level.obstacle import colors
 from render.surface import events
 
@@ -14,6 +14,8 @@ from level.level_builder import build_level_0
 from sound import sound_victory
 
 # class game which updates the game (logic and render) at each passage through the main loop
+
+# new events
 
 
 class Game:
@@ -34,6 +36,9 @@ class Game:
         for event in events():
             if event.type == pygame.QUIT:
                 self.is_open = False
+            if event.type == pygame.USEREVENT:
+                print("Victoire")
+                sound_victory()
             if event.type == pygame.KEYDOWN:
                 for player in (self.levels[self.cursor]).players:
                     if event.key == pygame.K_LEFT:
@@ -46,10 +51,6 @@ class Game:
                         player.update_velocity(0, 400)
 
         self.levels[self.cursor].update(delta_time)
-
-        if self.levels[self.cursor].finished:
-            print("Victoire")
-            sound_victory()
 
     def render(self, surface):
         draw_level(self.levels[self.cursor], surface)
