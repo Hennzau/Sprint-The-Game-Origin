@@ -13,6 +13,7 @@ from level.level_builder import build_level_0
 
 from sound import sound_victory
 
+
 # class game which updates the game (logic and render) at each passage through the main loop
 
 
@@ -37,13 +38,13 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 for player in (self.levels[self.cursor]).players:
                     if event.key == pygame.K_LEFT:
-                        player.update_velocity(-400, 0)
+                        player.move_left(self.levels[self.cursor].grid)
                     if event.key == pygame.K_RIGHT:
-                        player.update_velocity(400, 0)
+                        player.move_right(self.levels[self.cursor].grid)
                     if event.key == pygame.K_UP:
-                        player.update_velocity(0, -400)
+                        player.move_up(self.levels[self.cursor].grid)
                     if event.key == pygame.K_DOWN:
-                        player.update_velocity(0, 400)
+                        player.move_down(self.levels[self.cursor].grid)
 
         self.levels[self.cursor].update(delta_time)
 
