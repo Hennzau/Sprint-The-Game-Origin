@@ -23,7 +23,7 @@ def main():
     clock = pygame.time.Clock()
 
     while game.is_open:
-        surface.clear((0,0,0))
+        surface.clear((255,255,255))
 
         start = pygame.time.get_ticks()
 

@@ -56,5 +56,5 @@ class Game:
     def render(self, surface):
         draw_level(self.levels[self.cursor], surface.surface)
         temp_surface=surface.surface.copy()
-        surface.surface.fill((0,0,0))
+        surface.surface.fill((255,255,255))
         surface.surface.blit(temp_surface, (int((surface.width-(self.levels[self.cursor].grid.size[0])*pixel_size)/2),int((surface.height-(self.levels[self.cursor].grid.size[1])*pixel_size)/2)))
