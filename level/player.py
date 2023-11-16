@@ -98,21 +98,29 @@ class Player:
             return np.array([x, y + i])
 
     def move_up(self, grid):
+        self.bounce_direction = np.array([0, -1])
+
         if not self.is_moving:
             self.destination = self.calculate_destination(grid, "up") * pixel_size
             self.is_moving = True
 
     def move_down(self, grid):
+        self.bounce_direction = np.array([0, 1])
+
         if not self.is_moving:
             self.destination = self.calculate_destination(grid, "down") * pixel_size
             self.is_moving = True
 
     def move_left(self, grid):
+        self.bounce_direction = np.array([-1, 0])
+
         if not self.is_moving:
             self.destination = self.calculate_destination(grid, "left") * pixel_size
             self.is_moving = True
 
     def move_right(self, grid):
+        self.bounce_direction = np.array([1, 0])
+
         if not self.is_moving:
             self.destination = self.calculate_destination(grid, "right") * pixel_size
             self.is_moving = True
@@ -130,7 +138,7 @@ class Player:
                 self.bounce_amplitude = 0
                 self.bounces = False
 
-        self.render_position = self.position + np.abs(self.bounce_direction) * self.bounce_amplitude * np.sin(
+        self.render_position = self.position + self.bounce_direction * self.bounce_amplitude * np.sin(
             -20 * self.bounce_time)
 
         if (self.position == self.destination).all():
@@ -143,7 +151,6 @@ class Player:
             self.speed += self.start_speed * 4 * delta_time
             distance = np.linalg.norm(self.destination - self.position)
             direction = (self.destination - self.position) / distance
-            self.bounce_direction = np.copy(direction)
             delta = self.speed * delta_time
 
             if (direction == np.array([1, 0])).all():
