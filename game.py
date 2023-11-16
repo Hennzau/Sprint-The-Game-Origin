@@ -9,11 +9,11 @@ from level.obstacle import Obstacle, pixel_size
 
 from render.draw_level import draw_level
 
-from level.level_builder import build_level_0
-
 from sound import sound_victory
 from render.surface import Surface
 from level.grid import Grid
+
+from level.level_loader import build_level
 
 # class game which updates the game (logic and render) at each passage through the main loop
 
@@ -28,7 +28,7 @@ class Game:
         # code moche
         self.cursor = 0
 
-        self.levels.append(build_level_0())
+        self.levels.append(build_level("levels/level0.json"))
 
         # code bon
 
