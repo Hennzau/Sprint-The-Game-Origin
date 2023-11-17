@@ -40,6 +40,7 @@ class Game:
                 self.is_open = False
             if event.type == pygame.USEREVENT:
                 sound_victory()
+                self.stage = "End Menu"
             if event.type == pygame.KEYDOWN:
                 if self.cursor is not None:
                     for player in (self.levels[self.cursor]).players:
