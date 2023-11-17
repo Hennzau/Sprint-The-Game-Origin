@@ -1,8 +1,8 @@
 {
     "size":[21,13],
     "initial_positions":[[0,0], [0,7]],
-    "final_positions":[[20,12], [20,6]],
-    "initial_colors":["red", "yellow"],
+    "final_positions":[[20,12], [20,5]],
+    "initial_colors":["blue", "red"],
     "obstacles":[
         [0,6, "yellow"],
         [1,6, "yellow"],
@@ -68,9 +68,38 @@
         [14, 11, "yellow"],
         [15, 11, "yellow"],
         
-        [15, 9, "green", true]
+        [15, 9, "green", true],
 
+        [3, 4,"yellow"],
+        [3, 5,"yellow"],
 
+        [7, 2,"green", true],
+
+        [7, 4,"green"],
+        [7, 5,"green"],
+
+        [2, 1, "green"],
+        [3, 1, "green"],
+
+        [4, 1, "red", true],        
+        [1, 2, "yellow", true],
+
+        [11, 2, "yellow"],
+        [12, 2, "yellow"],
+
+        [14, 4, "yellow"],
+        [15, 4, "yellow"],
+
+        [15, 0, "blue"],
+        [15, 1, "blue"],
+        [15, 2, "blue"],
+
+        [17, 3, "red"],
+        [17, 1, "red"],
+        [17, 2, "red"],
+
+        [16, 5, "red", true],
+        [19, 3,"green", true]
 
     ]
 }
