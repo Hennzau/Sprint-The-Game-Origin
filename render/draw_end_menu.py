@@ -34,7 +34,7 @@ def draw_end_menu(surface, game):
     text_height = play_again_button.get_height()
 
     x_button1 =(width - play_again_button.get_width())/2 - 200
-    y_button1 = (height - play_again_button.get_height())/2 +100
+    y_button1 = (height - play_again_button.get_height())/2 
 
     x_rect1 = x_button1 - (button_width  - text_width)/2
     y_rect1 = y_button1 - (button_height  - text_height)/2
@@ -55,7 +55,7 @@ def draw_end_menu(surface, game):
     text_height = menu_button.get_height()
 
     x_button2 =(width - menu_button.get_width())/2 + 200
-    y_button2 = (height - menu_button.get_height())/2 +100
+    y_button2 = (height - menu_button.get_height())/2 
 
     x_rect2 = x_button2 - (button_width  - text_width)/2
     y_rect2 = y_button2 - (button_height  - text_height)/2
