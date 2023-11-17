@@ -4,6 +4,7 @@
 import pygame
 
 from game import Game
+from menu.main_menu import Main_menu
 from render.draw_main_menu import draw_main_menu
 from render.surface import Surface
 from render.surface import events, flip
@@ -16,6 +17,7 @@ def main():
     surface = Surface(1280, 720, "test")
 
     game = Game()
+    menu = Main_menu(game)
     clock = pygame.time.Clock()
 
     while game.is_open:
@@ -27,7 +29,7 @@ def main():
 
         if game.stage == "Main Menu":
             game.update(float(1 / 60))
-            draw_main_menu(surface)
+            draw_main_menu(surface, menu, game)
 
         flip()
 

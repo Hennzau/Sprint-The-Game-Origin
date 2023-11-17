@@ -25,14 +25,14 @@ class Game:
     def __init__(self):
         self.levels = []
         self.cursor = None
-        self.stage = "Launched"
+        self.stage = "Main Menu"
         self.is_open = True
 
         # Level 0
 
         self.cursor = 0
 
-        self.levels.append(build_level("assets/levels/level1.json"))
+        self.levels.append(build_level("assets/levels/level0.json"))
 
     def update(self, delta_time):
         for event in events():
@@ -50,6 +50,7 @@ class Game:
                         player.move_up(self.levels[self.cursor].grid)
                     if event.key == pygame.K_DOWN:
                         player.move_down(self.levels[self.cursor].grid)
+
 
         self.levels[self.cursor].update(delta_time)
 

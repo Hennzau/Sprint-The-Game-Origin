@@ -10,7 +10,6 @@ class Main_menu:
         self.start_game = False
         self.levels = game.levels
 
-        pass
 
     def update_level(self, level):
         self.level_selected = level
