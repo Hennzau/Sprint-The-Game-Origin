@@ -6,7 +6,7 @@ from surface import Surface, flip
 colors = {"red": (220, 20, 60), "blue": (106, 90, 205), "green": (154, 205, 50), "yellow": (255, 215, 0),
           "darkgrey": (105, 105, 105), "darkblue": (2, 4, 55), "white_yellow": (255,255,204)}
 
-surface = Surface(1280, 720, "test")
+#surface = Surface(1280, 720, "test")
 
 ###characteristics
 height = 500
