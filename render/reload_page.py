@@ -5,7 +5,7 @@ from surface import Surface, flip
 import time
 
 colors = {"red": (220, 20, 60), "blue": (106, 90, 205), "green": (154, 205, 50), "yellow": (255, 215, 0),
-          "darkgrey": (105, 105, 105), "darkblue": (2, 4, 55), "ivoire" : (255,255,212), "Volkswagen Taupe" : (140, 134, 128), 
+          "darkgrey": (105, 105, 105), "darkblue": (2, 4, 55), "ivory" : (255,255,212), "Volkswagen Taupe" : (140, 134, 128), 
           "orange":(255,165,0), "purple":(147,112,219)}
 
 ### drawing function
