@@ -9,6 +9,7 @@ from render.draw_main_menu import draw_main_menu
 from render.surface import Surface
 from render.surface import events, flip
 from level.obstacle import colors
+from render.draw_end_menu import draw_end_menu
 
 
 # ----------------- #
@@ -22,14 +23,17 @@ def main():
 
     while game.is_open:
         surface.clear((0, 0, 0))
+        
+        game.update(float(1 / 60))
 
         if game.stage == "Launched":
-            game.update(float(1 / 60))
             game.render(surface)
 
         if game.stage == "Main Menu":
-            game.update(float(1 / 60))
             draw_main_menu(surface, menu, game)
+
+        if game.stage == "End Menu":
+            draw_end_menu (surface, game)
 
         flip()
 
