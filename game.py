@@ -84,50 +84,61 @@ class Game:
 
             surface.py_surface.fill((0, 0, 0))
 
-        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(
-            int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5, int(
-                (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5,
-            self.levels[self.cursor].grid.size[0] * pixel_size + 10,
-            self.levels[self.cursor].grid.size[1] * pixel_size + 10))
-        pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(
-            int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 3, int(
-                (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 3,
-            self.levels[self.cursor].grid.size[0] * pixel_size + 6,
-            self.levels[self.cursor].grid.size[1] * pixel_size + 6))
-        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(
-            int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 1, int(
-                (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 1,
-            self.levels[self.cursor].grid.size[0] * pixel_size + 2,
-            self.levels[self.cursor].grid.size[1] * pixel_size + 2))
+            pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(
+                int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5, int(
+                    (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5,
+                self.levels[self.cursor].grid.size[0] * pixel_size + 10,
+                self.levels[self.cursor].grid.size[1] * pixel_size + 10))
+            pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(
+                int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 3, int(
+                    (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 3,
+                self.levels[self.cursor].grid.size[0] * pixel_size + 6,
+                self.levels[self.cursor].grid.size[1] * pixel_size + 6))
+            pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(
+                int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 1, int(
+                    (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 1,
+                self.levels[self.cursor].grid.size[0] * pixel_size + 2,
+                self.levels[self.cursor].grid.size[1] * pixel_size + 2))
 
-        surface.py_surface.blit(temp_surface,
-                                (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
-                                    (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
+            surface.py_surface.blit(temp_surface,
+                                    (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
+                                        (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
 
-        x = (((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
-        y = int((surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
+            x = (((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
+            y = int((surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
-        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x, y, 150, 100))
-        pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
-        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x + 4, y + 4, 142, 92))
-        pygame.draw.rect(surface.py_surface, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
-        time_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 50)
-        time = self.levels[self.cursor].time
-        minutes = int(time / 60)
-        secondes = int(time - 60 * minutes)
-        timer_string = str(minutes) + ":" + str(secondes)
-        timer = time_font.render(timer_string, True, colors["ivoire"])
-        surface.blit(timer, ((2 * x + 150) / 2 - timer.get_width() / 2, (2 * y + 100) / 2 - timer.get_height() / 2))
+            pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x, y, 150, 100))
+            pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
+            pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x + 4, y + 4, 142, 92))
+            pygame.draw.rect(surface.py_surface, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
+            time_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 50)
+            time = self.levels[self.cursor].time
+            minutes = int(time / 60)
+            secondes = int(time - 60 * minutes)
+            timer_string = str(minutes) + ":" + str(secondes)
+            timer = time_font.render(timer_string, True, colors["ivoire"])
+            surface.blit(timer, ((2 * x + 150) / 2 - timer.get_width() / 2, (2 * y + 100) / 2 - timer.get_height() / 2))
 
-        font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 40)
-        play_again_button = font.render("Hold R to Reload", True, colors["ivoire"])
-        current_level = "Level " + str(self.cursor + 1)
-        level = font.render(current_level, True, colors["ivoire"])
+            font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 40)
+            play_again_button = font.render("Hold R to Reload", True, colors["ivoire"])
+            current_level = "Level " + str(self.cursor + 1)
+            level = font.render(current_level, True, colors["ivoire"])
 
-        y_bis = ((surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5 + \
-                self.levels[self.cursor].grid.size[1] * pixel_size + 10
+            y_bis = ((surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5 + \
+                    self.levels[self.cursor].grid.size[1] * pixel_size + 10
 
-        surface.blit(level, (surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
-        surface.blit(play_again_button, (
-            surface.width / 2 - play_again_button.get_width() / 2,
-            (720 + y_bis) / 2 - play_again_button.get_height() / 2))
+            surface.blit(level, (surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
+            surface.blit(play_again_button, (
+                surface.width / 2 - play_again_button.get_width() / 2,
+                (720 + y_bis) / 2 - play_again_button.get_height() / 2))
+            
+            if self.levels[self.cursor].ask_for_reload:
+                temp_surface = pygame.Surface((play_again_button.get_width()*self.levels[self.cursor].reload_timer * 1.1,
+                    play_again_button.get_height()))
+                
+                temp_surface.fill (colors["red"])
+
+                surface.py_surface.blit(temp_surface, (surface.width / 2 - play_again_button.get_width() / 2, 
+                    (720 + y_bis) / 2 - play_again_button.get_height() / 2), special_flags=pygame.BLEND_RGB_MULT)
+            
+            
