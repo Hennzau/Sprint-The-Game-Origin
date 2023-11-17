@@ -1,56 +1,53 @@
 {
-    "size":[15,10],
+    "size":[20,12],
     "initial_positions":[[3,4]],
-    "final_positions":[[0, 9]],
-    "colors":["red"],
+    "final_positions":[[0, 11]],
+    "initial_colors":["red"],
     "obstacles":[
-        [12, 9, "darkgrey"],
-        [12, 8, "darkgrey"],
+        [16, 10, "darkgrey"],
+        [16, 11, "darkgrey"],
 
-        [14, 4, "darkgrey"],
+        [19, 4, "darkgrey"],
 
-        [10, 8, "darkgrey"],
+        [12, 10, "darkgrey"],
 
         [4, 0, "green"],
-        [4, 1, "green"],
-        [4, 2, "green"],
+        
 
-        [0, 8, "green"],
-        [1, 8, "green"],
-        [2, 8, "green"],
+        [0, 9, "green"],
+        [1, 9, "green"],
 
-        [7, 0, "green"],
-        [7, 1, "green"],
-        [7, 2, "green"],
+        [9, 0, "green"],
 
-        [10, 6, "green"],
-        [11, 6, "green"],
-        [12, 6, "green"],
+        [12, 7, "green"],
+        [13, 7, "green"],
+        [14, 7, "green"],
+        [15, 7, "green"],
 
-        [9,0, "blue"],
-        [9,1, "blue"],
-        [9,2, "blue"],
-        [9,3, "blue"],
-        [9,4, "blue"],
+        [11,0, "blue"],
+        [11,1, "blue"],
+        [11,2, "blue"],
+        [11,3, "blue"],
 
-        [6, 8, "red"],
-        [6, 9, "red"],
+        [7, 9 , "red"],
+        [7, 10, "red"],
+        [7, 11, "red"],
 
-        [2, 8, "yellow"],
-        [3, 8, "yellow"],
-        [4, 8, "yellow"],
-        [5, 8, "yellow"],
-        [6, 8, "yellow"],
+        [2, 9, "yellow"],
+        [3, 9, "yellow"],
+        [4, 9, "yellow"],
+        [5, 9, "yellow"],
+        [6, 9, "yellow"],
 
         [3, 2, "darkgrey"],
         [4, 2, "darkgrey"],
         [5, 2, "darkgrey"],
 
         [5, 3, "darkgrey"],
+        [5, 4, "darkgrey"],
         [5, 5, "darkgrey"],
 
-        [6, 6, "darkgrey"],
-        [6, 7, "darkgrey"],
+        [7, 8, "darkgrey"],
 
         [1, 3, "blue"],
         [1, 4, "blue"],
@@ -59,12 +56,11 @@
 
         [2, 6, "blue"],
         [3, 6, "blue"],
-        [4, 6, "blue"],
 
-        [12, 7, "yellow", true],
-        [5, 4, "blue", true],
-        [7, 9, "green", true],
-        [7, 0, "red", true]
+        [16, 9, "yellow", true],
+        [6, 5, "blue", true],
+        [8, 11, "green", true],
+        [8, 0, "red", true]
     ]
 
 }
