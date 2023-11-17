@@ -12,21 +12,21 @@ from level.obstacle import colors
 
 # ----------------- #
 
-
 def main():
     surface = Surface(1280, 720, "test")
+
     game = Game()
     clock = pygame.time.Clock()
 
     while game.is_open:
-        surface.clear((255,255,255))
+        surface.clear((0, 0, 0))
 
         if game.stage == "Launched":
-            game.update(float (1/60))
+            game.update(float(1 / 60))
             game.render(surface)
 
         if game.stage == "Main Menu":
-            game.update(float (1/60))
+            game.update(float(1 / 60))
             draw_main_menu(surface)
 
         flip()

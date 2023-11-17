@@ -19,7 +19,7 @@ class Player:
         self.destination = np.array([x_init, y_init])
 
         self.is_moving = False
-        self.start_speed = 800
+        self.start_speed = 1000
         self.speed = self.start_speed
 
         self.bounces = False
@@ -146,7 +146,7 @@ class Player:
                 self.is_moving = False
                 self.speed = self.start_speed
         else:
-            self.speed += self.start_speed * 6 * delta_time
+            self.speed += self.start_speed * 8 * delta_time
             distance = np.linalg.norm(self.destination - self.position)
             direction = (self.destination - self.position) / distance
             delta = self.speed * delta_time

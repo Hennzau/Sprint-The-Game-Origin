@@ -26,15 +26,13 @@ class Game:
         self.levels = []
         self.cursor = None
         self.stage = "Launched"
+        self.is_open = True
 
-        # code moche
+        # Level 0
+
         self.cursor = 0
 
         self.levels.append(build_level("assets/levels/level0.json"))
-
-        # code bon
-
-        self.is_open = True
 
     def update(self, delta_time):
         for event in events():
@@ -56,11 +54,21 @@ class Game:
         self.levels[self.cursor].update(delta_time)
 
     def render(self, surface):
-        draw_level(self.levels[self.cursor], surface.surface)
+        draw_level(self.levels[self.cursor], surface.py_surface)
 
-        temp_surface = surface.surface.copy()
+        temp_surface = surface.py_surface.subsurface(pygame.Rect(0, 0,
+                                                                 self.levels[self.cursor].grid.size[0] * pixel_size,
+                                                                 self.levels[self.cursor].grid.size[
+                                                                     1] * pixel_size)).copy()
 
-        surface.surface.fill((255, 255, 255))
-        surface.surface.blit(temp_surface,
-                             (int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2), int(
-                                 (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2)))
+        surface.py_surface.fill((0, 0, 0))
+
+        pygame.draw.rect(surface.py_surface, (255, 255, 255), pygame.Rect(
+            int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5, int(
+                (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5,
+            self.levels[self.cursor].grid.size[0] * pixel_size + 10,
+            self.levels[self.cursor].grid.size[1] * pixel_size + 10))
+
+        surface.py_surface.blit(temp_surface,
+                                (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
+                                    (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
