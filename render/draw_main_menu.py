@@ -1,10 +1,12 @@
 from menu.main_menu import Main_menu
 from level.obstacle import colors
+from sound import sound_button, sound_game_launched
 import pygame
 
 
 def draw_main_menu(surface, menu, game):
 
+    sound = False
     width, height = surface.width, surface.height
     button_width, button_height = 131, 30
 
@@ -46,6 +48,8 @@ def draw_main_menu(surface, menu, game):
                 menu.level_selected = i
                 menu.start_game = True
                 menu.launch_game(game)
+        else:    
+            sound = False
 
 
 
