@@ -25,12 +25,10 @@ class Game:
     def __init__(self):
         self.levels = []
         self.cursor = None
-        self.stage = "Launched"
+        self.stage = "Main Menu"
         self.is_open = True
 
         # Level 0
-
-        self.cursor = 2
 
         self.levels.append(build_level("assets/levels/level0.json"))
         self.levels.append(build_level("assets/levels/level1.json"))
@@ -43,35 +41,36 @@ class Game:
             if event.type == pygame.USEREVENT:
                 sound_victory()
             if event.type == pygame.KEYDOWN:
-                for player in (self.levels[self.cursor]).players:
-                    if event.key == pygame.K_LEFT:
-                        player.move_left(self.levels[self.cursor].grid)
-                    if event.key == pygame.K_RIGHT:
-                        player.move_right(self.levels[self.cursor].grid)
-                    if event.key == pygame.K_UP:
-                        player.move_up(self.levels[self.cursor].grid)
-                    if event.key == pygame.K_DOWN:
-                        player.move_down(self.levels[self.cursor].grid)
-
-
-        self.levels[self.cursor].update(delta_time)
+                if self.cursor is not None:
+                    for player in (self.levels[self.cursor]).players:
+                        if event.key == pygame.K_LEFT:
+                            player.move_left(self.levels[self.cursor].grid)
+                        if event.key == pygame.K_RIGHT:
+                            player.move_right(self.levels[self.cursor].grid)
+                        if event.key == pygame.K_UP:
+                            player.move_up(self.levels[self.cursor].grid)
+                        if event.key == pygame.K_DOWN:
+                            player.move_down(self.levels[self.cursor].grid)
+        if self.cursor is not None:
+            self.levels[self.cursor].update(delta_time)
 
     def render(self, surface):
-        draw_level(self.levels[self.cursor], surface.py_surface)
+        if self.cursor is not None:
+            draw_level(self.levels[self.cursor], surface.py_surface)
 
-        temp_surface = surface.py_surface.subsurface(pygame.Rect(0, 0,
-                                                                 self.levels[self.cursor].grid.size[0] * pixel_size,
-                                                                 self.levels[self.cursor].grid.size[
-                                                                     1] * pixel_size)).copy()
+            temp_surface = surface.py_surface.subsurface(pygame.Rect(0, 0,
+                                                                     self.levels[self.cursor].grid.size[0] * pixel_size,
+                                                                     self.levels[self.cursor].grid.size[
+                                                                         1] * pixel_size)).copy()
 
-        surface.py_surface.fill((0, 0, 0))
+            surface.py_surface.fill((0, 0, 0))
 
-        pygame.draw.rect(surface.py_surface, (255, 255, 255), pygame.Rect(
-            int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5, int(
-                (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5,
-            self.levels[self.cursor].grid.size[0] * pixel_size + 10,
-            self.levels[self.cursor].grid.size[1] * pixel_size + 10))
+            pygame.draw.rect(surface.py_surface, (255, 255, 255), pygame.Rect(
+                int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5, int(
+                    (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5,
+                self.levels[self.cursor].grid.size[0] * pixel_size + 10,
+                self.levels[self.cursor].grid.size[1] * pixel_size + 10))
 
-        surface.py_surface.blit(temp_surface,
-                                (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
-                                    (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
+            surface.py_surface.blit(temp_surface,
+                                    (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
+                                        (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
