@@ -52,7 +52,16 @@ class Player:
                     i = j - x
                     continue
 
-                if not grid.obstacles[j, y].color_switcher and not grid.obstacles[j, y].end and not (
+                if grid.obstacles[j, y].start:
+                    i = j - x
+                    continue
+
+                if grid.obstacles[j, y].end:
+                    i = j - x
+                    continue
+
+                if not grid.obstacles[j, y].color_switcher and not grid.obstacles[j, y].start and not grid.obstacles[
+                    j, y].end and not (
                         grid.obstacles[j, y].color == active_color):
                     break
 
@@ -73,8 +82,16 @@ class Player:
                     active_color = grid.obstacles[x, j].color
                     i = j - y
                     continue
+                if grid.obstacles[x, j].start:
+                    i = j - y
+                    continue
 
-                if not grid.obstacles[x, j].color_switcher and not grid.obstacles[x, j].end and not (
+                if grid.obstacles[x, j].end:
+                    i = j - y
+                    continue
+
+                if not grid.obstacles[x, j].color_switcher and not grid.obstacles[x, j].start and not grid.obstacles[
+                    x, j].end and not (
                         grid.obstacles[x, j].color == active_color):
                     break
 
