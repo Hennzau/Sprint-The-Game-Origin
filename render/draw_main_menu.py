@@ -71,5 +71,3 @@ def draw_main_menu(surface, menu, game):
                     menu.start_game = True
                     menu.launch_game(game)
             
-
-    pygame.display.update()
