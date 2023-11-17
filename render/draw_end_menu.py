@@ -1,17 +1,13 @@
 ### Imports
 import pygame
-from surface import Surface, flip
-
-colors = {"red": (220, 20, 60), "blue": (106, 90, 205), "green": (154, 205, 50), "yellow": (255, 215, 0),
-          "darkgrey": (105, 105, 105), "darkblue": (2, 4, 55),"darkerblue" : (0,0,51), "ivoire" : (255,255,212), "Volkswagen Taupe" : (140, 134, 128), "Black" : (0,0,0)}
-
-surface = Surface(1280, 720, "test")
-
+from render.surface import Surface, flip
+from game import Game
+from level.obstacle import colors
 
 
 ### drawing function
 
-def draw_end_menu(surface):
+def draw_end_menu(surface, game):
 
     #dimensions
     height = surface.height
@@ -80,7 +76,7 @@ def draw_end_menu(surface):
     
         surface.py_surface.blit(play_again_button, (x_button1, y_button1))
         if pygame.mouse.get_pressed()[0] :
-             pygame.QUIT()
+            pass
 
     if pygame.Rect(x_rect2, y_rect2, button_width , button_height).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x_rect2, y_rect2, button_width , button_height ))
@@ -90,13 +86,5 @@ def draw_end_menu(surface):
     
         surface.py_surface.blit(menu_button, (x_button2, y_button2))
         if pygame.mouse.get_pressed()[0] :
-             pygame.QUIT()
+            game.stage = "Main Menu"
 
-continuer = True
-while continuer :
-   surface.clear(colors["darkblue"])
-   draw_end_menu(surface)
-   flip()
-   for event in pygame.event.get():
-           if event.type == pygame.QUIT:
-               continuer = False
