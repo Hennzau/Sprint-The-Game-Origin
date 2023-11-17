@@ -47,10 +47,11 @@ class Game:
             if event.type == pygame.USEREVENT:
                 sound_victory()
                 self.reload_levels()
-
                 self.stage = "End Menu"
             if event.type == pygame.KEYDOWN:
                 if self.cursor is not None:
+                    if event.key == pygame.K_r:
+                        self.levels[self.cursor].ask_for_reload = True
                     for player in (self.levels[self.cursor]).players:
                         if event.key == pygame.K_LEFT:
                             player.move_left(self.levels[self.cursor].grid)
@@ -60,6 +61,10 @@ class Game:
                             player.move_up(self.levels[self.cursor].grid)
                         if event.key == pygame.K_DOWN:
                             player.move_down(self.levels[self.cursor].grid)
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_r:
+                    self.levels[self.cursor].ask_for_reload = False
+
         if self.cursor is not None:
             self.levels[self.cursor].update(delta_time)
 
@@ -79,11 +84,13 @@ class Game:
                 (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5,
             self.levels[self.cursor].grid.size[0] * pixel_size + 10,
             self.levels[self.cursor].grid.size[1] * pixel_size + 10))
-        pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 3, int(
+        pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(
+            int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 3, int(
                 (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 3,
             self.levels[self.cursor].grid.size[0] * pixel_size + 6,
             self.levels[self.cursor].grid.size[1] * pixel_size + 6))
-        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 1, int(
+        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(
+            int((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 1, int(
                 (surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 1,
             self.levels[self.cursor].grid.size[0] * pixel_size + 2,
             self.levels[self.cursor].grid.size[1] * pixel_size + 2))
@@ -91,18 +98,18 @@ class Game:
         surface.py_surface.blit(temp_surface,
                                 (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
                                     (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
-        
-        x = (((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5)/2 - 75 
+
+        x = (((surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
         y = int((surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
-        
-        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x,y,150,100))
-        pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(x+2,y+2,146,96))
-        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x+4,y+4,142,92))
-        pygame.draw.rect(surface.py_surface, colors["darkblue"], pygame.Rect(x+5,y+5, 140, 90))
+
+        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x, y, 150, 100))
+        pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
+        pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x + 4, y + 4, 142, 92))
+        pygame.draw.rect(surface.py_surface, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
         time_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 50)
-        time = self.levels[self.cursor].time 
-        minutes = int(time/60)
-        secondes = int(time-60*minutes)
+        time = self.levels[self.cursor].time
+        minutes = int(time / 60)
+        secondes = int(time - 60 * minutes)
         timer_string = str(minutes) + ":" + str(secondes)
         timer = time_font.render(timer_string, True, colors["ivoire"])
         surface.blit(timer, ((2*x+150)/2 - timer.get_width()/2 , (2*y+100)/2 - timer.get_height()/2 ))

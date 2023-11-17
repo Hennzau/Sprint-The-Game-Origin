@@ -24,6 +24,8 @@ class Level:
         self.initial_colors = initial_colors
         self.finished = False  # it's an indicator of the state of the level
 
+        self.ask_for_reload = False
+        self.reload_timer = 0
         self.time = 0  # a level can have the concept of time : it helps to make dynamic things
 
         for k in range(
@@ -54,3 +56,17 @@ class Level:
             self.finished = True
 
         self.time += delta_time
+        if self.ask_for_reload:
+            self.reload_timer += delta_time
+
+        if self.reload_timer >= 1:
+            self.players = []
+
+            for k in range(
+                    len(self.initial_positions)):
+                self.players.append(Player(colors[self.initial_colors[k]], self.initial_positions[k][0] * pixel_size,
+                                           self.initial_positions[k][1] * pixel_size))
+
+            self.ask_for_reload = False
+            self.reload_timer = 0
+            self.time = 0
