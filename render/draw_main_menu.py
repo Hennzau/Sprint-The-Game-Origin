@@ -4,7 +4,7 @@ import pygame
 
 
 def draw_main_menu(surface, menu, game):
-    
+
     width, height = surface.width, surface.height
     button_width, button_height = 131, 30
 
@@ -25,7 +25,7 @@ def draw_main_menu(surface, menu, game):
                                 2, height / 2 + start_button.get_height() / 2 - 175))
     
     n = len(menu.levels)
-    p = int(n/2)
+    p = int(n/2) + 1
 
     for i in range(p):
         level = f"Level " + str(i+1)

@@ -1,11 +1,12 @@
-###Imports###
+# Imports #
 import json
 
 from level.level import Level
 from level.obstacle import Obstacle, colors
 
-### build level function
 ''' 
+- build level function -
+
 this function takes a level written in a json file
 it returns the level objet that can be read by our python code
 '''
