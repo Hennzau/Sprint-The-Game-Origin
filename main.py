@@ -17,9 +17,13 @@ from render.draw_end_menu import draw_end_menu
 def main():
     surface = Surface(1280, 720, "Sprint The Game")
 
-    game = Game()
+    game = Game(surface)
     menu = Main_menu(game)
     clock = pygame.time.Clock()
+
+    timer = 0
+
+    frame_cap = 60
 
     while game.is_open:
         surface.clear((0, 0, 0))
@@ -27,7 +31,9 @@ def main():
         game.update(float(1 / 60))
 
         if game.stage == "Launched":
-            game.render(surface)
+            game.render()
+            if timer == 0:
+                print("Game launched, currently rendering", int(clock.get_fps()), "FPS")
 
         if game.stage == "Main Menu":
             draw_main_menu(surface, menu, game)
@@ -37,7 +43,9 @@ def main():
 
         flip()
 
-        clock.tick(60)
+        clock.tick(frame_cap)
+
+        timer = (timer + 1) % frame_cap
 
     pygame.quit()
 

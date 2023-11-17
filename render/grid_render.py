@@ -16,7 +16,7 @@ class GridRender:
     def __init__(self,
                  grid):  # We can create a GridRender object by passing a Grid Object, the Grid can not be dynamic (
         # obstacles are static)
-        self.image = pygame.Surface((grid.size[0] * pixel_size, grid.size[1] * pixel_size), pygame.SRCALPHA)
+        self.image = pygame.Surface((grid.size[0] * pixel_size, grid.size[1] * pixel_size))
         self.grid = grid
 
         # calculate base model of special obstacles (like color switcher that are animated)
