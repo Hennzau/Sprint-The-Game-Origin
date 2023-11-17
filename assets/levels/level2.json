@@ -1,7 +1,7 @@
 {
     "size":[24,14],
     "initial_positions":[[0,11], [0,13]],
-    "final_positions":[[22,4], [8,13]],
+    "final_positions":[[21,4], [8,13]],
     "initial_colors":["red", "yellow"],
     "obstacles":[
 
@@ -68,7 +68,7 @@
 
         [2, 0, "red"],
 
-        [21, 4, "blue"],
+        [22, 4, "blue"],
 
         [11, 0, "green"],
         [11, 1, "green"],
