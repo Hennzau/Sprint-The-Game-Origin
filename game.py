@@ -33,6 +33,8 @@ class Game:
         self.cursor = 0
 
         self.levels.append(build_level("assets/levels/level0.json"))
+        self.levels.append(build_level("assets/levels/level1.json"))
+        self.levels.append(build_level("assets/levels/level2.json"))
 
     def update(self, delta_time):
         for event in events():
@@ -73,3 +75,8 @@ class Game:
         surface.py_surface.blit(temp_surface,
                                 (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
                                     (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
+        
+        #pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect())
+        #pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect())
+        #pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect())
+        #pygame.draw.rect(surface.py_surface, colors["darkblue"], pygame.Rect())
