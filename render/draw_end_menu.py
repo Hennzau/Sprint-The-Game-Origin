@@ -76,7 +76,7 @@ def draw_end_menu(surface, game):
     
         surface.py_surface.blit(play_again_button, (x_button1, y_button1))
         if pygame.mouse.get_pressed()[0] :
-            pass
+            game.stage = "Launched"
 
     if pygame.Rect(x_rect2, y_rect2, button_width , button_height).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect(x_rect2, y_rect2, button_width , button_height ))
