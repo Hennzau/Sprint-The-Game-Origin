@@ -15,7 +15,7 @@ from render.draw_end_menu import draw_end_menu
 # ----------------- #
 
 def main():
-    surface = Surface(1280, 720, "test")
+    surface = Surface(1280, 720, "Sprint The Game")
 
     game = Game()
     menu = Main_menu(game)

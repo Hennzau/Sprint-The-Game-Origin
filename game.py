@@ -7,7 +7,7 @@ from render.surface import events
 from level.player import Player
 from level.obstacle import Obstacle, pixel_size
 
-from render.draw_level import draw_level
+from render.level_render import LevelRender
 
 from sound import sound_victory, sound_swipe
 from render.surface import Surface
@@ -24,6 +24,7 @@ from level.level_loader import build_level
 class Game:
     def __init__(self):
         self.levels = []
+        self.levels_render = []
         self.cursor = None
         self.last_level = None
         self.stage = "Main Menu"
@@ -36,10 +37,19 @@ class Game:
 
     def reload_levels(self):
         self.levels = []
+        self.levels_render = []
+
         self.levels.append(build_level("assets/levels/level0.json"))
+        self.levels_render.append(LevelRender(self.levels[-1]))
+
         self.levels.append(build_level("assets/levels/level1.json"))
+        self.levels_render.append(LevelRender(self.levels[-1]))
+
         self.levels.append(build_level("assets/levels/level2.json"))
+        self.levels_render.append(LevelRender(self.levels[-1]))
+
         self.levels.append(build_level("assets/levels/level3.json"))
+        self.levels_render.append(LevelRender(self.levels[-1]))
 
     def update(self, delta_time):
         for event in events():
@@ -96,7 +106,7 @@ class Game:
 
     def render(self, surface):
         if self.cursor is not None:
-            draw_level(self.levels[self.cursor], surface.py_surface)
+            self.levels_render[self.cursor].render(surface.py_surface)
 
             temp_surface = surface.py_surface.subsurface(pygame.Rect(0, 0,
                                                                      self.levels[self.cursor].grid.size[0] * pixel_size,
@@ -141,7 +151,8 @@ class Game:
 
             timer_string = str(minutes) + ":" + str(secondes)
             timer = time_font.render(timer_string, True, colors["ivory"])
-            surface.blit(timer, ((2 * x + 150) / 2 - timer.get_width() / 2, (2 * y + 100) / 2 - timer.get_height() / 2))
+            surface.py_surface.blit(timer, (
+            (2 * x + 150) / 2 - timer.get_width() / 2, (2 * y + 100) / 2 - timer.get_height() / 2))
 
             font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
             play_again_button = font.render("Hold R to Reload", True, colors["ivory"])
@@ -153,11 +164,11 @@ class Game:
             y_bis = ((surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 20 + \
                     self.levels[self.cursor].grid.size[1] * pixel_size
 
-            surface.blit(level, (surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
-            surface.blit(play_again_button, (
+            surface.py_surface.blit(level, (surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
+            surface.py_surface.blit(play_again_button, (
                 surface.width / 2 - play_again_button.get_width() / 2,
                 (720 + y_bis) / 2 - play_again_button.get_height() / 2))
-            surface.blit(return_to_menu, (
+            surface.py_surface.blit(return_to_menu, (
                 surface.width / 2 - play_again_button.get_width() / 2,
                 (720 + y_bis) / 2 - play_again_button.get_height() / 2 + return_to_menu.get_height()))
 
