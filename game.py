@@ -9,7 +9,7 @@ from level.obstacle import Obstacle, pixel_size
 
 from render.draw_level import draw_level
 
-from sound import sound_victory
+from sound import sound_victory, sound_swipe
 from render.surface import Surface
 from level.grid import Grid
 
@@ -57,12 +57,16 @@ class Game:
                         self.levels[self.cursor].ask_for_reload = True
                     for player in (self.levels[self.cursor]).players:
                         if event.key == pygame.K_LEFT:
+                            sound_swipe()
                             player.move_left(self.levels[self.cursor].grid)
                         if event.key == pygame.K_RIGHT:
+                            sound_swipe()
                             player.move_right(self.levels[self.cursor].grid)
                         if event.key == pygame.K_UP:
+                            sound_swipe()
                             player.move_up(self.levels[self.cursor].grid)
                         if event.key == pygame.K_DOWN:
+                            sound_swipe()
                             player.move_down(self.levels[self.cursor].grid)
             if event.type == pygame.KEYUP:
                 if self.cursor is not None:
