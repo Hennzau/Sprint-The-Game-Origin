@@ -32,7 +32,7 @@ class Game:
 
         self.cursor = 0
 
-        self.levels.append(build_level("assets/levels/level1.json"))
+        self.levels.append(build_level("assets/levels/level2.json"))
 
     def update(self, delta_time):
         for event in events():
