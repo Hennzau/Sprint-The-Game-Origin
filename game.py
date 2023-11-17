@@ -34,12 +34,20 @@ class Game:
         self.levels.append(build_level("assets/levels/level1.json"))
         self.levels.append(build_level("assets/levels/level2.json"))
 
+    def reload_levels(self):
+        self.levels = []
+        self.levels.append(build_level("assets/levels/level0.json"))
+        self.levels.append(build_level("assets/levels/level1.json"))
+        self.levels.append(build_level("assets/levels/level2.json"))
+
     def update(self, delta_time):
         for event in events():
             if event.type == pygame.QUIT:
                 self.is_open = False
             if event.type == pygame.USEREVENT:
                 sound_victory()
+                self.reload_levels()
+
                 self.stage = "End Menu"
             if event.type == pygame.KEYDOWN:
                 if self.cursor is not None:
