@@ -60,37 +60,51 @@ def draw_grid(grid, surface, time):
                                      2 * pi * k / 10 - pi / 2))]
 
                     pygame.draw.polygon(surface, grid.obstacles[i, j].color, L, 0)
-                elif grid.obstacles[i,j].color_switcher:
+                elif grid.obstacles[i, j].color_switcher:
                     pygame.draw.rect(surface, colors["darkblue"],
-                                 pygame.Rect(i * pixel_size, j * pixel_size, pixel_size, pixel_size))
-                    
-                    temp_surface=pygame.Surface((pixel_size, pixel_size), pygame.SRCALPHA)
+                                     pygame.Rect(i * pixel_size, j * pixel_size, pixel_size, pixel_size))
 
-                    circle_surface=pygame.Surface((pixel_size,pixel_size), pygame.SRCALPHA)
-                    
-                    #red arc
-                    pygame.draw.circle(circle_surface, colors["red"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
-                    temp_surface.blit(circle_surface.subsurface(pygame.Rect(pixel_size/2,0,pixel_size/2,pixel_size/2)),(pixel_size/2, 0))
-                    #yellow arc
-                    pygame.draw.circle(circle_surface, colors["yellow"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
-                    temp_surface.blit(circle_surface.subsurface(pygame.Rect(0,0,pixel_size/2,pixel_size/2)),(0, 0))
-                    #green arc
-                    pygame.draw.circle(circle_surface, colors["green"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
-                    temp_surface.blit(circle_surface.subsurface(pygame.Rect(0,pixel_size/2,pixel_size/2,pixel_size/2)),(0, pixel_size/2))
-                    #blue arc
-                    pygame.draw.circle(circle_surface, colors["blue"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
-                    temp_surface.blit(circle_surface.subsurface(pygame.Rect(pixel_size/2,pixel_size/2,pixel_size/2,pixel_size/2)),(pixel_size/2, pixel_size/2))
-                    #rotating the temp_surface and putting it on the surface
-                    rotated_surface = pygame.transform.rotate(temp_surface, time*100)
-                    new_temp_surface = rotated_surface.get_rect(center = temp_surface.get_rect(center =(i*pixel_size + pixel_size/2, j * pixel_size + pixel_size/2)).center)
+                    temp_surface = pygame.Surface((pixel_size, pixel_size), pygame.SRCALPHA)
+
+                    circle_surface = pygame.Surface((pixel_size, pixel_size), pygame.SRCALPHA)
+
+                    # red arc
+                    pygame.draw.circle(circle_surface, colors["red"], (pixel_size / 2, pixel_size / 2), pixel_size / 2,
+                                       0)
+                    temp_surface.blit(
+                        circle_surface.subsurface(pygame.Rect(pixel_size / 2, 0, pixel_size / 2, pixel_size / 2)),
+                        (pixel_size / 2, 0))
+                    # yellow arc
+                    pygame.draw.circle(circle_surface, colors["yellow"], (pixel_size / 2, pixel_size / 2),
+                                       pixel_size / 2, 0)
+                    temp_surface.blit(circle_surface.subsurface(pygame.Rect(0, 0, pixel_size / 2, pixel_size / 2)),
+                                      (0, 0))
+                    # green arc
+                    pygame.draw.circle(circle_surface, colors["green"], (pixel_size / 2, pixel_size / 2),
+                                       pixel_size / 2, 0)
+                    temp_surface.blit(
+                        circle_surface.subsurface(pygame.Rect(0, pixel_size / 2, pixel_size / 2, pixel_size / 2)),
+                        (0, pixel_size / 2))
+                    # blue arc
+                    pygame.draw.circle(circle_surface, colors["blue"], (pixel_size / 2, pixel_size / 2), pixel_size / 2,
+                                       0)
+                    temp_surface.blit(circle_surface.subsurface(
+                        pygame.Rect(pixel_size / 2, pixel_size / 2, pixel_size / 2, pixel_size / 2)),
+                        (pixel_size / 2, pixel_size / 2))
+                    # rotating the temp_surface and putting it on the surface
+                    rotated_surface = pygame.transform.rotate(temp_surface, time * 100)
+                    new_temp_surface = rotated_surface.get_rect(center=temp_surface.get_rect(
+                        center=(i * pixel_size + pixel_size / 2, j * pixel_size + pixel_size / 2)).center)
 
                     surface.blit(rotated_surface, new_temp_surface)
-                    
-                    #circle in the center
-                    pygame.draw.circle(surface, colors["darkblue"], (i*pixel_size+pixel_size/2, j*pixel_size+pixel_size/2), pixel_size/2.5,0)
-                    pygame.draw.circle(surface, grid.obstacles[i,j].color, (i*pixel_size+pixel_size/2, j*pixel_size+pixel_size/2), pixel_size/4,0)
-                    
 
+                    # circle in the center
+                    pygame.draw.circle(surface, colors["darkblue"],
+                                       (i * pixel_size + pixel_size / 2, j * pixel_size + pixel_size / 2),
+                                       pixel_size / 2.5, 0)
+                    pygame.draw.circle(surface, grid.obstacles[i, j].color,
+                                       (i * pixel_size + pixel_size / 2, j * pixel_size + pixel_size / 2),
+                                       pixel_size / 4, 0)
                 else:
                     pygame.draw.rect(surface, grid.obstacles[i, j].color,
                                      pygame.Rect(i * pixel_size, j * pixel_size, pixel_size, pixel_size))
