@@ -29,7 +29,7 @@ def main():
 
         if game.stage == "Main Menu":
             game.update(float(1 / 60))
-            draw_main_menu(surface, menu)
+            draw_main_menu(surface, menu, game)
 
         flip()
 

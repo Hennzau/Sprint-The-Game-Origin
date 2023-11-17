@@ -34,14 +34,7 @@ class Game:
 
         self.levels.append(build_level("assets/levels/level0.json"))
         self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
+
         
 
     def update(self, delta_time):
@@ -60,6 +53,7 @@ class Game:
                         player.move_up(self.levels[self.cursor].grid)
                     if event.key == pygame.K_DOWN:
                         player.move_down(self.levels[self.cursor].grid)
+
 
         self.levels[self.cursor].update(delta_time)
 
