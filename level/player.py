@@ -27,6 +27,10 @@ class Player:
         self.bounce_time = 0
         self.bounce_direction = np.array([0, 0])
 
+        self.record_length = 4
+        self.last_positions = []
+        self.cursor = 0
+
     def surface_position(self):
         return self.position
 
@@ -141,6 +145,16 @@ class Player:
             self.is_moving = True
 
     def update(self, delta_time, grid):
+        # data for the motion_blur (and maybe something else)
+
+        if len(self.last_positions) != self.record_length:
+            self.last_positions.append(self.render_position)
+        else:
+            self.last_positions[self.cursor] = self.render_position
+            self.cursor = (self.cursor + 1) % self.record_length
+
+        # logical
+
         if self.bounces:
             self.bounce_time = self.bounce_time + delta_time
             if self.bounce_amplitude == 0:

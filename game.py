@@ -25,12 +25,12 @@ class Game:
     def __init__(self):
         self.levels = []
         self.cursor = None
-        self.stage = "Main Menu"
+        self.stage = "Launched"
         self.is_open = True
 
         # Level 0
 
-        self.cursor = 0
+        self.cursor = 2
 
         self.levels.append(build_level("assets/levels/level0.json"))
         self.levels.append(build_level("assets/levels/level1.json"))
