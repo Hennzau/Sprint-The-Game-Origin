@@ -20,6 +20,7 @@ class Level:
         self.initial_positions = initial_positions
         self.initial_colors = initial_colors
         self.finished = False
+        self.time=0
         for k in range(
                 len(initial_positions)):  # sometimes there is two players and we can imagine a level with even more
             # creation of the list of colors in rgb format
@@ -47,3 +48,4 @@ class Level:
         if finished and not self.finished:
             pygame.event.post(victory_event)
             self.finished = True
+        self.time += delta_time

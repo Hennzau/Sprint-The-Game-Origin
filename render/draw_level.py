@@ -13,6 +13,6 @@ draw_level uses both draw_grid and draw_player in order to render the entire lev
 
 
 def draw_level(level, surface):
-    draw_grid(level.grid, surface)
+    draw_grid(level.grid, surface, level.time)
     for k in range(len(level.players)):
         draw_player(level.players[k], surface)
