@@ -23,7 +23,7 @@ def main():
 
     while game.is_open:
         surface.clear((0, 0, 0))
-        
+
         game.update(float(1 / 60))
 
         if game.stage == "Launched":
@@ -33,7 +33,7 @@ def main():
             draw_main_menu(surface, menu, game)
 
         if game.stage == "End Menu":
-            draw_end_menu (surface, game)
+            draw_end_menu(surface, game)
 
         flip()
 
