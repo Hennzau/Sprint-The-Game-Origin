@@ -15,9 +15,9 @@ class Surface:
         self.width = width
         self.height = height
         self.title = title
-        self.surface = pygame.display.set_mode((width, height))
-        self.blit = self.surface.blit
+        self.py_surface = pygame.display.set_mode((width, height))
+        self.blit = self.py_surface.blit
         pygame.display.set_caption(self.title)
 
     def clear(self, background_color):
-        self.surface.fill(background_color)
+        self.py_surface.fill(background_color)

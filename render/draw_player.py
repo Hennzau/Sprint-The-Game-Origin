@@ -1,11 +1,42 @@
-from level.player import Player
+import numpy as np
 import pygame
+
 from level.obstacle import pixel_size
 
 """"
 draw_player is called upon to reprsent the player at all times for the viewer.
 """
 
+blur_length = 4
+precision = 5
+positions = []
+
+cursor = 0
+
 
 def draw_player(player, surface):
-    pygame.draw.rect(surface, player.color, pygame.Rect(player.position[0], player.position[1], pixel_size, pixel_size))
+    global blur_length, positions, cursor, precision
+
+    if len(positions) != blur_length:
+        positions.append(player.render_position)
+    else:
+        blur = pygame.Surface((pixel_size, pixel_size))
+        pygame.draw.rect(blur, (player.color[0] / 2, player.color[1] / 2, player.color[2] / 2),
+                         pygame.Rect(0, 0, pixel_size, pixel_size))
+
+        for k in range(blur_length - 1):
+            initial = positions[k]
+            final = positions[k + 1]
+            delta = (final - initial) / precision
+
+            for i in range(precision):
+                blur_pos = initial + delta * i
+                surface.blit(blur, (blur_pos[0], blur_pos[1]))
+
+        positions[cursor * 1] = player.render_position
+
+        cursor = (cursor + 1) % blur_length
+
+    pygame.draw.rect(surface, player.color,
+                     pygame.Rect(player.render_position[0],
+                                 player.render_position[1], pixel_size, pixel_size))
