@@ -2,7 +2,7 @@
     "size":[15,10],
     "initial_positions":[[0,0]],
     "final_positions":[[14, 9]],
-    "colors":["blue"],
+    "initial_colors":["blue"],
     "obstacles":[
         [2, 3, "yellow", true],
         [14, 0, "darkgrey"],

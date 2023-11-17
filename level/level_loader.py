@@ -19,7 +19,7 @@ def build_level(level_json):  # level_json format : 'data.json'
     size = data["size"]
     initial_positions_table = data["initial_positions"]
     final_positions_table = data["final_positions"]
-    initial_colors = data["colors"]
+    initial_colors = data["initial_colors"]
 
     # creation of the lists of tuples for initial and final positions
     initial_positions_tuple = [(initial_positions_table[i][0], initial_positions_table[i][1]) for i in

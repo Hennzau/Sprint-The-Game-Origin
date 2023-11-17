@@ -21,7 +21,7 @@ def draw_player(player, surface):
         positions.append(player.render_position)
     else:
         blur = pygame.Surface((pixel_size, pixel_size))
-        pygame.draw.rect(blur, (player.color[0] / 2, player.color[1] / 2, player.color[2] / 2),
+        pygame.draw.rect(blur, (player.color[0] / 20, player.color[1] / 20, player.color[2] / 20),
                          pygame.Rect(0, 0, pixel_size, pixel_size))
 
         for k in range(blur_length - 1):
@@ -31,12 +31,18 @@ def draw_player(player, surface):
 
             for i in range(precision):
                 blur_pos = initial + delta * i
-                surface.blit(blur, (blur_pos[0], blur_pos[1]))
+                surface.blit(blur, (blur_pos[0], blur_pos[1]), special_flags=pygame.BLEND_RGB_ADD)
 
         positions[cursor * 1] = player.render_position
 
         cursor = (cursor + 1) % blur_length
 
+    blur_surface = pygame.Surface((pixel_size, pixel_size))
+    pygame.draw.rect(blur_surface, (player.color[0] / 2, player.color[1] / 2, player.color[2] / 2),
+                     pygame.Rect(0, 0, pixel_size, pixel_size))
+
+    surface.blit(blur_surface, (player.render_position[0], player.render_position[1]))
+
     pygame.draw.rect(surface, player.color,
-                     pygame.Rect(player.render_position[0],
-                                 player.render_position[1], pixel_size, pixel_size))
+                     pygame.Rect(player.render_position[0] + pixel_size / 10,
+                                 player.render_position[1] + pixel_size / 10, pixel_size * 8 / 10, pixel_size * 8 / 10))
