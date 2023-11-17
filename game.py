@@ -25,7 +25,7 @@ class Game:
     def __init__(self):
         self.levels = []
         self.cursor = None
-        self.stage = "Launched"
+        self.stage = "Main Menu"
         self.is_open = True
 
         # Level 0
@@ -34,6 +34,7 @@ class Game:
 
         self.levels.append(build_level("assets/levels/level0.json"))
         self.levels.append(build_level("assets/levels/level1.json"))
+        self.levels.append(build_level("assets/levels/level2.json"))
 
     def update(self, delta_time):
         for event in events():
@@ -51,6 +52,7 @@ class Game:
                         player.move_up(self.levels[self.cursor].grid)
                     if event.key == pygame.K_DOWN:
                         player.move_down(self.levels[self.cursor].grid)
+
 
         self.levels[self.cursor].update(delta_time)
 
@@ -73,3 +75,8 @@ class Game:
         surface.py_surface.blit(temp_surface,
                                 (int((surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 2), int(
                                     (surface.height - self.levels[self.cursor].grid.size[1] * pixel_size) / 2)))
+        
+        #pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect())
+        #pygame.draw.rect(surface.py_surface, colors["Black"], pygame.Rect())
+        #pygame.draw.rect(surface.py_surface, colors["ivoire"], pygame.Rect())
+        #pygame.draw.rect(surface.py_surface, colors["darkblue"], pygame.Rect())
