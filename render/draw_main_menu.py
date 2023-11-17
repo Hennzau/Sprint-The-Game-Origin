@@ -4,8 +4,7 @@ import pygame
 
 
 def draw_main_menu(surface, menu, game):
-    pygame.font.init()
-
+    
     width, height = surface.width, surface.height
     button_width, button_height = 131, 30
 

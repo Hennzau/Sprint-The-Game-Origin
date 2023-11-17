@@ -12,6 +12,7 @@ def events():
 class Surface:
     def __init__(self, width, height, title):
         pygame.init()
+        pygame.font.init()
         self.width = width
         self.height = height
         self.title = title
