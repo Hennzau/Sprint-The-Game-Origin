@@ -106,4 +106,13 @@ class Game:
         timer_string = str(minutes) + ":" + str(secondes)
         timer = time_font.render(timer_string, True, colors["ivoire"])
         surface.blit(timer, ((2*x+150)/2 - timer.get_width()/2 , (2*y+100)/2 - timer.get_height()/2 ))
+
+        font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 40)
+        play_again_button = font.render("Hold R to Reload", True, colors["ivoire"])
+        current_level = "Level " + str(self.cursor + 1)
+        level = font.render(current_level, True, colors["ivoire"])
         
+        y_bis = ((surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5 + self.levels[self.cursor].grid.size[1] * pixel_size + 10
+        
+        surface.blit(level, (surface.width/2 - level.get_width()/2  , y/2 - level.get_height()/2 ))
+        surface.blit(play_again_button, (surface.width/2 - play_again_button.get_width()/2 , (720+y_bis)/2 - play_again_button.get_height()/2 ))
