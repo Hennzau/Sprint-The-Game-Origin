@@ -1,7 +1,7 @@
 {
     "size":[20,12],
     "initial_positions":[[3,4]],
-    "final_positions":[[0, 11]],
+    "final_positions":[[0, 9]],
     "initial_colors":["red"],
     "obstacles":[
         [16, 10, "darkgrey"],
