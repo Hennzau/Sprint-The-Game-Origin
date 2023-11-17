@@ -19,3 +19,9 @@ def sound_swipe():
 
 def sound_background():
     pass
+
+def sound_button():
+    pass
+
+def sound_game_launched():
+    pass

@@ -4,7 +4,7 @@ colors = {"red": (220, 20, 60), "blue": (106, 90, 205), "green": (154, 205, 50),
           "Volkswagen Taupe": (140, 134, 128), "Black": (0, 0, 0)}
 
 # this is the pixel size that defines everything : each tile in the grid has this size and even the player.
-pixel_size = 44
+pixel_size = 40
 
 
 # class obstacle that will be used in the grid, color is a key of the dictionnary
