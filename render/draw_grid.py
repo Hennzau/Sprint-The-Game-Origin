@@ -13,7 +13,6 @@ def draw_grid(grid, surface):
     for i in range(height):
         for j in range(width):
             if grid.obstacles[i, j] is not None:
-
                 if grid.obstacles[i, j].start:
                     pygame.draw.rect(surface, colors["darkblue"],
                                      pygame.Rect(i * pixel_size,
@@ -24,7 +23,7 @@ def draw_grid(grid, surface):
                                     pygame.Rect(i * pixel_size + pixel_size / 8,
                                                 j * pixel_size + pixel_size / 8,
                                                 pixel_size / 2,
-                                                pixel_size / 2), pi / 2, 7 * pi / 4, 2)
+                                                pixel_size / 2), pi / 2, 7 * pi / 4, 1)
                     pygame.draw.circle(surface, colors["Volkswagen Taupe"], (
 
                         i * pixel_size + pixel_size * 11 / 32,
@@ -61,6 +60,21 @@ def draw_grid(grid, surface):
                                      2 * pi * k / 10 - pi / 2))]
 
                     pygame.draw.polygon(surface, grid.obstacles[i, j].color, L, 0)
+                elif grid.obstacles[i,j].color_switcher:
+                    circle_surface=pygame.Surface((pixel_size,pixel_size))
+                    circle_surface.fill(colors["darkblue"])
+                    #red arc
+                    pygame.draw.circle(circle_surface, colors["red"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
+                    surface.blit(circle_surface.subsurface(pygame.Rect(pixel_size/2,0,pixel_size/2,pixel_size/2)),(i*pixel_size+pixel_size/2, j*pixel_size))
+                    #yellow arc
+                    pygame.draw.circle(circle_surface, colors["yellow"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
+                    surface.blit(circle_surface.subsurface(pygame.Rect(0,0,pixel_size/2,pixel_size/2)),(i*pixel_size, j*pixel_size))
+                    #green arc
+                    pygame.draw.circle(circle_surface, colors["green"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
+                    surface.blit(circle_surface.subsurface(pygame.Rect(0,pixel_size/2,pixel_size/2,pixel_size/2)),(i*pixel_size, j*pixel_size+pixel_size/2))
+                    #blue arc
+                    pygame.draw.circle(circle_surface, colors["blue"], (pixel_size/2,pixel_size/2),pixel_size/2,0)
+                    surface.blit(circle_surface.subsurface(pygame.Rect(pixel_size/2,pixel_size/2,pixel_size/2,pixel_size/2)),(i*pixel_size+pixel_size/2, j*pixel_size+pixel_size/2))
 
                 else:
                     pygame.draw.rect(surface, grid.obstacles[i, j].color,
