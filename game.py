@@ -35,6 +35,7 @@ class Game:
         self.levels.append(build_level("assets/levels/level1.json"))
         self.levels.append(build_level("assets/levels/level2.json"))
         self.levels.append(build_level("assets/levels/level3.json"))
+        self.levels.append(build_level("assets/levels/level4.json"))
 
     def reload_levels(self):
         self.levels = []
