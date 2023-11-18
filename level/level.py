@@ -1,6 +1,15 @@
 from level.grid import Grid
 from level.player import Player
 from level.obstacle import colors, pixel_size, Obstacle
+
+from sound import sound_victory
+
+from effects.light_system import LightSystem
+from effects.point_light import PointLight
+
+from effects.particle_system import ParticleSystem
+from effects.point_particle import PointParticle
+
 import numpy as np
 import pygame
 
@@ -28,18 +37,62 @@ class Level:
         self.reload_timer = 0
         self.time = 0  # a level can have the concept of time : it helps to make dynamic things
 
+        self.victory_delay = 0.5
+        self.victory_timer = 0
+
+        self.light_system = LightSystem()
+        self.particle_system = ParticleSystem()
+
         for k in range(
                 len(initial_positions)):  # sometimes there are two players and we can imagine a level with even more
 
-            self.players.append(Player(colors[self.initial_colors[k]], initial_positions[k][0] * pixel_size,
-                                       initial_positions[k][1] * pixel_size))
+            self.grid.obstacles[self.initial_positions[k][0], self.initial_positions[k][1]] = Obstacle(
+                self.initial_colors[k],
+                False,
+                True, False)
 
-            self.grid.obstacles[initial_positions[k][0], initial_positions[k][1]] = Obstacle(self.initial_colors[k],
-                                                                                             False,
-                                                                                             True, False)
+            self.grid.obstacles[self.final_positions[k][0], self.final_positions[k][1]] = Obstacle(
+                self.initial_colors[k], False,
+                False, True)
 
-            self.grid.obstacles[final_positions[k][0], final_positions[k][1]] = Obstacle(self.initial_colors[k], False,
-                                                                                         False, True)
+            self.light_system.add_light("start" + str(k), colors[self.initial_colors[k]],
+                                        (self.initial_positions[k][0] * pixel_size + pixel_size / 2,
+                                         self.initial_positions[k][1] * pixel_size + pixel_size / 2),
+                                        400, 0.1)
+
+            self.light_system.add_light("end" + str(k), colors[self.initial_colors[k]],
+                                        (self.final_positions[k][0] * pixel_size + pixel_size / 2,
+                                         self.final_positions[k][1] * pixel_size + pixel_size / 2),
+                                        400, 0.1)
+
+            self.light_system.add_light("player" + str(k), colors[self.initial_colors[k]],
+                                        (self.initial_positions[k][0] * pixel_size + pixel_size / 2,
+                                         self.initial_positions[k][1] * pixel_size + pixel_size / 2),
+                                        200, 0.2)
+
+        self.reload_level()
+
+    def reload_level(self):
+        self.players = []
+        self.particle_system.clear()
+        self.victory_timer = 0
+
+        for k in range(
+                len(self.initial_positions)):
+            self.players.append(Player(colors[self.initial_colors[k]], self.initial_positions[k][0] * pixel_size,
+                                       self.initial_positions[k][1] * pixel_size))
+            particles = []
+            for i in range(100):
+                particles.append(PointParticle(colors[self.initial_colors[k]],
+                                               (self.initial_positions[k][0] * pixel_size + pixel_size / 2,
+                                                self.initial_positions[k][1] * pixel_size + pixel_size / 2),
+                                               (np.random.randint(100) * np.sin((2 * 3.14 * i) / 100),
+                                                np.random.randint(100) * np.cos((2 * 3.14 * i) / 100)),
+                                               3, np.random.randint(150) / 100))
+
+            self.particle_system.add(particles)
+
+        self.finished = False
 
     def update(self, delta_time):  # this function is called 60 times per second in average, so delta_time = 1/60
         finished = True
@@ -47,26 +100,64 @@ class Level:
         for i in range(len(self.players)):  # check if all players are at their final positions at the same time
             player = self.players[i]
             player.update(delta_time, self.grid)
+
+            if player.bounces and player.bounce_time == 0:
+                particles = []
+                for k in range(50):
+                    collision_position = player.position + np.array([pixel_size/2, pixel_size/2]) + player.bounce_direction * pixel_size / 2
+
+                    collision_dir = np.array([1, 1]) - np.abs (player.bounce_direction)
+                    if np.random.randint (100) > 50:
+                        collision_dir = -collision_dir
+
+                    particles.append(PointParticle  (player.color,
+                                                    (collision_position[0], collision_position[1]),
+                                                    (collision_dir[0] * np.random.randint (300) + np.random.randint (100) * np.sin((2 * 3.14 * k) / 10),
+                                                    collision_dir[1] * np.random.randint(300) + np.random.randint (100) * np.cos((2 * 3.14 * k) / 10)),
+                                                    3, np.random.randint(20) / 100))
+
+                self.particle_system.add(particles)
+
             if int(player.position[0] / pixel_size) != self.final_positions[i][0] or int(
                     player.position[1] / pixel_size) != self.final_positions[i][1]:
                 finished = False
 
-        if finished and not self.finished:  # if yes, trigger an event to tell the game to stop the current level
-            pygame.event.post(victory_event)
-            self.finished = True
+            self.light_system.lights["player" + str(i)].move(
+                (player.render_position[0] + pixel_size / 2, player.render_position[1] + pixel_size / 2))
+
+            self.light_system.lights["player" + str(i)].change_color(player.color)
+
+        if finished:  # if yes, trigger an event to tell the game to stop the current level
+            if self.victory_timer > self.victory_delay:
+                pygame.event.post(victory_event)
+                self.finished = True
+            elif self.victory_timer == 0:
+                sound_victory()
+
+                for k in range(
+                        len(self.initial_positions)):
+
+                    particles = []
+                    for i in range(300):
+                        particles.append(PointParticle(self.players[k].color,
+                                                       (self.final_positions[k][0] * pixel_size + pixel_size / 2,
+                                                        self.final_positions[k][1] * pixel_size + pixel_size / 2),
+                                                       (np.random.randint(300) * np.sin((2 * 3.14 * i) / 100),
+                                                        np.random.randint(300) * np.cos((2 * 3.14 * i) / 100)),
+                                                       3, np.random.randint(150) / 100))
+
+                    self.particle_system.add(particles)
+
+            self.victory_timer += delta_time
 
         self.time += delta_time
         if self.ask_for_reload:
             self.reload_timer += delta_time
 
         if self.reload_timer >= 1:
-            self.players = []
-
-            for k in range(
-                    len(self.initial_positions)):
-                self.players.append(Player(colors[self.initial_colors[k]], self.initial_positions[k][0] * pixel_size,
-                                           self.initial_positions[k][1] * pixel_size))
-
+            self.reload_level()
             self.ask_for_reload = False
             self.reload_timer = 0
             self.time = 0
+
+        self.particle_system.update(delta_time)
