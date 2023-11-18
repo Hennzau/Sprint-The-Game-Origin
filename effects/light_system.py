@@ -34,5 +34,5 @@ class LightSystem:
         self.lights[name] = PointLight(self.blank_base_model, color, position, radius, intensity)
 
     def render(self, surface):
-        for _, light in self.lights.items():
+        for light in self.lights.values():
             light.render(surface)
