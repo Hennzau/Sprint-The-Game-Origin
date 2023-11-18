@@ -38,7 +38,7 @@ class Game:
 
         # load levels
 
-        self.reload_levels()
+        self.load_levels()
 
         # load fonts and base model image of the game interface (things that do not change)
 
@@ -51,7 +51,7 @@ class Game:
         self.image = None
         self.load_interface()
 
-    def reload_levels(self):
+    def load_levels(self):
         self.levels = []
         self.levels_render = []
 
@@ -120,7 +120,8 @@ class Game:
                 self.is_open = False
             if event.type == pygame.USEREVENT:
                 sound_victory()
-                self.reload_levels()
+                self.levels[self.cursor].reload_level()
+
                 self.last_level = self.cursor
                 self.cursor = None
                 self.stage = "End Menu"
@@ -159,7 +160,7 @@ class Game:
                 self.main_menu_timer += delta_time
 
             if self.main_menu_timer >= 1:
-                self.reload_levels()
+                self.levels[self.cursor].reload_level()
                 self.last_level = self.cursor
                 self.cursor = None
                 self.stage = "Main Menu"

@@ -22,3 +22,5 @@ class LevelRender:
 
         for player in self.level.players:
             draw_player(player, surface)
+
+        self.level.light_system.render(surface)
