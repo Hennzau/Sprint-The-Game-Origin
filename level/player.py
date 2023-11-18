@@ -6,6 +6,8 @@ from level.grid import Grid
 from level.obstacle import Obstacle, pixel_size
 from sound import sound_collision
 
+from effects.particle_system import ParticleSystem
+from effects.point_particle import PointParticle
 
 # ---------------- #
 

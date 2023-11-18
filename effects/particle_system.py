@@ -14,6 +14,9 @@ class ParticleSystem:
         for particle in self.particles:
             if particle.image is not None:
                 particle.update(delta_time)
+        
+        if len ([particle.position for particle in self.particles if particle.image is not None]) == len (self.particles):
+            self.particles = []
 
     def add(self, particles):
         self.particles.extend(particles)

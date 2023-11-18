@@ -9,7 +9,7 @@ from level.obstacle import Obstacle, pixel_size
 
 from render.level_render import LevelRender
 
-from sound import sound_victory, sound_swipe
+from sound import sound_swipe
 from render.surface import Surface
 from level.grid import Grid
 
@@ -119,7 +119,6 @@ class Game:
             if event.type == pygame.QUIT:
                 self.is_open = False
             if event.type == pygame.USEREVENT:
-                sound_victory()
                 self.levels[self.cursor].reload_level()
 
                 self.last_level = self.cursor
@@ -132,19 +131,20 @@ class Game:
                     if event.key == pygame.K_e:
                         self.ask_for_main_menu = True
 
-                    for player in (self.levels[self.cursor]).players:
-                        if event.key == pygame.K_LEFT:
-                            sound_swipe()
-                            player.move_left(self.levels[self.cursor].grid)
-                        if event.key == pygame.K_RIGHT:
-                            sound_swipe()
-                            player.move_right(self.levels[self.cursor].grid)
-                        if event.key == pygame.K_UP:
-                            sound_swipe()
-                            player.move_up(self.levels[self.cursor].grid)
-                        if event.key == pygame.K_DOWN:
-                            sound_swipe()
-                            player.move_down(self.levels[self.cursor].grid)
+                    if not self.levels[self.cursor].victory_timer > 0:
+                        for player in (self.levels[self.cursor]).players:
+                            if event.key == pygame.K_LEFT:
+                                sound_swipe()
+                                player.move_left(self.levels[self.cursor].grid)
+                            if event.key == pygame.K_RIGHT:
+                                sound_swipe()
+                                player.move_right(self.levels[self.cursor].grid)
+                            if event.key == pygame.K_UP:
+                                sound_swipe()
+                                player.move_up(self.levels[self.cursor].grid)
+                            if event.key == pygame.K_DOWN:
+                                sound_swipe()
+                                player.move_down(self.levels[self.cursor].grid)
 
             if event.type == pygame.KEYUP:
                 if self.cursor is not None:

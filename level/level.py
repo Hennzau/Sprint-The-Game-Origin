@@ -2,6 +2,8 @@ from level.grid import Grid
 from level.player import Player
 from level.obstacle import colors, pixel_size, Obstacle
 
+from sound import sound_victory
+
 from effects.light_system import LightSystem
 from effects.point_light import PointLight
 
@@ -73,6 +75,7 @@ class Level:
     def reload_level(self):
         self.players = []
         self.particle_system.clear()
+        self.victory_timer = 0
 
         for k in range(
                 len(self.initial_positions)):
@@ -97,6 +100,24 @@ class Level:
         for i in range(len(self.players)):  # check if all players are at their final positions at the same time
             player = self.players[i]
             player.update(delta_time, self.grid)
+
+            if player.bounces and player.bounce_time == 0:
+                particles = []
+                for k in range(50):
+                    collision_position = player.position + np.array([pixel_size/2, pixel_size/2]) + player.bounce_direction * pixel_size / 2
+
+                    collision_dir = np.array([1, 1]) - np.abs (player.bounce_direction)
+                    if np.random.randint (100) > 50:
+                        collision_dir = -collision_dir
+
+                    particles.append(PointParticle  (player.color,
+                                                    (collision_position[0], collision_position[1]),
+                                                    (collision_dir[0] * np.random.randint (300) + np.random.randint (100) * np.sin((2 * 3.14 * k) / 10),
+                                                    collision_dir[1] * np.random.randint(300) + np.random.randint (100) * np.cos((2 * 3.14 * k) / 10)),
+                                                    3, np.random.randint(20) / 100))
+
+                self.particle_system.add(particles)
+
             if int(player.position[0] / pixel_size) != self.final_positions[i][0] or int(
                     player.position[1] / pixel_size) != self.final_positions[i][1]:
                 finished = False
@@ -109,9 +130,10 @@ class Level:
         if finished:  # if yes, trigger an event to tell the game to stop the current level
             if self.victory_timer > self.victory_delay:
                 pygame.event.post(victory_event)
-                self.victory_timer = 0
                 self.finished = True
             elif self.victory_timer == 0:
+                sound_victory()
+
                 for k in range(
                         len(self.initial_positions)):
 

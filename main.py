@@ -32,8 +32,8 @@ def main():
 
         if game.stage == "Launched":
             game.render()
-        #   if timer == 0:
-        #   print("Game launched, currently rendering", int(clock.get_fps()), "FPS")
+            #if timer == 0:
+            #   print("Game launched, currently rendering", int(clock.get_fps()), "FPS")
 
         if game.stage == "Main Menu":
             draw_main_menu(surface, menu, game)
