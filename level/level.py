@@ -179,6 +179,8 @@ class Level:
         # if the user ask for reload, increment the progress bar
         if self.ask_for_reload:
             self.reload_timer += delta_time
+        else:
+            self.reload_timer = 0
 
         # finally reload the level
         if self.reload_timer >= 1:

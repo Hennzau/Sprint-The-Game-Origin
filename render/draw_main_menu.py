@@ -1,4 +1,4 @@
-from menu.main_menu import Main_menu
+from menu.mainmenu import MainMenu
 from level.obstacle import colors
 from sound import sound_button, sound_game_launched
 import pygame

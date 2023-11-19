@@ -1,15 +1,14 @@
-### Logic of the main menu ###
+# Logic of the main menu #
 
 from game import Game
 
 
-class Main_menu:
+class MainMenu:
 
     def __init__(self, game):
         self.level_selected = None
         self.start_game = False
         self.levels = game.levels
-
 
     def update_level(self, level):
         self.level_selected = level

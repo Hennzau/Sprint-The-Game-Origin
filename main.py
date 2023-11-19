@@ -4,7 +4,7 @@
 import pygame
 
 from game import Game
-from menu.main_menu import Main_menu
+from menu.mainmenu import MainMenu
 from render.draw_main_menu import draw_main_menu
 from render.surface import Surface
 from render.surface import events, flip
@@ -18,7 +18,7 @@ def main():
     surface = Surface(1280, 720, "Sprint The Game")
 
     game = Game(surface)
-    menu = Main_menu(game)
+    menu = MainMenu(game)
     clock = pygame.time.Clock()
 
     timer = 0

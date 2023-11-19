@@ -18,8 +18,6 @@ from level.level_loader import build_level
 
 # class game which updates the game (logic and render) at each passage through the main loop
 
-# new events
-
 
 class Game:
     def __init__(self, surface):
@@ -49,11 +47,20 @@ class Game:
         self.return_to_menu = self.font.render("Hold E to go back", True, colors["ivory"])
 
         self.image = None
+
+        # the load interface generate the mask image of the statis interface : it helps not calculate again and again
+        # the image to render
+
         self.load_interface()
 
     def load_levels(self):
         self.levels = []
         self.levels_render = []
+
+        # build levels from JSON format
+
+        # there are two different classes : a Logical object 'Level' that represents the level, 
+        # and a Rendering object 'LevelRender' that manages the rendering of the level (pre-calculated images etc...)
 
         self.levels.append(build_level("assets/levels/level_1.json"))
         self.levels_render.append(LevelRender(self.levels[-1]))
@@ -74,6 +81,8 @@ class Game:
         self.image = pygame.Surface((self.surface.width, self.surface.height))
 
         if self.cursor is not None:
+            # First of all, create the frame that will contain the level
+
             self.surface.py_surface.fill((0, 0, 0))
 
             pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(
@@ -94,6 +103,8 @@ class Game:
                 self.levels[self.cursor].grid.size[0] * pixel_size + 2,
                 self.levels[self.cursor].grid.size[1] * pixel_size + 2))
 
+            # create the box of the timer, at the left of the level frame
+
             x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
             y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
@@ -102,14 +113,17 @@ class Game:
             pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 142, 92))
             pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
 
+            # print the current level
             current_level = "Level " + str(self.cursor + 1)
             level = self.font.render(current_level, True, colors["ivory"])
+            self.image.blit(level, (
+                self.surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
+
+            # create the two options in the level : Reload the level and return to main menu
 
             y_bis = ((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 20 + \
                     self.levels[self.cursor].grid.size[1] * pixel_size
 
-            self.image.blit(level, (
-                self.surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
             self.image.blit(self.play_again_button, (
                 self.surface.width / 2 - self.play_again_button.get_width() / 2,
                 (720 + y_bis) / 2 - self.play_again_button.get_height() / 2))
@@ -117,17 +131,18 @@ class Game:
                 self.surface.width / 2 - self.play_again_button.get_width() / 2,
                 (720 + y_bis) / 2 - self.play_again_button.get_height() / 2 + self.return_to_menu.get_height()))
 
-    def update(self, delta_time):
+    def update(self, delta_time):  # the update function manages everything
         for event in events():
             if event.type == pygame.QUIT:
                 self.is_open = False
+            # when there is a victory event, reload the current level and go to end menu
             if event.type == pygame.USEREVENT:
                 self.levels[self.cursor].reload_level()
 
                 self.last_level = self.cursor
                 self.cursor = None
                 self.stage = "End Menu"
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN:  # manage keyboard actions
                 if self.cursor is not None:
                     if event.key == pygame.K_r:
                         self.levels[self.cursor].ask_for_reload = True
@@ -156,11 +171,13 @@ class Game:
                 if event.key == pygame.K_e:
                     self.ask_for_main_menu = False
 
-        if self.cursor is not None:
+        if self.cursor is not None:  # update the level if the user is playing one
             self.levels[self.cursor].update(delta_time)
 
             if self.ask_for_main_menu:
                 self.main_menu_timer += delta_time
+            else:
+                self.main_menu_timer = 0
 
             if self.main_menu_timer >= 1:
                 self.levels[self.cursor].reload_level()
@@ -204,13 +221,16 @@ class Game:
             time = self.levels[self.cursor].time
 
             minutes = int(time / 60)
-            secondes = int(time - 60 * minutes)
+            seconds = int(time - 60 * minutes)
 
-            timer_string = str(minutes) + ":" + str(secondes)
+            timer_string = str(minutes) + ":" + str(seconds)
+
             timer = self.time_font.render(timer_string, True, colors["ivory"])
 
             self.surface.py_surface.blit(timer, (
                 (2 * x + 150) / 2 - timer.get_width() / 2, (2 * y + 100) / 2 - timer.get_height() / 2))
+
+            # when the user wants to reload the current level or go to the main menu, draw the text with color progress
 
             if self.levels[self.cursor].ask_for_reload:
                 temp_surface = pygame.Surface(
