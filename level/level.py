@@ -43,6 +43,7 @@ class Level:
         self.light_system = LightSystem()
         self.particle_system = ParticleSystem()
 
+        # We initialize special obstacles in the grid like starting points and ending points
         for k in range(
                 len(initial_positions)):  # sometimes there are two players and we can imagine a level with even more
 
@@ -55,6 +56,8 @@ class Level:
                 self.initial_colors[k], False,
                 False, True)
 
+            # those obstacles have also a soft lighting point
+
             self.light_system.add_light("start" + str(k), colors[self.initial_colors[k]],
                                         (self.initial_positions[k][0] * pixel_size + pixel_size / 2,
                                          self.initial_positions[k][1] * pixel_size + pixel_size / 2),
@@ -65,12 +68,14 @@ class Level:
                                          self.final_positions[k][1] * pixel_size + pixel_size / 2),
                                         400, 0.1)
 
+            # each player has a point of light that follows him
+
             self.light_system.add_light("player" + str(k), colors[self.initial_colors[k]],
                                         (self.initial_positions[k][0] * pixel_size + pixel_size / 2,
                                          self.initial_positions[k][1] * pixel_size + pixel_size / 2),
                                         200, 0.2)
 
-        self.reload_level()
+        self.reload_level()  # load / reload this level
 
     def reload_level(self):
         self.players = []
@@ -79,8 +84,14 @@ class Level:
 
         for k in range(
                 len(self.initial_positions)):
+
+            # play again with players at their starting points
+
             self.players.append(Player(colors[self.initial_colors[k]], self.initial_positions[k][0] * pixel_size,
                                        self.initial_positions[k][1] * pixel_size))
+
+            # at the beginning of the level, particles explode from the each player position
+
             particles = []
             for i in range(100):
                 particles.append(PointParticle(colors[self.initial_colors[k]],
@@ -97,40 +108,51 @@ class Level:
     def update(self, delta_time):  # this function is called 60 times per second in average, so delta_time = 1/60
         finished = True
 
-        for i in range(len(self.players)):  # check if all players are at their final positions at the same time
+        for i in range(len(self.players)):  # update data for all players
             player = self.players[i]
             player.update(delta_time, self.grid)
+
+            # when a player bounces on an obstacle we generate particles
 
             if player.bounces and player.bounce_time == 0:
                 particles = []
                 for k in range(50):
-                    collision_position = player.position + np.array([pixel_size/2, pixel_size/2]) + player.bounce_direction * pixel_size / 2
+                    collision_position = player.position + np.array(
+                        [pixel_size / 2, pixel_size / 2]) + player.bounce_direction * pixel_size / 2
 
-                    collision_dir = np.array([1, 1]) - np.abs (player.bounce_direction)
-                    if np.random.randint (100) > 50:
+                    collision_dir = np.array([1, 1]) - np.abs(player.bounce_direction)
+                    if np.random.randint(100) > 50:
                         collision_dir = -collision_dir
 
-                    particles.append(PointParticle  (player.color,
-                                                    (collision_position[0], collision_position[1]),
-                                                    (collision_dir[0] * np.random.randint (300) + np.random.randint (100) * np.sin((2 * 3.14 * k) / 10),
-                                                    collision_dir[1] * np.random.randint(300) + np.random.randint (100) * np.cos((2 * 3.14 * k) / 10)),
-                                                    3, np.random.randint(20) / 100))
+                    particles.append(PointParticle(player.color,
+                                                   (collision_position[0], collision_position[1]),
+                                                   (collision_dir[0] * np.random.randint(300) + np.random.randint(
+                                                       100) * np.sin((2 * 3.14 * k) / 10),
+                                                    collision_dir[1] * np.random.randint(300) + np.random.randint(
+                                                        100) * np.cos((2 * 3.14 * k) / 10)),
+                                                   3, np.random.randint(20) / 100))
 
                 self.particle_system.add(particles)
+
+            # check if all players are at their final positions at the same time
 
             if int(player.position[0] / pixel_size) != self.final_positions[i][0] or int(
                     player.position[1] / pixel_size) != self.final_positions[i][1]:
                 finished = False
 
+            # update the position and the color of the player
+
             self.light_system.lights["player" + str(i)].move(
                 (player.render_position[0] + pixel_size / 2, player.render_position[1] + pixel_size / 2))
 
-            self.light_system.lights["player" + str(i)].change_color(player.color)
+            self.light_system.lights["player" + str(i)].change_color(
+                player.color)  # this will regenerate the lighting mask when the previous color is different
 
         if finished:  # if yes, trigger an event to tell the game to stop the current level
             if self.victory_timer > self.victory_delay:
                 pygame.event.post(victory_event)
                 self.finished = True
+
             elif self.victory_timer == 0:
                 sound_victory()
 
