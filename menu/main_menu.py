@@ -18,3 +18,4 @@ class Main_menu:
         if self.start_game:
             game.cursor = self.level_selected
             game.stage = "Launched"
+            game.load_interface()

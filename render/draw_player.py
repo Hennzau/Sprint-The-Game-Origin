@@ -4,7 +4,7 @@ import pygame
 from level.obstacle import pixel_size
 
 """"
-draw_player is called upon to reprsent the player at all times for the viewer.
+draw_player is called upon to represent the player at all times for the viewer.
 """
 
 precision = 5
