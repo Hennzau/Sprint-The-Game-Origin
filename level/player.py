@@ -9,6 +9,7 @@ from sound import sound_collision
 from effects.particle_system import ParticleSystem
 from effects.point_particle import PointParticle
 
+
 # ---------------- #
 
 class Player:
@@ -135,28 +136,32 @@ class Player:
 
     # those are the functions that can be called from the game to move the player
     def move_up(self, grid):
-        self.bounce_direction = np.array([0, -1])  # changes the future bounce direction
+        if (self.bounce_direction == np.array([0, 0])).all():
+            self.bounce_direction = np.array([0, -1])  # changes the future bounce direction
 
         if not self.is_moving:  # the player can not move if it's alreadu moving
             self.destination = self.calculate_destination(grid, "up") * pixel_size
             self.is_moving = True
 
     def move_down(self, grid):
-        self.bounce_direction = np.array([0, 1])
+        if (self.bounce_direction == np.array([0, 0])).all():
+            self.bounce_direction = np.array([0, 1])
 
         if not self.is_moving:
             self.destination = self.calculate_destination(grid, "down") * pixel_size
             self.is_moving = True
 
     def move_left(self, grid):
-        self.bounce_direction = np.array([-1, 0])
+        if (self.bounce_direction == np.array([0, 0])).all():
+            self.bounce_direction = np.array([-1, 0])
 
         if not self.is_moving:
             self.destination = self.calculate_destination(grid, "left") * pixel_size
             self.is_moving = True
 
     def move_right(self, grid):
-        self.bounce_direction = np.array([1, 0])
+        if (self.bounce_direction == np.array([0, 0])).all():
+            self.bounce_direction = np.array([1, 0])
 
         if not self.is_moving:
             self.destination = self.calculate_destination(grid, "right") * pixel_size
@@ -187,6 +192,7 @@ class Player:
                 self.bounce_time = 0
                 self.bounce_amplitude = 0
                 self.bounces = False
+                self.bounce_direction = np.array([0, 0])
 
         self.render_position = self.position + self.bounce_direction * self.bounce_amplitude * np.sin(
             -20 * self.bounce_time)
@@ -203,6 +209,8 @@ class Player:
             distance = np.linalg.norm(self.destination - self.position)
             direction = (self.destination - self.position) / distance
             delta = self.speed * delta_time
+
+            self.bounce_direction = direction
 
             # check that the next frame the player will not cross the destination (if the speed is too high)
 
