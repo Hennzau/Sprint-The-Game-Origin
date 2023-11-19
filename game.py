@@ -55,16 +55,19 @@ class Game:
         self.levels = []
         self.levels_render = []
 
-        self.levels.append(build_level("assets/levels/level0.json"))
+        self.levels.append(build_level("assets/levels/level_1.json"))
         self.levels_render.append(LevelRender(self.levels[-1]))
 
-        self.levels.append(build_level("assets/levels/level1.json"))
+        self.levels.append(build_level("assets/levels/level_2.json"))
         self.levels_render.append(LevelRender(self.levels[-1]))
 
-        self.levels.append(build_level("assets/levels/level2.json"))
+        self.levels.append(build_level("assets/levels/level_3.json"))
         self.levels_render.append(LevelRender(self.levels[-1]))
 
-        self.levels.append(build_level("assets/levels/level3.json"))
+        self.levels.append(build_level("assets/levels/level_4.json"))
+        self.levels_render.append(LevelRender(self.levels[-1]))
+
+        self.levels.append(build_level("assets/levels/level_5.json"))
         self.levels_render.append(LevelRender(self.levels[-1]))
 
     def load_interface(self):

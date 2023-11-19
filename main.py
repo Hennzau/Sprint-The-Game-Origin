@@ -23,17 +23,20 @@ def main():
 
     timer = 0
 
-    frame_cap = 60
+    frame_cap = 120
 
     while game.is_open:
         surface.clear((0, 0, 0))
 
-        game.update(float(1 / 60))
+        if clock.get_fps() > 0:
+            game.update(float(1 / clock.get_fps()))
+        else:
+            game.update(float(1 / 60))
 
         if game.stage == "Launched":
             game.render()
-            #if timer == 0:
-            #   print("Game launched, currently rendering", int(clock.get_fps()), "FPS")
+            if timer == 0:
+                print("Game launched, currently rendering", int(clock.get_fps()), "FPS")
 
         if game.stage == "Main Menu":
             draw_main_menu(surface, menu, game)

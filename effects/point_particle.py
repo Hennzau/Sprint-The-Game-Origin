@@ -24,4 +24,5 @@ class PointParticle:
 
             self.lifetime = self.lifetime - delta_time
         else:
+            # if the lifetime is <= 0, let's kill the image
             self.image = None
