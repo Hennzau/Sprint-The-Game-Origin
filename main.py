@@ -4,7 +4,7 @@
 import pygame
 
 from game import Game
-from menu.mainmenu import MainMenu
+from menu.main_menu import MainMenu
 from render.draw_main_menu import draw_main_menu
 from render.surface import Surface
 from render.surface import events, flip
