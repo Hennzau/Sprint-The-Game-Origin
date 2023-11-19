@@ -11,6 +11,7 @@ from render.draw_level import draw_level
 
 from level.level_builder import build_level_0
 
+
 # class game which updates the game (logic and render) at each passage through the main loop
 
 class Game:
@@ -18,12 +19,15 @@ class Game:
         self.levels = []
         self.cursor = None
 
-        # code moche
-        self.cursor = 0
-
         self.levels.append(build_level_0())
 
-        # code bon
+        cursor = input("Please choose the number of the level you want to play:")
+
+        if cursor == "0":
+            self.cursor = 0
+        else:
+            print("Only level '0' is available at the moment")
+            quit()
 
         self.is_open = True
 
@@ -45,7 +49,13 @@ class Game:
         self.levels[self.cursor].update(delta_time)
 
         if self.levels[self.cursor].finished:
-            print("Victoire")
+            print("Victory")
+            choice = input("Play again ? (y/[all])")
+            if choice == "y":
+                self.levels = []
+                self.levels.append(build_level_0())
+            else:
+                quit()
 
     def render(self, surface):
         draw_level(self.levels[self.cursor], surface)

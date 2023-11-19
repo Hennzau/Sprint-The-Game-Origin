@@ -14,7 +14,7 @@ from level.obstacle import colors
 
 
 def main():
-    surface = Surface(1280, 720, "test")
+    surface = Surface(1280, 720, "Sprint The Game | MVP")
     game = Game()
 
     delta_time = 0
@@ -23,11 +23,11 @@ def main():
     clock = pygame.time.Clock()
 
     while game.is_open:
-        surface.clear(colors["darkblue"])
+        surface.clear((0, 0, 0))
 
         start = pygame.time.get_ticks()
 
-        game.update(float (1/60))
+        game.update(float(1 / 60))
         game.render(surface.surface)
 
         flip()
