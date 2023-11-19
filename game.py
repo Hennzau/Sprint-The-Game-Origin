@@ -31,11 +31,14 @@ class Game:
 
         # Level 0
 
-        self.levels.append(build_level("assets/levels/level0.json"))
-        self.levels.append(build_level("assets/levels/level1.json"))
-        self.levels.append(build_level("assets/levels/level2.json"))
-        self.levels.append(build_level("assets/levels/level3.json"))
-        self.levels.append(build_level("assets/levels/level4.json"))
+        self.ask_for_main_menu = False
+        self.main_menu_timer = 0
+
+        # load levels
+
+        self.load_levels()
+
+        # load fonts and base model image of the game interface (things that do not change)
 
     def reload_levels(self):
         self.levels = []
