@@ -87,7 +87,7 @@ class Player:
 
         return i
 
-    # same
+    # same for vertical axis
     def advance_y(self, grid, r1, r2):
         x, y = self.level_position()
         i = 0
@@ -177,8 +177,6 @@ class Player:
             self.last_positions[self.cursor] = self.render_position
             self.cursor = (self.cursor + 1) % self.record_length
 
-        # logical
-
         # manages the bounces with a sinusoidal function
 
         if self.bounces:
@@ -198,6 +196,7 @@ class Player:
             -20 * self.bounce_time)
 
         # manages the movement of the player
+
         if (self.position == self.destination).all():
             if self.is_moving:
                 sound_collision()

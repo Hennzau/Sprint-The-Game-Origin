@@ -14,8 +14,10 @@ class ParticleSystem:
         for particle in self.particles:
             if particle.image is not None:
                 particle.update(delta_time)
-        
-        if len ([particle.position for particle in self.particles if particle.image is not None]) == len (self.particles):
+
+        # if every particle are dead, clear the list
+        if len(self.particles) > 0 and len([1 for particle in self.particles if particle.lifetime <= 0]) == len(
+                self.particles):
             self.particles = []
 
     def add(self, particles):

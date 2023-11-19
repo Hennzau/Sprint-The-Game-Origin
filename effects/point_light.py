@@ -27,6 +27,7 @@ class PointLight:
         self.image.blit(self.base_model, (0, 0),
                         special_flags=pygame.BLEND_RGBA_ADD)
 
+        # color mask to match what the user wants
         temp_surface = pygame.Surface((self.radius * 2, self.radius * 2))
         temp_surface.fill(
             (min(self.color[0] * self.intensity, 255), min(self.color[1] * self.intensity, 255),
@@ -34,8 +35,8 @@ class PointLight:
 
         self.image.blit(temp_surface, (0, 0), special_flags=pygame.BLEND_RGB_MULT)
 
-    def change_color(self, color):
-        if self.color != color:
+    def change_color(self, color):  # reload the mask and apply it on the base_model
+        if self.color != color:  # only if the mask changed
             self.color = color
 
             self.image = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)

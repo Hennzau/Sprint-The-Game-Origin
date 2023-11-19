@@ -19,7 +19,8 @@ class LightSystem:
 
         self.blank_base_model = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
 
-        for k in range(self.precision):
+        for k in range(self.precision):  # consists in a superposition of blank disks BLEND_ADD
+
             sub_radius = self.radius * (self.precision - k) / self.precision
             temp_surface = pygame.Surface((sub_radius * 2, sub_radius * 2), pygame.SRCALPHA)
 

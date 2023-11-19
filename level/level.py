@@ -148,11 +148,12 @@ class Level:
             self.light_system.lights["player" + str(i)].change_color(
                 player.color)  # this will regenerate the lighting mask when the previous color is different
 
-        if finished:  # if yes, trigger an event to tell the game to stop the current level
+        if finished:  # if yes, trigger an event to tell the game to stop the current level after a certain delay
             if self.victory_timer > self.victory_delay:
                 pygame.event.post(victory_event)
                 self.finished = True
 
+            # When the user succeed sound the victory and tones of particles
             elif self.victory_timer == 0:
                 sound_victory()
 
@@ -172,14 +173,19 @@ class Level:
 
             self.victory_timer += delta_time
 
+        # manages the concept of time of the level
         self.time += delta_time
+
+        # if the user ask for reload, increment the progress bar
         if self.ask_for_reload:
             self.reload_timer += delta_time
 
+        # finally reload the level
         if self.reload_timer >= 1:
             self.reload_level()
             self.ask_for_reload = False
             self.reload_timer = 0
             self.time = 0
 
+        # at the end we update the particle system : it manages the position of all particles and their lifetime
         self.particle_system.update(delta_time)
