@@ -11,8 +11,8 @@ class LevelEditor :
         self.size = size
         self.level = Level(size, [], [], [])
         self.players = []
-        self.colors = ["red", "blue", "green", "yellow", "darkgrey"]
-        self.color_cursor = None
+        self.colors = ["red", "yellow", "green", "blue", "darkgrey"]
+        self.color_cursor = 0
         self.color_switcher = False
         self.level_render=LevelRender(self.level)
         
