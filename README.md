@@ -1,92 +1,103 @@
-# CodingWeeks2-jeeth
+# CodingWeeks2-jeeth (Juliette, Emmanuel, Enzo, Thomas, Henrik)
 
+Pour cette deuxième semaine, nous avons voulu créer un jeu type puzzle, basé sur deux jeux que nous aimions beaucoup.
 
+Le but est simple, il est constitué d'une grille, et de un ou plusieurs personnages controlés simultanéments par
+l'utilisateur.
+
+Un personnage c'est :
+
+- représenté par un carré qui se déplace dans la grille
+- d'une couleur qui peut changer pendant le jeu
+
+La grille contient :
+
+- un ensemble de murs de différentes couleurs
+- un point de départ pour chaque personnage
+- un point d'arrivé attribué à chaque personnage
+- des 'color switcher' qui permettent de changer la couleur du joueur lorsque ce dernier passe dessus
+
+L'objectif de l'utilisateur est de positionner tous les personnages sur leur point d'arrivé, sachant qu'un personnage
+traverse les murs de sa couleur.
+
+Ceci est le MVP réalisé dans le cadre des coding weeks de CentraleSupélec :
+
+![](./illustrations/1.png)
 
 ## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Vous voulez tester ce MVP ? Voici ce qu'il faut faire :
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- Cloner cette branch de notre repository sur votre ordinateur:
 
 ```
-cd existing_repo
-git remote add origin https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth.git
-git branch -M main
-git push -uf origin main
+git clone -b MVP-demo https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth.git
 ```
 
-## Integrate with your tools
+- Le jeu a été développé sous Python 3.11.5, mais il doit être compatible avec toute version de python >3.11 sur MacOS
+  et
+  Window. Assurez vous donc d'avoir une telle version avec la commande qui suit. Si ce n'est pas le cas vous pouvez
+  télécharger et mettre à jour votre python au lien suivant:
 
-- [ ] [Set up project integrations](https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth/-/settings/integrations)
+```
+python --version
+(or python3 --version)
+```
 
-## Collaborate with your team
+https://www.python.org/downloads/release/python-3115/
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+- Il faut ensuite installer les bibliothèques utilisées dans ce projet, elles sont au nombre de deux, indiquées dans le
+  fichier 'requirements.txt'. Néanmoins pour ne pas compromettre votre installation globale de python, nous vous
+  proposons de travailler avec un environnement virtuel. C'est à dire un second python et un second pip directement
+  intégrés dans le projet. Ouvrez alors un terminal dans le dossier cloné:
 
-## Test and Deploy
+```
+python -m venv venv
 
-Use the built-in continuous integration in GitLab.
+.\venv\Scripts\pip install -r requirements.txt (sur windows)
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+- Vous pouvez alors lancer le jeu en faisant :
 
-***
+```
+.\venv\Scripts\python main.py (sur python)
+```
 
-# Editing this README
+- Une fenêtre Pygame noire s'ouvre alors, et le terminal vous demande de sélectionner le numéro du niveau auquel vous
+  voulez jouer, pour le moment il n'y a rien d'autre que le niveau '0'. Rentre donc '0'
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+![](./illustrations/0.png)
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+- Vous pouvez alors vous déplacer avec les touches LEFT,RIGHT,UP,DOWN du clavier, sachant que vous êtes le petit carré
+  rouge en haut à gauche de l'écran, et que votre but est d'atteindre le point en bas à droite de la grille en vous
+  déplaçant.
 
-## Name
-Choose a self-explaining name for your project.
+![](./illustrations/2.png)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+- Il y'a deux colors switcher dans ce niveau qui sont ici :
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+![](./illustrations/5.png)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- à votre victoire il vous sera demandé de répondre dans le terminal:
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+![](./illustrations/4.png)
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Points d'attention
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Nous tenons à vous signaler que si vous avez suivis les étapes de l'installation, vous vous retrouvez avec un
+environnement python dans votre dossier, avec seulement les bibliothèques numpy et pygame. Le dossier peut alors être
+lourd.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Ceci est un MVP, dont voici les points d'améliorations pour le produit final:
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- Le personnage n'est pas reconnaissable
+- Le personnage est trop lent
+- Les color switchers ne sont pas reconnaissable
+- le point de départ n'est pas marqué dans la grille, et même si ce n'est pas vital il faut marquer le point d'arrivé
+- la grille n'est pas centrée dans la fenêtre
+- il faudrait une interface graphique pour sélectionner un niveau ou retenter le niveau, pas dans un terminal
+- le jeu est trop 'static' : rien ne bouge et il n'y a pas d'effet particulier
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Tous ces points d'améliorations ont été traités, vous pouvez le retrouver dans la branch principale :
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth
