@@ -70,6 +70,10 @@ def draw_end_menu(surface, game):
 
     surface.py_surface.blit(menu_button, (x_button2, y_button2))
 
+    # next level button
+    # TODO: Henrik you have to 'copy' code from above to make a 'next level' button
+    #  that will make the user go to the next level
+
     if pygame.Rect(x_rect1, y_rect1, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
                          pygame.Rect(x_rect1, y_rect1, button_width, button_height))
@@ -99,3 +103,9 @@ def draw_end_menu(surface, game):
         surface.py_surface.blit(menu_button, (x_button2, y_button2))
         if pygame.mouse.get_pressed()[0]:
             game.stage = "Main Menu"
+
+    # TODO: Henrik, there you have to do the 'logical part' of the button : copy the code from above to make
+    # the button change when the mouse is on it, and when the mouse is pressed, use this :
+    # game.cursor = ... [increase game.cursor if possible]
+    # game.stage = "Launched"
+    # game.load_interface()

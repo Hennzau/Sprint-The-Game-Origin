@@ -110,6 +110,15 @@ class Level:
 
         for i in range(len(self.players)):  # update data for all players
             player = self.players[i]
+
+            # Check if a player start moving, and if so, add particles at his starting position
+            # TODO: Henrik you have to do it
+
+            if player.is_moving and player.speed == player.start_speed:
+                particles = []
+                particles.append(PointParticle(player.color, (player.position[0], player.position[1]), (0, 0), 50, 2))
+                self.particle_system.add(particles)
+
             player.update(delta_time, self.grid)
 
             # when a player bounces on an obstacle we generate particles
