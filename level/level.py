@@ -13,18 +13,33 @@ from effects.point_particle import PointParticle
 import numpy as np
 import pygame
 
-"""
-A Level is an object that contains the grid and players data
-"""
-
 victory_event = pygame.event.Event(pygame.USEREVENT)
 
 
 class Level:
+    """
+    A Level is an object that contains the grid and players data
+    """
+
     # Those parameters define the size of the grid that belongs to this level and also all the parameters for the
     # players (the count, their colors at the beginning, their initial positions and event the final position they
     # have to go to)
     def __init__(self, size, initial_positions, initial_colors, final_positions):
+        """
+        The Level __init__ function will generate a new complete Level giving a certain player condition and a size
+
+        Parameters:
+        size ((int,int)): width and height size of the grid
+
+        initial_positions (list[(int,int),...]):    a python list containing tuples that represents the position of
+                                                    the player IN THE GRID (in 0...size[0] and 0...size[1])
+        initial_colors (list[str,...]): a python list containing strings that represents the color of the player for the
+                                        'colors' dictionary
+
+        final_positions (list[(int,int),...]):  a python list containing tuples that represents the position of
+                                                the player IN THE GRID (in 0...size[0] and 0...size[1])
+        """
+
         self.grid = Grid(size)
         self.players = []
 
@@ -78,6 +93,9 @@ class Level:
         self.reload_level()  # load / reload this level
 
     def reload_level(self):
+        """
+        the 'reload_level' function reload the placement of the players on the level
+        """
         self.players = []
         self.particle_system.clear()
         self.victory_timer = 0
@@ -106,7 +124,15 @@ class Level:
 
         self.finished = False
 
-    def update(self, delta_time):  # this function is called 60 times per second in average, so delta_time = 1/60
+    def update(self, delta_time):
+        """
+        the 'update' function takes a delta_time, calculated by taking the average times of execution of the main loop
+        (basically the FPS variable) and it updates everything : the players, actions (reload, go back),
+        the victory event, light points on players and even the multiple particles on every actions
+
+        Parameters:
+        delta_time (float): the delta_time
+        """
         finished = True
 
         for i in range(len(self.players)):  # update data for all players

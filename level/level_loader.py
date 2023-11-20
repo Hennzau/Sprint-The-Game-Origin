@@ -4,15 +4,19 @@ import json
 from level.level import Level
 from level.obstacle import Obstacle, colors
 
-''' 
-- build level function -
 
-this function takes a level written in a json file
-it returns the level objet that can be read by our python code
-'''
+def build_level(level_json):
+    """
+    the 'build_level' function takes a level written in a json file
+    it returns the level objet that can be read by our python code
 
+    Parameters:
+    level_json (str): Path of the level '.json' from the working directory
 
-def build_level(level_json):  # level_json format : 'data.json'
+    Returns:
+    a new Level object with a grid that has been initialized
+    """
+
     json_file = open(level_json)
     data = json.load(json_file)  # data is a json object, like a dictionary
 
