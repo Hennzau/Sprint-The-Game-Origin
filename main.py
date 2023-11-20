@@ -61,7 +61,11 @@ def main():
             draw_end_menu(surface, game)
 
         if game.stage == "Level Editor":
-            draw_level_editor(level_editor, surface)
+            if clock.get_fps() > 0:
+                level_editor.update(float(1 / clock.get_fps()))
+            else:
+                game.update(float(1 / 60))
+            draw_level_editor(level_editor, surface, game)
 
         flip()
 
