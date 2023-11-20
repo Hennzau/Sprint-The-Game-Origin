@@ -10,6 +10,8 @@ from render.surface import Surface
 from render.surface import events, flip
 from level.obstacle import colors
 from render.draw_end_menu import draw_end_menu
+from editor.draw_level_editor import draw_level_editor
+from editor.level_editor import LevelEditor
 
 
 # ----------------- #
@@ -18,6 +20,7 @@ def main():
     surface = Surface(1280, 720, "Sprint The Game")
 
     game = Game(surface)
+    level_editor = LevelEditor((20,12))
     menu = MainMenu(game)
     clock = pygame.time.Clock()
 
@@ -43,6 +46,9 @@ def main():
 
         if game.stage == "End Menu":
             draw_end_menu(surface, game)
+
+        if game.stage == "Level Editor":
+            draw_level_editor(level_editor, surface)
 
         flip()
 
