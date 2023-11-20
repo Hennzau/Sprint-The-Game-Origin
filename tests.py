@@ -17,6 +17,10 @@ class TestGridAdd:
         assert self.level.grid.obstacles[2, 2].color == colors["blue"]
 
 
+test = TestGridAdd()
+test.test_add()
+
+
 class TestGridMove:
     """
     This test tests the calculation of the destination in an example grid when there is an obstacle
