@@ -13,18 +13,29 @@ from effects.point_particle import PointParticle
 import numpy as np
 import pygame
 
-"""
-A Level is an object that contains the grid and players data
-"""
-
 victory_event = pygame.event.Event(pygame.USEREVENT)
 
 
 class Level:
+    """
+    A Level is an object that contains the grid and players data
+    """
+
     # Those parameters define the size of the grid that belongs to this level and also all the parameters for the
     # players (the count, their colors at the beginning, their initial positions and event the final position they
     # have to go to)
     def __init__(self, size, initial_positions, initial_colors, final_positions):
+        """
+        The Level __init__ function will generate a new complete Level giving a certain player condition and a size
+
+        Parameters:
+        size ((int,int)): width and height size of the grid
+
+        initial_positions (list[(int,int),...]): a python list containing tuples that represents the position of
+                                                # the player IN THE GRID (in 0...size[0] and 0...size[1])
+        initial_colors (list[
+        """
+
         self.grid = Grid(size)
         self.players = []
 
