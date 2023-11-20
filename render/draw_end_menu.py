@@ -80,7 +80,7 @@ def draw_end_menu(surface, game):
     text_height = next_level.get_height()
 
     x_button3 = (width - next_level.get_width()) / 2 
-    y_button3 = (height - next_level.get_height()) / 2 + 100
+    y_button3 = (height - next_level.get_height()) / 2 + 150
 
     x_rect3 = x_button3 - (button_width - text_width) / 2
     y_rect3 = y_button3 - (button_height - text_height) / 2
