@@ -16,6 +16,8 @@ def draw_end_menu(surface, game):
     button_height = 80
     sound = True
     surface.py_surface.fill(colors["darkblue"])
+    backgroud = pygame.image.load('assets/images/Sprint_Background.png')
+    surface.py_surface.blit(backgroud, (0,0))
 
     # fonts
     font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 60)
@@ -23,6 +25,28 @@ def draw_end_menu(surface, game):
 
     # title
     title = font.render('VICTORY', True, colors["ivory"])
+    
+    x_title_extended = width / 2 - title.get_width() / 2
+    y_title_extended = height / 2 - title.get_height() / 2 - 200
+    title_extended_width = title.get_width()
+    title_extended_height = title.get_height()
+
+    pygame.draw.rect(surface.py_surface, colors["ivory"],
+                                 pygame.Rect(x_title_extended - 40, y_title_extended - 40,
+                                             title_extended_width + 80, title_extended_height + 80))
+
+    pygame.draw.rect(surface.py_surface, colors["Black"],
+                                 pygame.Rect(x_title_extended - 39, y_title_extended - 39,
+                                             title_extended_width + 78, title_extended_height + 78))
+    
+    pygame.draw.rect(surface.py_surface, colors["ivory"],
+                                 pygame.Rect(x_title_extended - 25, y_title_extended - 25,
+                                             title_extended_width + 50, title_extended_height + 50))
+    
+    pygame.draw.rect(surface.py_surface, colors["darkblue"],
+                                 pygame.Rect(x_title_extended - 24, y_title_extended - 24,
+                                             title_extended_width + 48, title_extended_height + 48))
+    
     surface.py_surface.blit(title, ((width - title.get_width()) / 2,
                                     (height - title.get_height()) / 2 - 200))
 
@@ -72,8 +96,28 @@ def draw_end_menu(surface, game):
     surface.py_surface.blit(menu_button, (x_button2, y_button2))
 
     # next level button
-    # TODO: Henrik you have to 'copy' code from above to make a 'next level' button
-    #  that will make the user go to the next level
+    # allows the user go to the next level
+
+    next_level = font_buttons.render("Next level", True, colors["ivory"])
+
+    text_width = next_level.get_width()
+    text_height = next_level.get_height()
+
+    x_button3 = (width - next_level.get_width()) / 2
+    y_button3 = (height - next_level.get_height()) / 2 + 150
+
+    x_rect3 = x_button3 - (button_width - text_width) / 2
+    y_rect3 = y_button3 - (button_height - text_height) / 2
+
+    pygame.draw.rect(surface.py_surface, colors["ivory"], pygame.Rect(x_rect3, y_rect3, button_width, button_height))
+    pygame.draw.rect(surface.py_surface, colors["Black"],
+                     pygame.Rect(x_rect3 + 1, y_rect3 + 1, button_width - 2, button_height - 2))
+    pygame.draw.rect(surface.py_surface, colors["ivory"],
+                     pygame.Rect(x_rect3 + 5, y_rect3 + 5, button_width - 10, button_height - 10))
+    pygame.draw.rect(surface.py_surface, colors["darkblue"],
+                     pygame.Rect(x_rect3 + 6, y_rect3 + 6, button_width - 12, button_height - 12))
+
+    surface.py_surface.blit(next_level, (x_button3, y_button3))
 
     if pygame.Rect(x_rect1, y_rect1, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
@@ -108,15 +152,31 @@ def draw_end_menu(surface, game):
         sound = False
 
     if not game.sound and not sound:
-            game.sound = True
-            sound_button()
-    
-    if sound:
-         game.sound = False
-    
+        game.sound = True
+        sound_button()
 
-    # TODO: Henrik, there you have to do the 'logical part' of the button : copy the code from above to make
-    # the button change when the mouse is on it, and when the mouse is pressed, use this :
-    # game.cursor = ... [increase game.cursor if possible]
-    # game.stage = "Launched"
-    # game.load_interface()
+    if sound:
+        game.sound = False
+
+    # the button change when the mouse is on it, and when the mouse is pressed, use this button to move on to the
+    # next level.
+
+    if pygame.Rect(x_rect3, y_rect3, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
+        pygame.draw.rect(surface.py_surface, colors["ivory"],
+                         pygame.Rect(x_rect3, y_rect3, button_width, button_height))
+        pygame.draw.rect(surface.py_surface, colors["Black"],
+                         pygame.Rect(x_rect3 + 1, y_rect3 + 1, button_width - 2, button_height - 2))
+        pygame.draw.rect(surface.py_surface, colors["ivory"],
+                         pygame.Rect(x_rect3 + 5, y_rect3 + 5, button_width - 10, button_height - 10))
+        pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
+                         pygame.Rect(x_rect3 + 6, y_rect3 + 6, button_width - 12, button_height - 12))
+
+    surface.py_surface.blit(next_level, (x_button3, y_button3))
+    if pygame.mouse.get_pressed()[0]:
+        if game.last_level + 1 < len(game.levels):
+            game.cursor = game.last_level + 1
+            game.stage = "Launched"
+            game.load_interface()
+        else:
+            game.stage = "Main Menu"
+            pygame.time.wait(250)

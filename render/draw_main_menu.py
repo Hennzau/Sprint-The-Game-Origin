@@ -10,6 +10,8 @@ def draw_main_menu(surface, menu, game):
     button_width, button_height = 131, 30
 
     surface.py_surface.fill(colors["darkerblue"])
+    backgroud = pygame.image.load('assets/images/Sprint_Background.png')
+    surface.py_surface.blit(backgroud, (0,0))
 
     font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 60)
     font_levels = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
@@ -17,6 +19,27 @@ def draw_main_menu(surface, menu, game):
     title = font.render('SPRINT THE GAME', True, colors["ivory"])
     start_button = font.render(
         'Select Level to Start', True, colors["ivory"])
+
+    x_title_extended = width / 2 - start_button.get_width() / 2
+    y_title_extended = height / 2 - title.get_height() / 2 - 200
+    title_extended_width = start_button.get_width()
+    title_extended_height = title.get_height() + start_button.get_height() + 25
+
+    pygame.draw.rect(surface.py_surface, colors["ivory"],
+                                 pygame.Rect(x_title_extended - 40, y_title_extended - 40,
+                                             title_extended_width + 80, title_extended_height + 80))
+
+    pygame.draw.rect(surface.py_surface, colors["Black"],
+                                 pygame.Rect(x_title_extended - 39, y_title_extended - 39,
+                                             title_extended_width + 78, title_extended_height + 78))
+    
+    pygame.draw.rect(surface.py_surface, colors["ivory"],
+                                 pygame.Rect(x_title_extended - 25, y_title_extended - 25,
+                                             title_extended_width + 50, title_extended_height + 50))
+    
+    pygame.draw.rect(surface.py_surface, colors["darkblue"],
+                                 pygame.Rect(x_title_extended - 24, y_title_extended - 24,
+                                             title_extended_width + 48, title_extended_height + 48))
 
     surface.py_surface.blit(title, (width / 2 - title.get_width() / 2,
                                     height / 2 - title.get_height() / 2 - 200))
@@ -119,38 +142,36 @@ def draw_main_menu(surface, menu, game):
 
     
     level_editor = font_levels.render("Level Editor", True, colors["ivory"])
-    x_lvled,y_lvled = (width  - level_editor.get_width() - 50 , height / 2 - level_editor.get_height() / 2 - 300)
+    x_lvled,y_lvled = (width  - level_editor.get_width() - 50 , height / 2 - level_editor.get_height() / 2 + 320)
     
     pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 26, y_lvled - 26 ,
-                                             level_editor.get_width() + 52, level_editor.get_height() + 52))
+                                 pygame.Rect(x_lvled - 21, y_lvled - 21 ,
+                                             level_editor.get_width() + 42, level_editor.get_height() + 42))
     pygame.draw.rect(surface.py_surface, colors["Black"],
-                                 pygame.Rect(x_lvled - 25, y_lvled - 25,
-                                             level_editor.get_width() + 50, level_editor.get_height() + 50))
+                                 pygame.Rect(x_lvled - 20, y_lvled - 20,
+                                             level_editor.get_width() + 40, level_editor.get_height() + 40))
     pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 21, y_lvled - 21,
-                                             level_editor.get_width() + 42, level_editor.get_height() + 42))
+                                 pygame.Rect(x_lvled - 16, y_lvled - 16,
+                                             level_editor.get_width() + 32, level_editor.get_height() + 32))
     pygame.draw.rect(surface.py_surface, colors["darkblue"],
-                                 pygame.Rect(x_lvled - 20, y_lvled - 20,
-                                             level_editor.get_width() + 40, level_editor.get_height() + 40))
-    surface.py_surface.blit(level_editor, (width  - level_editor.get_width() - 50 ,
-                                    height / 2 - level_editor.get_height() / 2 - 300))
+                                 pygame.Rect(x_lvled - 15, y_lvled - 15,
+                                             level_editor.get_width() + 30, level_editor.get_height() + 30))
+    surface.py_surface.blit(level_editor, (x_lvled , y_lvled))
     
-    if pygame.Rect(x_lvled - 26, y_lvled - 26 , level_editor.get_width() + 52, level_editor.get_height() + 52).collidepoint(pygame.mouse.get_pos()):
+    if pygame.Rect(x_lvled - 21, y_lvled - 21 , level_editor.get_width() + 42, level_editor.get_height() + 42).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 26, y_lvled - 26 ,
-                                             level_editor.get_width() + 52, level_editor.get_height() + 52))
-        pygame.draw.rect(surface.py_surface, colors["Black"],
-                                 pygame.Rect(x_lvled - 25, y_lvled - 25,
-                                             level_editor.get_width() + 50, level_editor.get_height() + 50))
-        pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 21, y_lvled - 21,
+                                 pygame.Rect(x_lvled - 21, y_lvled - 21 ,
                                              level_editor.get_width() + 42, level_editor.get_height() + 42))
-        pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
+        pygame.draw.rect(surface.py_surface, colors["Black"],
                                  pygame.Rect(x_lvled - 20, y_lvled - 20,
                                              level_editor.get_width() + 40, level_editor.get_height() + 40))
-        surface.py_surface.blit(level_editor, (width  - level_editor.get_width() - 50 ,
-                                    height / 2 - level_editor.get_height() / 2 - 300))
+        pygame.draw.rect(surface.py_surface, colors["ivory"],
+                                 pygame.Rect(x_lvled - 16, y_lvled - 16,
+                                             level_editor.get_width() + 32, level_editor.get_height() + 32))
+        pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
+                                 pygame.Rect(x_lvled - 15, y_lvled - 15,
+                                             level_editor.get_width() + 30, level_editor.get_height() + 30))
+        surface.py_surface.blit(level_editor, (x_lvled, y_lvled))
         
         if pygame.mouse.get_pressed()[0]:
                     menu.launch_level_editor(game)
