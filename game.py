@@ -34,6 +34,9 @@ class Game:
 
         self.ask_for_main_menu = False
         self.main_menu_timer = 0
+        
+        self.ask_for_pause = False
+        self.pause_timer = 0
 
         # load levels
 
@@ -43,9 +46,10 @@ class Game:
 
         self.time_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 50)
 
-        self.font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
+        self.font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 20)
         self.play_again_button = self.font.render("Hold R to Reload", True, colors["ivory"])
         self.return_to_menu = self.font.render("Hold E to go back", True, colors["ivory"])
+        self.pause_button = self.font.render("Hold P to Pause", True, colors["ivory"])
 
         self.image = None
 
@@ -120,35 +124,41 @@ class Game:
             self.image.blit(level, (
                 self.surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
 
-            # create the two options in the level : Reload the level and return to main menu
+            # create the three options in the level : Reload the level, return to main menu, pause the game
 
             y_bis = ((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 20 + \
                     self.levels[self.cursor].grid.size[1] * pixel_size
 
             self.image.blit(self.play_again_button, (
                 self.surface.width / 2 - self.play_again_button.get_width() / 2,
-                (720 + y_bis) / 2 - self.play_again_button.get_height() / 2))
+                (720 + y_bis) / 2 - self.play_again_button.get_height()))
             self.image.blit(self.return_to_menu, (
                 self.surface.width / 2 - self.play_again_button.get_width() / 2,
-                (720 + y_bis) / 2 - self.play_again_button.get_height() / 2 + self.return_to_menu.get_height()))
+                (720 + y_bis) / 2 - self.play_again_button.get_height() + self.return_to_menu.get_height()))
+            self.image.blit(self.pause_button, (
+                self.surface.width / 2 - self.pause_button.get_width() / 2,
+                (720 + y_bis) / 2 - self.pause_button.get_height() + self.play_again_button.get_height() + self.return_to_menu.get_height()))
 
     def update(self, delta_time):  # the update function manages everything
         for event in events():
             if event.type == pygame.QUIT:
                 self.is_open = False
+
             # when there is a victory event, reload the current level and go to end menu
             if event.type == pygame.USEREVENT:
                 self.levels[self.cursor].reload_level()
-
                 self.last_level = self.cursor
                 self.cursor = None
                 self.stage = "End Menu"
+                
             if event.type == pygame.KEYDOWN:  # manage keyboard actions
                 if self.cursor is not None:
                     if event.key == pygame.K_r:
                         self.levels[self.cursor].ask_for_reload = True
                     if event.key == pygame.K_e:
                         self.ask_for_main_menu = True
+                    if event.key == pygame.K_p:
+                        self.levels[self.cursor].ask_for_pause = True
 
                     if not self.levels[self.cursor].victory_timer > 0:
                         is_moving = False
@@ -184,12 +194,15 @@ class Game:
                         self.levels[self.cursor].ask_for_reload = False
                 if event.key == pygame.K_e:
                     self.ask_for_main_menu = False
+                if event.key == pygame.K_p:
+                    self.levels[self.cursor].ask_for_pause = False
 
         if self.cursor is not None:  # update the level if the user is playing one
             self.levels[self.cursor].update(delta_time)
 
             if self.ask_for_main_menu:
                 self.main_menu_timer += delta_time
+                
             else:
                 self.main_menu_timer = 0
 
@@ -198,9 +211,23 @@ class Game:
                 self.last_level = self.cursor
                 self.cursor = None
                 self.stage = "Main Menu"
-
                 self.ask_for_main_menu = False
                 self.main_menu_timer = 0
+            
+            if self.ask_for_pause:
+                self.pause_timer += delta_time
+            
+            else :
+                self.pause_timer =0
+
+            if self.pause_timer >= 1:
+                self.levels[self.cursor].pause_level()
+                self.last_level = self.cursor
+                self.cursor = None
+                self.stage = "Pause Menu"
+                self.ask_for_pause = False
+                self.pause_timer =0
+
 
     def render(self):
         if self.cursor is not None:
@@ -244,7 +271,7 @@ class Game:
             self.surface.py_surface.blit(timer, (
                 (2 * x + 150) / 2 - timer.get_width() / 2, (2 * y + 100) / 2 - timer.get_height() / 2))
 
-            # when the user wants to reload the current level or go to the main menu, draw the text with color progress
+            # when the user wants to reload the current level or go to the main menu or pause the game, draw the text with color progress
 
             if self.levels[self.cursor].ask_for_reload:
                 temp_surface = pygame.Surface(
@@ -255,7 +282,19 @@ class Game:
 
                 self.surface.py_surface.blit(temp_surface,
                                              (self.surface.width / 2 - self.play_again_button.get_width() / 2,
-                                              (720 + y_bis) / 2 - self.play_again_button.get_height() / 2),
+                                              (720 + y_bis) / 2 - self.play_again_button.get_height()),
+                                             special_flags=pygame.BLEND_RGB_MULT)
+            
+            if self.levels[self.cursor].ask_for_pause:
+                temp_surface = pygame.Surface(
+                    (self.pause_button.get_width() * self.levels[self.cursor].pause_timer * 1.1,
+                     self.pause_button.get_height()))
+
+                temp_surface.fill(colors["green"])
+
+                self.surface.py_surface.blit(temp_surface,
+                                             (self.surface.width / 2 - self.play_again_button.get_width() / 2,
+                                              (720 + y_bis) / 2 - self.pause_button.get_height() + self.return_to_menu.get_height() + self.play_again_button.get_height()),
                                              special_flags=pygame.BLEND_RGB_MULT)
 
             if self.ask_for_main_menu:
@@ -267,5 +306,5 @@ class Game:
 
                 self.surface.py_surface.blit(temp_surface, (
                     self.surface.width / 2 - self.play_again_button.get_width() / 2,
-                    (720 + y_bis) / 2 - self.play_again_button.get_height() / 2 + self.return_to_menu.get_height()),
+                    (720 + y_bis) / 2 - self.play_again_button.get_height() + self.return_to_menu.get_height()),
                                              special_flags=pygame.BLEND_RGB_MULT)

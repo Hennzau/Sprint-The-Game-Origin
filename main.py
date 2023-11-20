@@ -13,6 +13,7 @@ from render.draw_end_menu import draw_end_menu
 from editor.draw_level_editor import draw_level_editor
 from editor.level_editor import LevelEditor
 from sound import sound_background
+from render.draw_pause_menu import draw_pause_menu
 
 
 # ----------------- #
@@ -45,6 +46,9 @@ def main():
 
         if game.stage == "Main Menu":
             draw_main_menu(surface, menu, game)
+        
+        if game.stage == "Pause Menu":
+            draw_pause_menu(surface, game)
 
         if game.stage == "End Menu":
             draw_end_menu(surface, game)
