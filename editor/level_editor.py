@@ -7,6 +7,7 @@ import pygame
 from level.obstacle import pixel_size
 from level.player import Player
 import json
+import os
 
 class LevelEditor :
 
@@ -104,5 +105,9 @@ class LevelEditor :
         level_in_json = json.dumps(dico, indent=4)
  
         # Writing to level.json
-        with open("assets/levels/level_from_editor.json", "w") as outfile:
+
+        n = len(os.listdir("assets/levels"))
+        path = "assets/levels/level_"+str(n+1)+".json"
+
+        with open(path, "w") as outfile:
             outfile.write(level_in_json)
