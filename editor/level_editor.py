@@ -97,7 +97,7 @@ class LevelEditor :
                     if not (self.level.grid.obstacles[i,j].color_switcher) and not (self.level.grid.obstacles[i,j].start) and not (self.level.grid.obstacles[i,j].end):
                         dico["obstacles"].append ([i,j,self.level.grid.obstacles[i,j].color_str])
                     if self.level.grid.obstacles[i,j].color_switcher:
-                        dico["obstacles"].append([i,j,self.level.grid.obstacle[i,j].color_str,True])
+                        dico["obstacles"].append([i,j,self.level.grid.obstacles[i,j].color_str,True])
 
 
         
