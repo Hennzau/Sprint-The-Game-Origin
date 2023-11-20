@@ -13,8 +13,22 @@ from effects.point_particle import PointParticle
 # ---------------- #
 
 class Player:
-    # Player object has a color (in RGB format, not in str) and a position
+    """
+    Player object has a color (in RGB format, not in str) and a position.
+    The class Player manages movements of the player depending on the input key pressed by the user and the grid by
+    creating and calculating a 'destination' variable that the player will reach
+    """
+
     def __init__(self, color, x_init, y_init):
+        """
+        the Player __init__ function initializes a new player and its parameters for its movements, and its actions
+        (like bouncing, the motion blur etc...)
+
+        Parameters:
+        color ((int, int, int)): color is in RGB format : it's the initial color of the player
+        x_init (int): the initial x position of the player on the surface (in 0...grid.size[0] * pixel_size)
+        y_init (int): the initial y position of the player on the surface (in 0...grid.size[1] * pixel_size)
+        """
         self.color = color
 
         self.position = np.array([x_init, y_init])
@@ -42,19 +56,37 @@ class Player:
         self.last_positions = []
         self.cursor = 0
 
-    # position of the player in the pixel format (on the surface the unit is the size of one pixel)
     def surface_position(self):
+        """
+        Returns:
+        the coordinates of the player in a np array, on the surface (unit = pixel)
+        """
         return self.position
 
-    # position of the player on the grid (the unit is 'pixel_size')
     def level_position(self):
+        """
+        Returns:
+        the coordinates of the player in a np array, on the GRID (unit = pixel_size)
+        """
         x = int(self.position[0] / pixel_size)
         y = int(self.position[1] / pixel_size)
 
         return np.array([x, y])
 
-    # this function calculates the destination of a player that wants to move on the horizontal axis
     def advance_x(self, grid, r1, r2):
+        """
+        the 'advance_x' function is an internal function that should not be called from anything else than the
+        'calculate destination' of the player. It searches for the final obstacle that the player can go on for the
+        horizontal axis
+
+        Parameters:
+        grid (Grid): the Grid of the current level containing obstacles,
+        r1: (int) is the range of the search, depends on r2,
+        r2: (int) the step of the search : 1 or -1 depending on the direction of the axis
+
+        Returns:
+        the int measure of the destination that the player can reach (can be negative)
+        """
         x, y = self.level_position()
         i = 0
 
@@ -89,6 +121,20 @@ class Player:
 
     # same for vertical axis
     def advance_y(self, grid, r1, r2):
+        """
+        the 'advance_y' function is an internal function that should not be called from anything else than the
+        'calculate destination' of the player. It searches for the final obstacle that the player can go on for the
+        vertical axis
+
+        Parameters:
+        grid (Grid): the Grid of the current level containing obstacles,
+        r1: (int) is the range of the search, depends on r2,
+        r2: (int) the step of the search : 1 or -1 depending on the direction of the axis
+
+        Returns:
+        the int measure of the destination that the player can reach (can be negative)
+        """
+
         x, y = self.level_position()
         i = 0
 
@@ -120,6 +166,18 @@ class Player:
 
     # manges the calculus regarding the direction
     def calculate_destination(self, grid, direction):
+        """
+        the 'calculate_destination' function uses 'advance_?' function depending on the direction the user want to move
+        to.
+
+        Parameters:
+        grid (Grid): the Grid of the current level containing obstacles,
+        direction (str): the direction in ["right", "left", "up", "down"]
+
+        Returns:
+        np.array([int,int]): the destination on the GRID that the player has to go to
+        """
+
         x, y = self.level_position()
 
         if direction == "right":
@@ -134,33 +192,72 @@ class Player:
         if direction == "up":
             return np.array([x, y + self.advance_y(grid, -1, -1)])
 
-    # those are the functions that can be called from the game to move the player
     def move_up(self, grid):
+        """
+        the 'move_?' is the interface between the game and the player: this function is called by the game when the user
+        presses a key. It updates the 'destination' variable
+
+        Parameters:
+        grid (Grid): the Grid of the current level containing obstacles
+        """
+
         self.bounce_direction = np.array([0, -1])  # changes the future bounce direction
 
         self.destination = self.calculate_destination(grid, "up") * pixel_size
         self.is_moving = True
 
     def move_down(self, grid):
+        """
+        the 'move_?' is the interface between the game and the player: this function is called by the game when the user
+        presses a key. It updates the 'destination' variable
+
+        Parameters:
+        grid (Grid): the Grid of the current level containing obstacles
+        """
+
         self.bounce_direction = np.array([0, 1])
 
         self.destination = self.calculate_destination(grid, "down") * pixel_size
         self.is_moving = True
 
     def move_left(self, grid):
+        """
+        the 'move_?' is the interface between the game and the player: this function is called by the game when the user
+        presses a key. It updates the 'destination' variable
+
+        Parameters:
+        grid (Grid): the Grid of the current level containing obstacles
+        """
+
         self.bounce_direction = np.array([-1, 0])
 
         self.destination = self.calculate_destination(grid, "left") * pixel_size
         self.is_moving = True
 
     def move_right(self, grid):
+        """
+        the 'move_?' is the interface between the game and the player: this function is called by the game when the user
+        presses a key. It updates the 'destination' variable
+
+        Parameters:
+        grid (Grid): the Grid of the current level containing obstacles
+        """
+
         self.bounce_direction = np.array([1, 0])
 
         self.destination = self.calculate_destination(grid, "right") * pixel_size
         self.is_moving = True
 
     def update(self, delta_time, grid):
-        # data for the motion_blur (and maybe something else)
+        """
+        the 'update' function manages actions of the player like the bouncing, it also records the last positions of
+        the player for the motion blur effect.
+        It also manages the switch of the color when the player move in the grid
+
+        Parameters:
+        delta_time (float): the delta_time calculated in main.py
+        grid (Grid): the Grid of the current level containing obstacles
+        """
 
         # record the last 'record_length' positions of the player
         if len(self.last_positions) != self.record_length:
