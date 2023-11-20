@@ -1,5 +1,6 @@
 # importations
 import pygame
+from os import listdir
 from level.level import Level, victory_event
 from level.obstacle import colors
 from render.surface import events
@@ -62,21 +63,12 @@ class Game:
 
         # there are two different classes : a Logical object 'Level' that represents the level, 
         # and a Rendering object 'LevelRender' that manages the rendering of the level (pre-calculated images etc...)
-
-        self.levels.append(build_level("assets/levels/level_1.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_2.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_3.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_4.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_5.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
+        level_list = listdir("assets/levels")
+        
+        for i in range(1,len(level_list)+1):
+            path = "assets/levels/level_" + str(i) +".json"
+            self.levels.append(build_level(path))
+            self.levels_render.append(LevelRender(self.levels[-1]))
 
     def load_interface(self):
         self.image = pygame.Surface((self.surface.width, self.surface.height))

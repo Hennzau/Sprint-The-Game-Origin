@@ -179,3 +179,4 @@ def draw_end_menu(surface, game):
             game.load_interface()
         else:
             game.stage = "Main Menu"
+            pygame.time.wait(250)
