@@ -12,7 +12,7 @@ from level.obstacle import colors
 from render.draw_end_menu import draw_end_menu
 from editor.draw_level_editor import draw_level_editor
 from editor.level_editor import LevelEditor
-from sound import sound_background
+
 
 
 # ----------------- #
