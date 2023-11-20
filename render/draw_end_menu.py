@@ -136,9 +136,14 @@ def draw_end_menu(surface, game):
     if sound:
          game.sound = False
     
-
-    # TODO: Henrik, there you have to do the 'logical part' of the button : copy the code from above to make
     # the button change when the mouse is on it, and when the mouse is pressed, use this :
     # game.cursor = ... [increase game.cursor if possible]
     # game.stage = "Launched"
     # game.load_interface()
+
+    surface.py_surface.blit(next_level, (x_button3, y_button3))
+    if pygame.mouse.get_pressed()[0]:
+        game.cursor = game.next_level
+        game.stage = "Launched"
+        game.load_interface()
+    sound = False
