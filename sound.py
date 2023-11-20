@@ -11,7 +11,7 @@ def sound_collision():
 def sound_victory():
     pygame.mixer.init()
     my_sound = pygame.mixer.Sound('assets/sounds/Victory_new.wav')
-    my_sound.set_volume(0.75)
+    my_sound.set_volume(0.075)
     my_sound.play()
 
 
