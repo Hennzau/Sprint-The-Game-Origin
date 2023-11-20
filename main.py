@@ -18,6 +18,8 @@ from editor.level_editor import LevelEditor
 # ----------------- #
 
 def main():
+    icon = pygame.image.load('assets/images/Sprint_Icon.png') 
+    pygame.display.set_icon(icon)
     surface = Surface(1280, 720, "Sprint The Game")
 
     game = Game(surface)

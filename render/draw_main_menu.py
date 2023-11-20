@@ -119,7 +119,7 @@ def draw_main_menu(surface, menu, game):
 
     
     level_editor = font_levels.render("Level Editor", True, colors["ivory"])
-    x_lvled,y_lvled = (width  - level_editor.get_width() - 50 , height / 2 - level_editor.get_height() / 2 - 300)
+    x_lvled,y_lvled = (width  - level_editor.get_width() - 50 , height / 2 - level_editor.get_height() / 2 + 300)
     
     pygame.draw.rect(surface.py_surface, colors["ivory"],
                                  pygame.Rect(x_lvled - 26, y_lvled - 26 ,
@@ -133,8 +133,7 @@ def draw_main_menu(surface, menu, game):
     pygame.draw.rect(surface.py_surface, colors["darkblue"],
                                  pygame.Rect(x_lvled - 20, y_lvled - 20,
                                              level_editor.get_width() + 40, level_editor.get_height() + 40))
-    surface.py_surface.blit(level_editor, (width  - level_editor.get_width() - 50 ,
-                                    height / 2 - level_editor.get_height() / 2 - 300))
+    surface.py_surface.blit(level_editor, (x_lvled , y_lvled))
     
     if pygame.Rect(x_lvled - 26, y_lvled - 26 , level_editor.get_width() + 52, level_editor.get_height() + 52).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
@@ -149,8 +148,7 @@ def draw_main_menu(surface, menu, game):
         pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
                                  pygame.Rect(x_lvled - 20, y_lvled - 20,
                                              level_editor.get_width() + 40, level_editor.get_height() + 40))
-        surface.py_surface.blit(level_editor, (width  - level_editor.get_width() - 50 ,
-                                    height / 2 - level_editor.get_height() / 2 - 300))
+        surface.py_surface.blit(level_editor, (x_lvled, y_lvled))
         
         if pygame.mouse.get_pressed()[0]:
                     menu.launch_level_editor(game)
