@@ -85,7 +85,18 @@ def draw_end_menu(surface, game):
     x_rect3 = x_button3 - (button_width - text_width) / 2
     y_rect3 = y_button3 - (button_height - text_height) / 2
 
-   
+    pygame.draw.rect(surface.py_surface, colors["ivory"], pygame.Rect(x_rect3, y_rect3, button_width, button_height))
+    pygame.draw.rect(surface.py_surface, colors["Black"],
+                     pygame.Rect(x_rect3 + 1, y_rect3 + 1, button_width - 2, button_height - 2))
+    pygame.draw.rect(surface.py_surface, colors["ivory"],
+                     pygame.Rect(x_rect3 + 5, y_rect3 + 5, button_width - 10, button_height - 10))
+    pygame.draw.rect(surface.py_surface, colors["darkblue"],
+                     pygame.Rect(x_rect3 + 6, y_rect3 + 6, button_width - 12, button_height - 12))
+    
+    surface.py_surface.blit(next_level, (x_button3, y_button3))
+
+
+
     if pygame.Rect(x_rect1, y_rect1, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
                          pygame.Rect(x_rect1, y_rect1, button_width, button_height))
