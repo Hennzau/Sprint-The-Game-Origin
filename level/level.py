@@ -116,8 +116,9 @@ class Level:
 
             if player.is_moving and player.speed == player.start_speed:
                 particles = []
-                for k in range(50):
-                    particles.append(PointParticle(player.color, (player.position[0]+k, player.position[1]-k), (0, 0), 50, 2))
+                for k in range(10):
+                    for j in range(5):
+                        particles.append(PointParticle(player.color, (player.position[0]+k, player.position[1]+5*j), (np.random.randint(j), np.random.randint(j)), 2, 2))
                 self.particle_system.add(particles)
 
             player.update(delta_time, self.grid)
