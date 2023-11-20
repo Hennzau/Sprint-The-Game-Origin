@@ -23,7 +23,7 @@ def main():
 
     timer = 0
 
-    frame_cap = 121
+    frame_cap = 120
 
     while game.is_open:
         surface.clear((0, 0, 0))
