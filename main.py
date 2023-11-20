@@ -29,10 +29,19 @@ def main():
 
     frame_cap = 120
 
-    sound_background()
+    pygame.mixer.init()
+    pygame.mixer.set_num_channels(8)
+    background = pygame.mixer.Channel(5)
+    my_sound = pygame.mixer.Sound('assets/sounds/soundtrack-sprint_c5L9pqZh.mp3')
+    my_sound.set_volume(2)
+    background.play(my_sound)
+
     while game.is_open:
         surface.clear((0, 0, 0))
 
+        if not background.get_busy():
+            background.play(my_sound)
+        
         if clock.get_fps() > 0:
             game.update(float(1 / clock.get_fps()))
         else:
