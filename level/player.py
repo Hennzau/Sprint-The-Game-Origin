@@ -136,36 +136,28 @@ class Player:
 
     # those are the functions that can be called from the game to move the player
     def move_up(self, grid):
-        if (self.bounce_direction == np.array([0, 0])).all():
-            self.bounce_direction = np.array([0, -1])  # changes the future bounce direction
+        self.bounce_direction = np.array([0, -1])  # changes the future bounce direction
 
-        if not self.is_moving:  # the player can not move if it's alreadu moving
-            self.destination = self.calculate_destination(grid, "up") * pixel_size
-            self.is_moving = True
+        self.destination = self.calculate_destination(grid, "up") * pixel_size
+        self.is_moving = True
 
     def move_down(self, grid):
-        if (self.bounce_direction == np.array([0, 0])).all():
-            self.bounce_direction = np.array([0, 1])
+        self.bounce_direction = np.array([0, 1])
 
-        if not self.is_moving:
-            self.destination = self.calculate_destination(grid, "down") * pixel_size
-            self.is_moving = True
+        self.destination = self.calculate_destination(grid, "down") * pixel_size
+        self.is_moving = True
 
     def move_left(self, grid):
-        if (self.bounce_direction == np.array([0, 0])).all():
-            self.bounce_direction = np.array([-1, 0])
+        self.bounce_direction = np.array([-1, 0])
 
-        if not self.is_moving:
-            self.destination = self.calculate_destination(grid, "left") * pixel_size
-            self.is_moving = True
+        self.destination = self.calculate_destination(grid, "left") * pixel_size
+        self.is_moving = True
 
     def move_right(self, grid):
-        if (self.bounce_direction == np.array([0, 0])).all():
-            self.bounce_direction = np.array([1, 0])
+        self.bounce_direction = np.array([1, 0])
 
-        if not self.is_moving:
-            self.destination = self.calculate_destination(grid, "right") * pixel_size
-            self.is_moving = True
+        self.destination = self.calculate_destination(grid, "right") * pixel_size
+        self.is_moving = True
 
     def update(self, delta_time, grid):
         # data for the motion_blur (and maybe something else)
