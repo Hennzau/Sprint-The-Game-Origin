@@ -25,7 +25,7 @@ def sound_swipe():
 
 def sound_background():
     pygame.mixer.init()
-    my_sound = pygame.mixer.Sound('assets/sounds/Soundtrack.wav')
+    my_sound = pygame.mixer.Sound('assets/sounds/Soundtrack1.wav')
     my_sound.set_volume(0.7)
     my_sound.play()
     pass
