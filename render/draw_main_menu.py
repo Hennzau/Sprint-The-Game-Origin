@@ -48,7 +48,10 @@ def draw_main_menu(surface, menu, game):
                                            2, height / 2 + start_button.get_height() / 2 - 175))
 
     n = len(menu.levels)
-    p = int(n / 2) + 1
+    if n%2 == 1:
+        p = int(n / 2) + 1
+    else:
+         p = int(n/2)
 
     sound = True
 
@@ -174,6 +177,7 @@ def draw_main_menu(surface, menu, game):
         surface.py_surface.blit(level_editor, (x_lvled, y_lvled))
         
         if pygame.mouse.get_pressed()[0]:
+                    pygame.time.wait(500)
                     menu.launch_level_editor(game)
                     sound_game_launched()
 

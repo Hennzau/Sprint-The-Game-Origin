@@ -319,6 +319,7 @@ def draw_level_editor (level_editor, surface, game):
         surface.py_surface.blit(exit_button, (x_rect6+15, y_rect6+15))
 
         if pygame.mouse.get_pressed()[0]:
+            pygame.time.wait(500)
             game.stage = "Main Menu"
         
 
