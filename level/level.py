@@ -81,6 +81,7 @@ class Level:
         self.players = []
         self.particle_system.clear()
         self.victory_timer = 0
+        self.time = 0
 
         for k in range(
                 len(self.initial_positions)):
@@ -114,10 +115,10 @@ class Level:
             # Check if a player start moving, and if so, add particles at his starting position
             # TODO: Henrik you have to do it
 
-            if player.is_moving and player.speed == player.start_speed:
-                particles = []
-                particles.append(PointParticle(player.color, (player.position[0], player.position[1]), (0, 0), 50, 2))
-                self.particle_system.add(particles)
+            # if player.is_moving and player.speed == player.start_speed:
+            #    particles = []
+            #    particles.append(PointParticle(player.color, (player.position[0], player.position[1]), (0, 0), 50, 2))
+            #    self.particle_system.add(particles)
 
             player.update(delta_time, self.grid)
 
