@@ -118,7 +118,7 @@ class Level:
                 particles = []
                 for k in range(10):
                     for j in range(5):
-                        particles.append(PointParticle(player.color, (player.position[0]+k, player.position[1]+5*j), (np.random.randint(j), np.random.randint(j)), 2, 2))
+                        particles.append(PointParticle(player.color, (player.position[0]+5*k, player.position[1]+5*j), (np.random.randint(10), np.random.randint(10)), 2, 2))
                 self.particle_system.add(particles)
 
             player.update(delta_time, self.grid)
