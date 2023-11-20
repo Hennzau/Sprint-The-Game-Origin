@@ -152,6 +152,7 @@ class Level:
             if self.victory_timer > self.victory_delay:
                 pygame.event.post(victory_event)
                 self.finished = True
+                self.time = 0
 
             # When the user succeed sound the victory and tones of particles
             elif self.victory_timer == 0:
