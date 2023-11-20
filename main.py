@@ -12,6 +12,7 @@ from level.obstacle import colors
 from render.draw_end_menu import draw_end_menu
 from editor.draw_level_editor import draw_level_editor
 from editor.level_editor import LevelEditor
+from sound import sound_background
 
 
 # ----------------- #
@@ -28,6 +29,7 @@ def main():
 
     frame_cap = 120
 
+    sound_background()
     while game.is_open:
         surface.clear((0, 0, 0))
 

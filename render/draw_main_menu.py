@@ -27,6 +27,8 @@ def draw_main_menu(surface, menu, game):
     n = len(menu.levels)
     p = int(n / 2) + 1
 
+    sound = True
+
     for i in range(p):
         level = f"Level " + str(i + 1)
         levels_button = font_levels.render(level, True, colors["ivory"])
@@ -62,12 +64,14 @@ def draw_main_menu(surface, menu, game):
                                          button_width + 40, button_height + 40))
             surface.py_surface.blit(levels_button, (k, height / 2 - (levels_button.get_height() / 2 - 100)))
 
+            sound = False
+            
             if pygame.mouse.get_pressed()[0]:
                 menu.level_selected = i
                 menu.start_game = True
                 menu.launch_game(game)
-        else:
-            sound = False
+                sound_game_launched()
+
 
     if (n - p) > 0:
         for i in range(n - p):
@@ -103,10 +107,13 @@ def draw_main_menu(surface, menu, game):
                                              button_width + 40, button_height + 40))
                 surface.py_surface.blit(levels_button, (k, height / 2 - (levels_button.get_height() / 2 - 225)))
 
+                sound = False
+
                 if pygame.mouse.get_pressed()[0]:
                     menu.level_selected = i + p
                     menu.start_game = True
                     menu.launch_game(game)
+                    sound_game_launched()
 
     #Render Level Editor button
 
@@ -147,3 +154,13 @@ def draw_main_menu(surface, menu, game):
         
         if pygame.mouse.get_pressed()[0]:
                     menu.launch_level_editor(game)
+                    sound_game_launched()
+
+        sound = False 
+
+    if not game.sound and not sound:
+            game.sound = True
+            sound_button()
+    
+    if sound:
+         game.sound = False

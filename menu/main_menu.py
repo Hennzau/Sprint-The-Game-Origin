@@ -9,6 +9,7 @@ class MainMenu:
         self.level_selected = None
         self.start_game = False
         self.levels = game.levels
+        self.sound = False
 
     def update_level(self, level):
         self.level_selected = level

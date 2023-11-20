@@ -4,14 +4,14 @@ import pygame
 def sound_collision():
     pygame.mixer.init()
     my_sound = pygame.mixer.Sound('assets/sounds/Collision.wav')
-    my_sound.set_volume(0.25)
+    my_sound.set_volume(0.1)
     my_sound.play()
 
 
 def sound_victory():
     pygame.mixer.init()
     my_sound = pygame.mixer.Sound('assets/sounds/Victory_new.wav')
-    my_sound.set_volume(0.75)
+    my_sound.set_volume(0.15)
     my_sound.play()
 
 
@@ -24,15 +24,20 @@ def sound_swipe():
 
 
 def sound_background():
+    pygame.mixer.init()
+    my_sound = pygame.mixer.Sound('assets/sounds/Soundtrack.wav')
+    my_sound.set_volume(0.7)
+    my_sound.play()
     pass
 
-def sound_button(bool):
+def sound_button():
     pygame.mixer.init()
     my_sound = pygame.mixer.Sound('assets/sounds/Boup.wav')
-    my_sound.set_volume(0.05)
-    if not bool:
-        my_sound.play()
-    pass
+    my_sound.set_volume(0.075)
+    my_sound.play()
 
 def sound_game_launched():
-    pass
+    pygame.mixer.init()
+    my_sound = pygame.mixer.Sound('assets/sounds/Game launched.wav')
+    my_sound.set_volume(0.15)
+    my_sound.play()

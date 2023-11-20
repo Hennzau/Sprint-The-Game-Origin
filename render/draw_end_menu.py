@@ -3,6 +3,7 @@ import pygame
 from render.surface import Surface, flip
 from game import Game
 from level.obstacle import colors
+from sound import sound_button
 
 
 ### drawing function
@@ -13,7 +14,7 @@ def draw_end_menu(surface, game):
     width = surface.width
     button_width = 250
     button_height = 80
-
+    sound = True
     surface.py_surface.fill(colors["darkblue"])
 
     # fonts
@@ -89,6 +90,7 @@ def draw_end_menu(surface, game):
             game.cursor = game.last_level
             game.stage = "Launched"
             game.load_interface()
+        sound = False
 
     if pygame.Rect(x_rect2, y_rect2, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
@@ -103,6 +105,15 @@ def draw_end_menu(surface, game):
         surface.py_surface.blit(menu_button, (x_button2, y_button2))
         if pygame.mouse.get_pressed()[0]:
             game.stage = "Main Menu"
+        sound = False
+
+    if not game.sound and not sound:
+            game.sound = True
+            sound_button()
+    
+    if sound:
+         game.sound = False
+    
 
     # TODO: Henrik, there you have to do the 'logical part' of the button : copy the code from above to make
     # the button change when the mouse is on it, and when the mouse is pressed, use this :

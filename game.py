@@ -28,6 +28,7 @@ class Game:
         self.stage = "Main Menu"
         self.is_open = True
         self.surface = surface
+        self.sound = False
 
         # manage the return to menu key
 
