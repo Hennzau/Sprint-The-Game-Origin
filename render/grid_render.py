@@ -46,7 +46,7 @@ class GridRender:
         pygame.draw.circle(circle_surface, colors["blue"], (pixel_size / 2, pixel_size / 2),
                            pixel_size / 2,
                            0)
-        
+
         self.base_color_switcher.blit(circle_surface.subsurface(
             pygame.Rect(pixel_size / 2, pixel_size / 2, pixel_size / 2, pixel_size / 2)),
             (pixel_size / 2, pixel_size / 2))

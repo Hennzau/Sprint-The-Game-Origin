@@ -73,6 +73,16 @@ class Player:
 
         return np.array([x, y])
 
+    def level_destination(self):
+        """
+        Returns:
+        the coordinates of the destination in a np array, on the GRID (unit = pixel_size)
+        """
+        x = int(self.destination[0] / pixel_size)
+        y = int(self.destination[1] / pixel_size)
+
+        return np.array([x, y])
+
     def advance_x(self, grid, r1, r2):
         """
         the 'advance_x' function is an internal function that should not be called from anything else than the
