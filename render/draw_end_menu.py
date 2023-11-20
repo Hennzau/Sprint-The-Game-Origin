@@ -72,9 +72,20 @@ def draw_end_menu(surface, game):
     surface.py_surface.blit(menu_button, (x_button2, y_button2))
 
     # next level button
-    # TODO: Henrik you have to 'copy' code from above to make a 'next level' button
-    #  that will make the user go to the next level
+    # allows the user go to the next level
 
+    next_level = font_buttons.render("Next level", True, colors["ivory"])
+
+    text_width = next_level.get_width()
+    text_height = next_level.get_height()
+
+    x_button3 = (width - next_level.get_width()) / 2 
+    y_button3 = (height - next_level.get_height()) / 2 + 100
+
+    x_rect3 = x_button3 - (button_width - text_width) / 2
+    y_rect3 = y_button3 - (button_height - text_height) / 2
+
+   
     if pygame.Rect(x_rect1, y_rect1, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
                          pygame.Rect(x_rect1, y_rect1, button_width, button_height))
