@@ -133,7 +133,7 @@ def draw_main_menu(surface, menu, game):
         surface.py_surface.blit(level_editor, (x_lvled, y_lvled))
 
         if pygame.mouse.get_pressed()[0]:
-            menu.launch_level_editor(game)
+            game.stage = "Level Editor"
             sound_game_launched()
 
         sound = False

@@ -1,27 +1,23 @@
-# importations
+# Imports
+
 import os
-
 import pygame
-from level.level import Level, victory_event
-from level.obstacle import colors
+
+from level.level import victory_event
+from level.obstacle import colors, pixel_size
+from level.level_loader import build_level
+
 from render.surface import events
-
-from level.player import Player
-from level.obstacle import Obstacle, pixel_size
-
 from render.level_render import LevelRender
 
 from sound import sound_swipe
-from render.surface import Surface
-from level.grid import Grid
-
-from level.level_loader import build_level
-
-
-# class game which updates the game (logic and render) at each passage through the main loop
 
 
 class Game:
+    """
+    The Game object updates the game (logic and render) at each passage through the main loop
+    """
+
     def __init__(self, surface):
         self.levels = []
         self.levels_render = []
@@ -131,12 +127,13 @@ class Game:
             if event.type == pygame.QUIT:
                 self.is_open = False
             # when there is a victory event, reload the current level and go to end menu
-            if event.type == pygame.USEREVENT:
+            if event.type == victory_event.type:
                 self.levels[self.cursor].reload_level()
 
                 self.last_level = self.cursor
                 self.cursor = None
                 self.stage = "End Menu"
+
             if event.type == pygame.KEYDOWN:  # manage keyboard actions
                 if self.cursor is not None:
                     if event.key == pygame.K_r:

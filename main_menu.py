@@ -18,6 +18,3 @@ class MainMenu:
             game.cursor = self.level_selected
             game.stage = "Launched"
             game.load_interface()
-
-    def launch_level_editor(self, game):
-        game.stage = "Level Editor"
