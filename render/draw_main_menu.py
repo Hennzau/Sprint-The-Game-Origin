@@ -55,7 +55,7 @@ def draw_main_menu(surface, menu, game):
 
     # Draw the levels button, up to 5 per line and 2 lines
 
-    n = len(menu.levels)
+    n = len(game.levels)
     if n % 2 == 1:
         p = int(n / 2) + 1
     else:

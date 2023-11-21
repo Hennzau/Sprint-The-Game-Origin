@@ -7,7 +7,7 @@ from game import Game
 def draw_level_editor(level_editor, surface, game):
     level_editor.level_render.render(surface.py_surface)
 
-    ## color choice
+    # color choice
 
     # button
     pygame.draw.rect(surface.py_surface, colors["ivory"],
@@ -83,7 +83,7 @@ def draw_level_editor(level_editor, surface, game):
         if pygame.mouse.get_pressed()[0] and level_editor.color_switcher == False:
             level_editor.color_cursor = 4
 
-    ## type choice
+    # type choice
     font_buttons = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
 
     # obstacle
@@ -175,7 +175,7 @@ def draw_level_editor(level_editor, surface, game):
                                (i * pixel_size + pixel_size / 2, j * pixel_size + pixel_size / 2),
                                pixel_size / 4, 0)
 
-    ## add player
+    # add player
 
     add_player_button = font_buttons.render("Add player", True, colors["ivory"])
     add_player_width = add_player_button.get_width()
@@ -231,7 +231,7 @@ def draw_level_editor(level_editor, surface, game):
                                         level_editor.select_end)
                 level_editor.select_add_player = False
 
-    ## delete player
+    # delete player
 
     delete_player_button = font_buttons.render("Delete player", True, colors["ivory"])
     delete_player_width = delete_player_button.get_width()
@@ -266,7 +266,7 @@ def draw_level_editor(level_editor, surface, game):
         if pygame.mouse.get_pressed()[0] and len(level_editor.level.players) != 0:
             level_editor.remove_last_player()
 
-    ## save button
+    # save button
 
     save_button = font_buttons.render("Save level", True, colors["ivory"])
     save_width = save_button.get_width()
@@ -297,6 +297,7 @@ def draw_level_editor(level_editor, surface, game):
 
         if pygame.mouse.get_pressed()[0]:
             level_editor.save()
+            game.load_levels()
             game.stage = "Main Menu"
 
     # Exit button
@@ -330,3 +331,4 @@ def draw_level_editor(level_editor, surface, game):
 
         if pygame.mouse.get_pressed()[0]:
             game.stage = "Main Menu"
+            game.load_levels()
