@@ -4,11 +4,10 @@
 import pygame
 
 from game import Game
-from menu.main_menu import MainMenu
+from main_menu import MainMenu
 from render.draw_main_menu import draw_main_menu
 from render.surface import Surface
-from render.surface import events, flip
-from level.obstacle import colors
+from render.surface import flip
 from render.draw_end_menu import draw_end_menu
 from editor.draw_level_editor import draw_level_editor
 from editor.level_editor import LevelEditor
@@ -48,7 +47,7 @@ def main():
     while game.is_open:
         surface.clear((0, 0, 0))
 
-        # We check if the soundtrack is still playing and we restart it if needed
+        # We check if the soundtrack is still playing, and we restart it if needed
 
         if not background.get_busy():
             background.play(my_sound)
@@ -60,7 +59,7 @@ def main():
         else:
             game.update(float(1 / 60))
 
-        # We act accordingly to the stage of the game (draw the conresponding menus)
+        # We act accordingly to the stage of the game (draw the corresponding menus)
 
         if game.stage == "Launched":
             game.render()
