@@ -134,6 +134,7 @@ def draw_end_menu(surface, game):
             game.cursor = game.last_level
             game.stage = "Launched"
             game.load_interface()
+
         sound = False
 
     if pygame.Rect(x_rect2, y_rect2, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
@@ -171,12 +172,11 @@ def draw_end_menu(surface, game):
         pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
                          pygame.Rect(x_rect3 + 6, y_rect3 + 6, button_width - 12, button_height - 12))
 
-    surface.py_surface.blit(next_level, (x_button3, y_button3))
-    if pygame.mouse.get_pressed()[0]:
-        if game.last_level + 1 < len(game.levels):
-            game.cursor = game.last_level + 1
-            game.stage = "Launched"
-            game.load_interface()
-        else:
-            game.stage = "Main Menu"
-            pygame.time.wait(250)
+        surface.py_surface.blit(next_level, (x_button3, y_button3))
+        if pygame.mouse.get_pressed()[0]:
+            if game.last_level + 1 < len(game.levels):
+                game.cursor = game.last_level + 1
+                game.stage = "Launched"
+                game.load_interface()
+            else:
+                game.stage = "Main Menu"
