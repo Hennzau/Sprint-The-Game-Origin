@@ -8,9 +8,16 @@ from sound import sound_button
 from render.box import draw_covered_box, draw_empty_box, draw_text_box
 
 
-# drawing function
-
 def draw_end_menu(surface, game):
+    """
+    the draw_end_menu function draw the victory menu of the game on the given surface
+    It also manages actions on the game
+
+    Parameters:
+    surface (Surface): the surface on which you want to draw the end menu
+    game (Game): the Game object
+    """
+
     # dimensions
 
     height = surface.height

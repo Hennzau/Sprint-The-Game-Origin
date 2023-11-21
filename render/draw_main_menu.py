@@ -9,6 +9,16 @@ from sound import sound_button, sound_game_launched
 
 
 def draw_main_menu(surface, menu, game):
+    """
+    the draw_main_menu function draw the main menu of the game on the given surface
+    It also manages actions on the game
+
+    Parameters:
+    surface (Surface): the surface on which you want to draw the end menu,
+    menu (MainMenu): the MainMenu object you want to draw
+    game (Game): the Game object
+    """
+
     # Draw the main menu interface and manage the different buttons
     width, height = surface.width, surface.height
     button_width, button_height = 131, 30
