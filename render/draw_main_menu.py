@@ -1,3 +1,5 @@
+### Imports
+
 from menu.main_menu import MainMenu
 from level.obstacle import colors
 from sound import sound_button, sound_game_launched
@@ -5,17 +7,21 @@ import pygame
 
 
 def draw_main_menu(surface, menu, game):
-    sound = False
+    # Draw the main menu interface and manage the different buttons
     width, height = surface.width, surface.height
     button_width, button_height = 131, 30
 
+    # Draw the background
     surface.py_surface.fill(colors["darkerblue"])
     backgroud = pygame.image.load('assets/images/Sprint_Background.png')
     surface.py_surface.blit(backgroud, (0,0))
 
+    # Initialise the different fonts used
     font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 60)
     font_levels = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
 
+    # Show the title inside a box 
+    
     title = font.render('SPRINT THE GAME', True, colors["ivory"])
     start_button = font.render(
         'Select Level to Start', True, colors["ivory"])
@@ -47,13 +53,17 @@ def draw_main_menu(surface, menu, game):
     surface.py_surface.blit(start_button, (width / 2 - start_button.get_width() /
                                            2, height / 2 + start_button.get_height() / 2 - 175))
 
+    # Draw the levels button, up to 5 per line and 2 lines
+
     n = len(menu.levels)
     if n%2 == 1:
         p = int(n / 2) + 1
     else:
          p = int(n/2)
 
-    sound = True
+    sound = True # Check if we have to play the sound when we're over a button
+
+    # Draw the first line
 
     for i in range(p):
         level = f"Level " + str(i + 1)
@@ -74,6 +84,8 @@ def draw_main_menu(surface, menu, game):
 
         surface.py_surface.blit(levels_button, (k, height / 2 - (levels_button.get_height() / 2 - 100)))
 
+        # We check if the mouse is over the button
+
         if pygame.Rect(k - 26, height / 2 - (levels_button.get_height() / 2 - 100) - 26, button_width + 52,
                        button_height + 52).collidepoint(pygame.mouse.get_pos()):
             pygame.draw.rect(surface.py_surface, colors["ivory"],
@@ -92,12 +104,15 @@ def draw_main_menu(surface, menu, game):
 
             sound = False
             
+            # We check is the button is pressed and switch to the according game.stage 
+            
             if pygame.mouse.get_pressed()[0]:
                 menu.level_selected = i
                 menu.start_game = True
                 menu.launch_game(game)
                 sound_game_launched()
 
+    # We draw the second line the exact same way
 
     if (n - p) > 0:
         for i in range(n - p):
@@ -141,7 +156,7 @@ def draw_main_menu(surface, menu, game):
                     menu.launch_game(game)
                     sound_game_launched()
 
-    #Render Level Editor button
+    # We now draw the "Level Editor" button, the same way the other button were.
 
     
     level_editor = font_levels.render("Level Editor", True, colors["ivory"])
@@ -183,9 +198,13 @@ def draw_main_menu(surface, menu, game):
 
         sound = False 
 
+    # We now check if the mouse was over one of the button and if it just entered the button to play the sound
+
     if not game.sound and not sound:
             game.sound = True
             sound_button()
     
+    # We put back the value "False" if the mouse wasn't in any button
+
     if sound:
          game.sound = False
