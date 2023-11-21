@@ -1,23 +1,29 @@
-### Imports
+# Imports
+
 import pygame
-from render.surface import Surface, flip
-from game import Game
+
 from level.obstacle import colors
 from sound import sound_button
 
+from render.box import draw_covered_box, draw_empty_box, draw_text_box
 
-### drawing function
+
+# drawing function
 
 def draw_end_menu(surface, game):
     # dimensions
+
     height = surface.height
     width = surface.width
     button_width = 250
     button_height = 80
+
     sound = True
+
     surface.py_surface.fill(colors["darkblue"])
+
     backgroud = pygame.image.load('assets/images/Sprint_Background.png')
-    surface.py_surface.blit(backgroud, (0,0))
+    surface.py_surface.blit(backgroud, (0, 0))
 
     # fonts
     font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 60)
@@ -25,30 +31,14 @@ def draw_end_menu(surface, game):
 
     # title
     title = font.render('VICTORY', True, colors["ivory"])
-    
+
     x_title_extended = width / 2 - title.get_width() / 2
     y_title_extended = height / 2 - title.get_height() / 2 - 200
     title_extended_width = title.get_width()
     title_extended_height = title.get_height()
 
-    pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_title_extended - 40, y_title_extended - 40,
-                                             title_extended_width + 80, title_extended_height + 80))
-
-    pygame.draw.rect(surface.py_surface, colors["Black"],
-                                 pygame.Rect(x_title_extended - 39, y_title_extended - 39,
-                                             title_extended_width + 78, title_extended_height + 78))
-    
-    pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_title_extended - 25, y_title_extended - 25,
-                                             title_extended_width + 50, title_extended_height + 50))
-    
-    pygame.draw.rect(surface.py_surface, colors["darkblue"],
-                                 pygame.Rect(x_title_extended - 24, y_title_extended - 24,
-                                             title_extended_width + 48, title_extended_height + 48))
-    
-    surface.py_surface.blit(title, ((width - title.get_width()) / 2,
-                                    (height - title.get_height()) / 2 - 200))
+    draw_text_box(surface.py_surface, x_title_extended, y_title_extended, title_extended_width, title_extended_height)
+    surface.py_surface.blit(title, ((width - title.get_width()) / 2, (height - title.get_height()) / 2 - 200))
 
     # play again button
     play_again_button = font_buttons.render("Play again", True, colors["ivory"])
@@ -62,14 +52,7 @@ def draw_end_menu(surface, game):
     x_rect1 = x_button1 - (button_width - text_width) / 2
     y_rect1 = y_button1 - (button_height - text_height) / 2
 
-    pygame.draw.rect(surface.py_surface, colors["ivory"], pygame.Rect(x_rect1, y_rect1, button_width, button_height))
-    pygame.draw.rect(surface.py_surface, colors["Black"],
-                     pygame.Rect(x_rect1 + 1, y_rect1 + 1, button_width - 2, button_height - 2))
-    pygame.draw.rect(surface.py_surface, colors["ivory"],
-                     pygame.Rect(x_rect1 + 5, y_rect1 + 5, button_width - 10, button_height - 10))
-    pygame.draw.rect(surface.py_surface, colors["darkblue"],
-                     pygame.Rect(x_rect1 + 6, y_rect1 + 6, button_width - 12, button_height - 12))
-
+    draw_empty_box(surface.py_surface, x_rect1, y_rect1, button_width, button_height)
     surface.py_surface.blit(play_again_button, (x_button1, y_button1))
 
     # menu button
@@ -85,14 +68,7 @@ def draw_end_menu(surface, game):
     x_rect2 = x_button2 - (button_width - text_width) / 2
     y_rect2 = y_button2 - (button_height - text_height) / 2
 
-    pygame.draw.rect(surface.py_surface, colors["ivory"], pygame.Rect(x_rect2, y_rect2, button_width, button_height))
-    pygame.draw.rect(surface.py_surface, colors["Black"],
-                     pygame.Rect(x_rect2 + 1, y_rect2 + 1, button_width - 2, button_height - 2))
-    pygame.draw.rect(surface.py_surface, colors["ivory"],
-                     pygame.Rect(x_rect2 + 5, y_rect2 + 5, button_width - 10, button_height - 10))
-    pygame.draw.rect(surface.py_surface, colors["darkblue"],
-                     pygame.Rect(x_rect2 + 6, y_rect2 + 6, button_width - 12, button_height - 12))
-
+    draw_empty_box(surface.py_surface, x_rect2, y_rect2, button_width, button_height)
     surface.py_surface.blit(menu_button, (x_button2, y_button2))
 
     # next level button
@@ -109,27 +85,13 @@ def draw_end_menu(surface, game):
     x_rect3 = x_button3 - (button_width - text_width) / 2
     y_rect3 = y_button3 - (button_height - text_height) / 2
 
-    pygame.draw.rect(surface.py_surface, colors["ivory"], pygame.Rect(x_rect3, y_rect3, button_width, button_height))
-    pygame.draw.rect(surface.py_surface, colors["Black"],
-                     pygame.Rect(x_rect3 + 1, y_rect3 + 1, button_width - 2, button_height - 2))
-    pygame.draw.rect(surface.py_surface, colors["ivory"],
-                     pygame.Rect(x_rect3 + 5, y_rect3 + 5, button_width - 10, button_height - 10))
-    pygame.draw.rect(surface.py_surface, colors["darkblue"],
-                     pygame.Rect(x_rect3 + 6, y_rect3 + 6, button_width - 12, button_height - 12))
-
+    draw_empty_box(surface.py_surface, x_rect3, y_rect3, button_width, button_height)
     surface.py_surface.blit(next_level, (x_button3, y_button3))
 
     if pygame.Rect(x_rect1, y_rect1, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
-        pygame.draw.rect(surface.py_surface, colors["ivory"],
-                         pygame.Rect(x_rect1, y_rect1, button_width, button_height))
-        pygame.draw.rect(surface.py_surface, colors["Black"],
-                         pygame.Rect(x_rect1 + 1, y_rect1 + 1, button_width - 2, button_height - 2))
-        pygame.draw.rect(surface.py_surface, colors["ivory"],
-                         pygame.Rect(x_rect1 + 5, y_rect1 + 5, button_width - 10, button_height - 10))
-        pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
-                         pygame.Rect(x_rect1 + 6, y_rect1 + 6, button_width - 12, button_height - 12))
-
+        draw_covered_box(surface.py_surface, x_rect1, y_rect1, button_width, button_height)
         surface.py_surface.blit(play_again_button, (x_button1, y_button1))
+
         if pygame.mouse.get_pressed()[0]:
             game.cursor = game.last_level
             game.stage = "Launched"
@@ -138,16 +100,9 @@ def draw_end_menu(surface, game):
         sound = False
 
     if pygame.Rect(x_rect2, y_rect2, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
-        pygame.draw.rect(surface.py_surface, colors["ivory"],
-                         pygame.Rect(x_rect2, y_rect2, button_width, button_height))
-        pygame.draw.rect(surface.py_surface, colors["Black"],
-                         pygame.Rect(x_rect2 + 1, y_rect2 + 1, button_width - 2, button_height - 2))
-        pygame.draw.rect(surface.py_surface, colors["ivory"],
-                         pygame.Rect(x_rect2 + 5, y_rect2 + 5, button_width - 10, button_height - 10))
-        pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
-                         pygame.Rect(x_rect2 + 6, y_rect2 + 6, button_width - 12, button_height - 12))
-
+        draw_covered_box(surface.py_surface, x_rect2, y_rect2, button_width, button_height)
         surface.py_surface.blit(menu_button, (x_button2, y_button2))
+
         if pygame.mouse.get_pressed()[0]:
             game.stage = "Main Menu"
         sound = False
@@ -163,16 +118,9 @@ def draw_end_menu(surface, game):
     # next level.
 
     if pygame.Rect(x_rect3, y_rect3, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
-        pygame.draw.rect(surface.py_surface, colors["ivory"],
-                         pygame.Rect(x_rect3, y_rect3, button_width, button_height))
-        pygame.draw.rect(surface.py_surface, colors["Black"],
-                         pygame.Rect(x_rect3 + 1, y_rect3 + 1, button_width - 2, button_height - 2))
-        pygame.draw.rect(surface.py_surface, colors["ivory"],
-                         pygame.Rect(x_rect3 + 5, y_rect3 + 5, button_width - 10, button_height - 10))
-        pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
-                         pygame.Rect(x_rect3 + 6, y_rect3 + 6, button_width - 12, button_height - 12))
-
+        draw_covered_box(surface.py_surface, x_rect3, y_rect3, button_width, button_height)
         surface.py_surface.blit(next_level, (x_button3, y_button3))
+
         if pygame.mouse.get_pressed()[0]:
             if game.last_level + 1 < len(game.levels):
                 game.cursor = game.last_level + 1

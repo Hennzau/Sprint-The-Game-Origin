@@ -1,6 +1,7 @@
 ### Imports
 import pygame
 
+
 # Here we define all functions related to sound and manage their volumes (except for the soundtrack)
 
 def sound_collision():
@@ -24,11 +25,13 @@ def sound_swipe():
     my_sound.play()
     pass
 
+
 def sound_button():
     pygame.mixer.init()
     my_sound = pygame.mixer.Sound('assets/sounds/Boup.wav')
     my_sound.set_volume(0.1)
     my_sound.play()
+
 
 def sound_game_launched():
     pygame.mixer.init()
