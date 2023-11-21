@@ -1,5 +1,7 @@
+### Imports
 import pygame
 
+# Here we define all functions related to sound and manage their volumes (except for the soundtrack)
 
 def sound_collision():
     pygame.mixer.init()
