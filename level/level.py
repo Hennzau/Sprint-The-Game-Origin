@@ -181,7 +181,8 @@ class Level:
 
             if int(player.position[0] / pixel_size) != self.final_positions[i][0] or int(
                     player.position[1] / pixel_size) != self.final_positions[i][1]:
-                finished = False
+                if self.victory_timer == 0:  # be sure that the user was not in a winning position the frame before
+                    finished = False
 
             # update the position and the color of the player
 

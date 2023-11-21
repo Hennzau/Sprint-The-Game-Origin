@@ -14,14 +14,14 @@ def draw_main_menu(surface, menu, game):
     # Draw the background
     surface.py_surface.fill(colors["darkerblue"])
     backgroud = pygame.image.load('assets/images/Sprint_Background.png')
-    surface.py_surface.blit(backgroud, (0,0))
+    surface.py_surface.blit(backgroud, (0, 0))
 
     # Initialise the different fonts used
     font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 60)
     font_levels = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
 
     # Show the title inside a box 
-    
+
     title = font.render('SPRINT THE GAME', True, colors["ivory"])
     start_button = font.render(
         'Select Level to Start', True, colors["ivory"])
@@ -32,20 +32,20 @@ def draw_main_menu(surface, menu, game):
     title_extended_height = title.get_height() + start_button.get_height() + 25
 
     pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_title_extended - 40, y_title_extended - 40,
-                                             title_extended_width + 80, title_extended_height + 80))
+                     pygame.Rect(x_title_extended - 40, y_title_extended - 40,
+                                 title_extended_width + 80, title_extended_height + 80))
 
     pygame.draw.rect(surface.py_surface, colors["Black"],
-                                 pygame.Rect(x_title_extended - 39, y_title_extended - 39,
-                                             title_extended_width + 78, title_extended_height + 78))
-    
+                     pygame.Rect(x_title_extended - 39, y_title_extended - 39,
+                                 title_extended_width + 78, title_extended_height + 78))
+
     pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_title_extended - 25, y_title_extended - 25,
-                                             title_extended_width + 50, title_extended_height + 50))
-    
+                     pygame.Rect(x_title_extended - 25, y_title_extended - 25,
+                                 title_extended_width + 50, title_extended_height + 50))
+
     pygame.draw.rect(surface.py_surface, colors["darkblue"],
-                                 pygame.Rect(x_title_extended - 24, y_title_extended - 24,
-                                             title_extended_width + 48, title_extended_height + 48))
+                     pygame.Rect(x_title_extended - 24, y_title_extended - 24,
+                                 title_extended_width + 48, title_extended_height + 48))
 
     surface.py_surface.blit(title, (width / 2 - title.get_width() / 2,
                                     height / 2 - title.get_height() / 2 - 200))
@@ -56,12 +56,12 @@ def draw_main_menu(surface, menu, game):
     # Draw the levels button, up to 5 per line and 2 lines
 
     n = len(menu.levels)
-    if n%2 == 1:
+    if n % 2 == 1:
         p = int(n / 2) + 1
     else:
-         p = int(n/2)
+        p = int(n / 2)
 
-    sound = True # Check if we have to play the sound when we're over a button
+    sound = True  # Check if we have to play the sound when we're over a button
 
     # Draw the first line
 
@@ -103,9 +103,9 @@ def draw_main_menu(surface, menu, game):
             surface.py_surface.blit(levels_button, (k, height / 2 - (levels_button.get_height() / 2 - 100)))
 
             sound = False
-            
+
             # We check is the button is pressed and switch to the according game.stage 
-            
+
             if pygame.mouse.get_pressed()[0]:
                 menu.level_selected = i
                 menu.start_game = True
@@ -158,53 +158,53 @@ def draw_main_menu(surface, menu, game):
 
     # We now draw the "Level Editor" button, the same way the other button were.
 
-    
     level_editor = font_levels.render("Level Editor", True, colors["ivory"])
-    x_lvled,y_lvled = (width  - level_editor.get_width() - 50 , height / 2 - level_editor.get_height() / 2 + 320)
-    
+
+    x_lvled, y_lvled = (25, height / 2 - level_editor.get_height() / 2 + 320)
+
     pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 21, y_lvled - 21 ,
-                                             level_editor.get_width() + 42, level_editor.get_height() + 42))
+                     pygame.Rect(x_lvled - 21, y_lvled - 21,
+                                 level_editor.get_width() + 42, level_editor.get_height() + 42))
     pygame.draw.rect(surface.py_surface, colors["Black"],
-                                 pygame.Rect(x_lvled - 20, y_lvled - 20,
-                                             level_editor.get_width() + 40, level_editor.get_height() + 40))
+                     pygame.Rect(x_lvled - 20, y_lvled - 20,
+                                 level_editor.get_width() + 40, level_editor.get_height() + 40))
     pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 16, y_lvled - 16,
-                                             level_editor.get_width() + 32, level_editor.get_height() + 32))
+                     pygame.Rect(x_lvled - 16, y_lvled - 16,
+                                 level_editor.get_width() + 32, level_editor.get_height() + 32))
     pygame.draw.rect(surface.py_surface, colors["darkblue"],
-                                 pygame.Rect(x_lvled - 15, y_lvled - 15,
-                                             level_editor.get_width() + 30, level_editor.get_height() + 30))
-    surface.py_surface.blit(level_editor, (x_lvled , y_lvled))
-    
-    if pygame.Rect(x_lvled - 21, y_lvled - 21 , level_editor.get_width() + 42, level_editor.get_height() + 42).collidepoint(pygame.mouse.get_pos()):
+                     pygame.Rect(x_lvled - 15, y_lvled - 15,
+                                 level_editor.get_width() + 30, level_editor.get_height() + 30))
+    surface.py_surface.blit(level_editor, (x_lvled, y_lvled))
+
+    if pygame.Rect(x_lvled - 21, y_lvled - 21, level_editor.get_width() + 42,
+                   level_editor.get_height() + 42).collidepoint(pygame.mouse.get_pos()):
         pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 21, y_lvled - 21 ,
-                                             level_editor.get_width() + 42, level_editor.get_height() + 42))
+                         pygame.Rect(x_lvled - 21, y_lvled - 21,
+                                     level_editor.get_width() + 42, level_editor.get_height() + 42))
         pygame.draw.rect(surface.py_surface, colors["Black"],
-                                 pygame.Rect(x_lvled - 20, y_lvled - 20,
-                                             level_editor.get_width() + 40, level_editor.get_height() + 40))
+                         pygame.Rect(x_lvled - 20, y_lvled - 20,
+                                     level_editor.get_width() + 40, level_editor.get_height() + 40))
         pygame.draw.rect(surface.py_surface, colors["ivory"],
-                                 pygame.Rect(x_lvled - 16, y_lvled - 16,
-                                             level_editor.get_width() + 32, level_editor.get_height() + 32))
+                         pygame.Rect(x_lvled - 16, y_lvled - 16,
+                                     level_editor.get_width() + 32, level_editor.get_height() + 32))
         pygame.draw.rect(surface.py_surface, colors["Volkswagen Taupe"],
-                                 pygame.Rect(x_lvled - 15, y_lvled - 15,
-                                             level_editor.get_width() + 30, level_editor.get_height() + 30))
+                         pygame.Rect(x_lvled - 15, y_lvled - 15,
+                                     level_editor.get_width() + 30, level_editor.get_height() + 30))
         surface.py_surface.blit(level_editor, (x_lvled, y_lvled))
-        
+
         if pygame.mouse.get_pressed()[0]:
-                    pygame.time.wait(500)
-                    menu.launch_level_editor(game)
-                    sound_game_launched()
+            menu.launch_level_editor(game)
+            sound_game_launched()
 
-        sound = False 
+        sound = False
 
-    # We now check if the mouse was over one of the button and if it just entered the button to play the sound
+        # We now check if the mouse was over one of the button and if it just entered the button to play the sound
 
     if not game.sound and not sound:
-            game.sound = True
-            sound_button()
-    
+        game.sound = True
+        sound_button()
+
     # We put back the value "False" if the mouse wasn't in any button
 
     if sound:
-         game.sound = False
+        game.sound = False
