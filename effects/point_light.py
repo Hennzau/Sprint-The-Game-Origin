@@ -1,14 +1,25 @@
 import pygame
 import numpy as np
 
-"""
-In Sprint The Game, every source of light is actually a PointLight, which means the source is present in the grid
-"""
-
 
 class PointLight:
-    # take an initial color (RGB) and an initial position
+    """
+    In Sprint The Game, every source of light is actually a PointLight, which means the source is present in the grid
+    """
+
     def __init__(self, base_model, color, position, radius, intensity):
+        """
+        The PointLight __init__ function takes everything a Light Point needs to be created, in particular,
+        it takes a base_model of a blank model light already rendered in an image (a pygame surface)
+
+        Parameters:
+            base_model (py_surface): the blank model
+            color (RGB): the color in the RGB format
+            position ((int,int)): position of the light (unit is pixel)
+            radius (int): radius of the light (unit is pixel)
+            intensity (float): between 0 and 1, represents the intensity of the light
+        """
+
         self.color = color
         self.position = position
         self.intensity = intensity
@@ -35,7 +46,14 @@ class PointLight:
 
         self.image.blit(temp_surface, (0, 0), special_flags=pygame.BLEND_RGB_MULT)
 
-    def change_color(self, color):  # reload the mask and apply it on the base_model
+    def change_color(self, color):
+        """
+        The change_color function reloads the color mask to apply on the base_model
+
+        Parameters:
+            color (RGB): the color in the RGB format
+        """
+
         if self.color != color:  # only if the mask changed
             self.color = color
 
@@ -55,8 +73,23 @@ class PointLight:
             self.image.blit(temp_surface, (0, 0), special_flags=pygame.BLEND_RGB_MULT)
 
     def move(self, position):
+        """
+        The move function changes the position of the light point
+
+        Parameters:
+            position ((int,int)): the new position
+        """
+
         self.position = position
 
-    def render(self, surface):  # merge the 'self.image' mask on the surface at the right position
+    def render(self, surface):
+        """
+        Render the point light on the given surface
+
+        Parameters:
+            surface (py_surface): the surface to draw the light on
+        """
+
+        # merge the 'self.image' mask on the surface at the right position
         surface.blit(self.image, (self.position[0] - self.radius, self.position[1] - self.radius),
                      special_flags=pygame.BLEND_RGBA_ADD)

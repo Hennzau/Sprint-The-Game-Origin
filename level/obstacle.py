@@ -30,6 +30,7 @@ class Obstacle:
         """
 
         self.color = colors[color]
+        self.color_str=color
         self.color_switcher = color_switcher
         self.end = end
         self.start = start

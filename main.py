@@ -4,39 +4,62 @@
 import pygame
 
 from game import Game
-from menu.main_menu import MainMenu
+from main_menu import MainMenu
 from render.draw_main_menu import draw_main_menu
 from render.surface import Surface
-from render.surface import events, flip
-from level.obstacle import colors
+from render.surface import flip
 from render.draw_end_menu import draw_end_menu
 from editor.draw_level_editor import draw_level_editor
 from editor.level_editor import LevelEditor
-from sound import sound_background
 
 
 # ----------------- #
 
 def main():
+    # The main() function is the one we execute to play the game, it manages the different game stage
+
+    # First we inititalize the surface, the game icon, the window's name, the soundtrack and the different objects
+
+    icon = pygame.image.load('assets/images/Sprint_Icon.png')
+    pygame.display.set_icon(icon)
     surface = Surface(1280, 720, "Sprint The Game")
 
     game = Game(surface)
-    level_editor = LevelEditor((20,12))
-    menu = MainMenu(game)
+    level_editor = LevelEditor((20, 12))
+    menu = MainMenu()
+
     clock = pygame.time.Clock()
 
     timer = 0
 
     frame_cap = 120
 
-    sound_background()
+    pygame.mixer.init()
+    pygame.mixer.set_num_channels(8)
+    background = pygame.mixer.Channel(
+        5)  # We create a separate channel for this music so that we can detect when it's not played
+    my_sound = pygame.mixer.Sound('assets/sounds/soundtrack-sprint_c5L9pqZh.mp3')
+    my_sound.set_volume(2)
+    background.play(my_sound)
+
+    # We enter the loop of the game:
+
     while game.is_open:
         surface.clear((0, 0, 0))
+
+        # We check if the soundtrack is still playing, and we restart it if needed
+
+        if not background.get_busy():
+            background.play(my_sound)
+
+        # We update the game
 
         if clock.get_fps() > 0:
             game.update(float(1 / clock.get_fps()))
         else:
             game.update(float(1 / 60))
+
+        # We act accordingly to the stage of the game (draw the corresponding menus)
 
         if game.stage == "Launched":
             game.render()
@@ -50,7 +73,7 @@ def main():
             draw_end_menu(surface, game)
 
         if game.stage == "Level Editor":
-            draw_level_editor(level_editor, surface)
+            draw_level_editor(level_editor, surface, game)
 
         flip()
 

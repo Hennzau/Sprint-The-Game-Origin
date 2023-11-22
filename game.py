@@ -1,25 +1,23 @@
-# importations
+# Imports
+
+import os
 import pygame
-from level.level import Level, victory_event
-from level.obstacle import colors
+
+from level.level import victory_event
+from level.obstacle import colors, pixel_size
+from level.level_loader import build_level
+
 from render.surface import events
-
-from level.player import Player
-from level.obstacle import Obstacle, pixel_size
-
 from render.level_render import LevelRender
 
 from sound import sound_swipe
-from render.surface import Surface
-from level.grid import Grid
-
-from level.level_loader import build_level
-
-
-# class game which updates the game (logic and render) at each passage through the main loop
 
 
 class Game:
+    """
+    The Game object updates the game (logic and render) at each passage through the main loop
+    """
+
     def __init__(self, surface):
         self.levels = []
         self.levels_render = []
@@ -58,25 +56,17 @@ class Game:
         self.levels = []
         self.levels_render = []
 
-        # build levels from JSON format
+        # build levels from JSON format (max 10 levels)
 
-        # there are two different classes : a Logical object 'Level' that represents the level, 
-        # and a Rendering object 'LevelRender' that manages the rendering of the level (pre-calculated images etc...)
+        for i in range(1, 11):
+            path = "assets/levels/level_" + str(i) + ".json"
+            if os.path.isfile(path):
+                # there are two different classes : a Logical object 'Level' that represents the level,
+                # and a Rendering object 'LevelRender' that manages the rendering of the level
+                # (pre-calculated images etc...)
 
-        self.levels.append(build_level("assets/levels/level_1.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_2.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_3.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_4.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
-
-        self.levels.append(build_level("assets/levels/level_5.json"))
-        self.levels_render.append(LevelRender(self.levels[-1]))
+                self.levels.append(build_level(path))
+                self.levels_render.append(LevelRender(self.levels[-1]))
 
     def load_interface(self):
         self.image = pygame.Surface((self.surface.width, self.surface.height))
@@ -137,12 +127,13 @@ class Game:
             if event.type == pygame.QUIT:
                 self.is_open = False
             # when there is a victory event, reload the current level and go to end menu
-            if event.type == pygame.USEREVENT:
+            if event.type == victory_event.type:
                 self.levels[self.cursor].reload_level()
 
                 self.last_level = self.cursor
                 self.cursor = None
                 self.stage = "End Menu"
+
             if event.type == pygame.KEYDOWN:  # manage keyboard actions
                 if self.cursor is not None:
                     if event.key == pygame.K_r:

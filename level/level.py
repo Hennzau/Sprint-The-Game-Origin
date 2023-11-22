@@ -142,6 +142,7 @@ class Level:
 
             if player.is_moving and player.speed == player.start_speed:
                 particles = []
+
                 for k in range(8):
                     for j in range(8):
                         particles.append(
@@ -149,6 +150,7 @@ class Level:
                                           (player.position[0] + 5 * k, player.position[1] + 5 * j),
                                           (np.random.randint(-30, 30), np.random.randint(-30, 30)), 1,
                                           np.random.randint(150) / 100))
+
                 self.particle_system.add(particles)
 
             player.update(delta_time, self.grid)
@@ -179,7 +181,8 @@ class Level:
 
             if int(player.position[0] / pixel_size) != self.final_positions[i][0] or int(
                     player.position[1] / pixel_size) != self.final_positions[i][1]:
-                finished = False
+                if self.victory_timer == 0:  # be sure that the user was not in a winning position the frame before
+                    finished = False
 
             # update the position and the color of the player
 

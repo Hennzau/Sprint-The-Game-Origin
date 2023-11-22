@@ -3,21 +3,25 @@ import pygame
 
 from level.obstacle import pixel_size
 
-""""
-draw_player is called upon to represent the player at all times for the viewer.
-"""
-
-precision = 5
-
 
 def draw_player(player, surface):
-    global precision
+    """
+    the draw_player function draw the player and its integrated motion_blur effect on the given surface.
 
+    Parameters:
+    player (Player): the Player Object you want to draw
+    surface (Surface): the surface on which you want to draw the end menu,
+    """
+
+    precision = 5
+
+    # only create the motion blur effect when there are all the necessary recorded positions
     if len(player.last_positions) == player.record_length:
-        blur = pygame.Surface((pixel_size, pixel_size))
+        blur = pygame.Surface((pixel_size, pixel_size))  # create the mask
         pygame.draw.rect(blur, (player.color[0] / 20, player.color[1] / 20, player.color[2] / 20),
                          pygame.Rect(0, 0, pixel_size, pixel_size))
 
+        # draw the mask at between all recorded positions as 'BLEND.ADD'
         for k in range(player.record_length - 1):
             initial = player.last_positions[k]
             final = player.last_positions[k + 1]

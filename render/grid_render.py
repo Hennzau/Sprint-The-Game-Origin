@@ -6,16 +6,23 @@ from level.obstacle import Obstacle, pixel_size, colors
 
 from math import *
 
-""""
-To make things faster, a GridRender class is necessary : it will manage the calculus of each frame by taking a cache 
-image already calculated
-"""
-
 
 class GridRender:
+    """"
+    To make things faster, a GridRender class is necessary : it will manage the calculus of each frame by taking a cache
+    image already calculated
+    """
+
     def __init__(self,
-                 grid):  # We can create a GridRender object by passing a Grid Object, the Grid can not be dynamic (
-        # obstacles are static)
+                 grid):
+        """
+        The GridRender __init__ function will generate an image of the grid that will be reused
+        instead of being calculated again
+
+        Parameters:
+        grid (Grid): the grid Object to render
+        """
+
         self.image = pygame.Surface((grid.size[0] * pixel_size, grid.size[1] * pixel_size))
         self.grid = grid
 
@@ -46,7 +53,7 @@ class GridRender:
         pygame.draw.circle(circle_surface, colors["blue"], (pixel_size / 2, pixel_size / 2),
                            pixel_size / 2,
                            0)
-        
+
         self.base_color_switcher.blit(circle_surface.subsurface(
             pygame.Rect(pixel_size / 2, pixel_size / 2, pixel_size / 2, pixel_size / 2)),
             (pixel_size / 2, pixel_size / 2))
@@ -57,7 +64,7 @@ class GridRender:
         for i in range(height):
             for j in range(width):
                 if grid.obstacles[i, j] is not None:
-                    if grid.obstacles[i, j].start:
+                    if grid.obstacles[i, j].start:  # draw the centralesupelec logo
                         pygame.draw.rect(self.image, colors["darkblue"],
                                          pygame.Rect(i * pixel_size,
                                                      j * pixel_size, pixel_size,
@@ -82,7 +89,7 @@ class GridRender:
                         pygame.draw.circle(self.image, grid.obstacles[i, j].color, (
                             i * pixel_size + pixel_size * 21 / 32,
                             j * pixel_size + pixel_size * 21 / 32), 3)
-                    elif grid.obstacles[i, j].end:
+                    elif grid.obstacles[i, j].end:  # draw a star
                         pygame.draw.rect(self.image, colors["darkblue"],
                                          pygame.Rect(i * pixel_size,
                                                      j * pixel_size,
@@ -104,7 +111,7 @@ class GridRender:
                                          2 * pi * k / 10 - pi / 2))]
 
                         pygame.draw.polygon(self.image, grid.obstacles[i, j].color, L, 0)
-                    elif grid.obstacles[i, j].color_switcher:
+                    elif grid.obstacles[i, j].color_switcher:  # draw the color_switcher
                         pygame.draw.rect(self.image, colors["darkblue"],
                                          pygame.Rect(i * pixel_size, j * pixel_size, pixel_size, pixel_size))
 
@@ -113,17 +120,23 @@ class GridRender:
                         pygame.draw.circle(self.image, grid.obstacles[i, j].color,
                                            (i * pixel_size + pixel_size / 2, j * pixel_size + pixel_size / 2),
                                            pixel_size / 4, 0)
-                    else:
+                    else:  # draw a colored not special obstacle
                         pygame.draw.rect(self.image, grid.obstacles[i, j].color,
                                          pygame.Rect(i * pixel_size, j * pixel_size, pixel_size, pixel_size))
-                else:
+                else:  # draw an empty tile
                     pygame.draw.rect(self.image, colors["darkblue"],
                                      pygame.Rect(i * pixel_size, j * pixel_size, pixel_size, pixel_size))
 
-    # the render function now consists in pasting the already calculated 'self.image' on the surface you want to draw :
-    # there are no massive for functions and multiples calling to pygame.draw anymore
-
     def render(self, surface, time):
+        """
+        The render function will blit the already calculated 'self.image' to the surface you want to draw the grid on.
+        There are no massive 'for' functions and lots of calls to pygame.draw anymore
+
+        Parameters:
+        surface (py_surface): The Pygame Surface you want to draw the grid on
+        time (float): The relative time of the level
+        """
+
         surface.blit(self.image, (0, 0))
 
         # only color switchers have to be updated
