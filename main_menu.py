@@ -14,8 +14,9 @@ class MainMenu:
         """
         self.level_selected = None
         self.start_game = False
-        self.sound = False
         self.level_cursor = 0
+        self.button1_pressed = False
+        self.button2_pressed = False
 
     def update_level(self, level):
         """
@@ -54,7 +55,7 @@ class MainMenu:
         else :
             self.level_cursor = 0
 
-    def increase_cursor(self, game):
+    def decrease_cursor(self, game):
         """
         This method is used to increase the view of levels selected
 
@@ -63,7 +64,7 @@ class MainMenu:
         """
         n = len(game.levels) // 10
 
-        if self.level_selected > 0:
+        if self.level_cursor > 0:
             self.level_cursor -= 1
         else :
             self.level_cursor = n

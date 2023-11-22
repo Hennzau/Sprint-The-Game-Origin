@@ -31,6 +31,7 @@ def draw_main_menu(surface, menu, game):
     # Initialise the different fonts used
     font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 60)
     font_levels = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
+    font_switch = pygame.font.SysFont("arial", 30)
 
     # Show the title inside a box 
 
@@ -52,7 +53,39 @@ def draw_main_menu(surface, menu, game):
 
     # Draw buttons to switch row of levels
     
-    
+
+
+    increase_button = font_switch.render(">", True, colors["ivory"])
+    decrease_button = font_switch.render("<", True, colors["ivory"])
+    x1 =  width /2 - decrease_button.get_width() - 2 * decrease_button.get_width()
+    x2 =  width /2 - increase_button.get_width() + 3 * increase_button.get_width()
+    y = (height + 544)/2 - increase_button.get_height()/2 + 50
+
+    draw_empty_box(surface.py_surface,x1 - 20, y - 20, decrease_button.get_width() + 40, decrease_button.get_height() + 40)
+    surface.py_surface.blit(decrease_button, (x1,y))
+    draw_empty_box(surface.py_surface, x2 - 20, y - 20, increase_button.get_width() + 40, increase_button.get_height() + 40)
+    surface.py_surface.blit(increase_button, (x2,y))
+
+    if pygame.Rect(x1 - 20, y - 20, decrease_button.get_width() + 40, decrease_button.get_height() + 40).collidepoint(pygame.mouse.get_pos()):
+        draw_covered_box(surface.py_surface, x1 - 20, y - 20, decrease_button.get_width() + 40, decrease_button.get_height() + 40)
+        surface.py_surface.blit(decrease_button, (x1,y))
+        sound = False
+        if pygame.mouse.get_pressed()[0] and not menu.button1_pressed:
+            menu.decrease_cursor(game)
+            menu.button1_pressed = True
+    else:
+        menu.button1_pressed = False
+
+    if pygame.Rect(x2 - 20, y - 20, increase_button.get_width() + 40, increase_button.get_height() + 40).collidepoint(pygame.mouse.get_pos()):
+        draw_covered_box(surface.py_surface, x2 - 20, y - 20, increase_button.get_width() + 40, increase_button.get_height() + 40)
+        surface.py_surface.blit(increase_button, (x2,y))
+        sound = False
+        if pygame.mouse.get_pressed()[0] and not menu.button2_pressed :
+            menu.increase_cursor(game)
+            menu.button2_pressed = True
+    else:
+        menu.button2_pressed = False
+          
     # Draw the levels button, up to 5 per line and 2 lines
 
     m = len(game.levels) // 10
@@ -79,7 +112,6 @@ def draw_main_menu(surface, menu, game):
         draw_empty_box(surface.py_surface, k - 26, height / 2 - (levels_button.get_height() / 2 - 100) - 26,
                        button_width + 52, button_height + 52)
         surface.py_surface.blit(levels_button, (k, height / 2 - (levels_button.get_height() / 2 - 100)))
-
         # We check if the mouse is over the button
 
         if pygame.Rect(k - 26, height / 2 - (levels_button.get_height() / 2 - 100) - 26, button_width + 52,
@@ -109,7 +141,6 @@ def draw_main_menu(surface, menu, game):
             draw_empty_box(surface.py_surface, k - 26, height / 2 - (levels_button.get_height() / 2 - 225) - 26,
                            button_width + 52, button_height + 52)
             surface.py_surface.blit(levels_button, (k, height / 2 - (levels_button.get_height()) / 2 + 225))
-
             if pygame.Rect(k - 26, height / 2 - (levels_button.get_height() / 2 - 225) - 26, button_width + 52,
                            button_height + 52).collidepoint(pygame.mouse.get_pos()):
                 draw_covered_box(surface.py_surface, k - 26, height / 2 - (levels_button.get_height() / 2 - 225) - 26,
@@ -147,7 +178,7 @@ def draw_main_menu(surface, menu, game):
 
         sound = False
 
-        # We now check if the mouse was over one of the button and if it just entered the button to play the sound
+    # We now check if the mouse was over one of the button and if it just entered the button to play the sound
 
     if not game.sound and not sound:
         game.sound = True
