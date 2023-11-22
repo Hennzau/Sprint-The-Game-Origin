@@ -23,7 +23,7 @@ def main():
     surface = Surface(1280, 720, "Sprint The Game")
 
     game = Game(surface)
-    level_editor = LevelEditor((20, 12), "assets/levels/custom/level_1.json")
+    level_editor = LevelEditor((20, 12))
 
     menu = MainMenu()
 
