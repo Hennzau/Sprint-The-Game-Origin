@@ -179,7 +179,6 @@ class Level:
                                                    3, np.random.randint(20) / 100))
 
                 self.particle_system.add(particles)
-                self.hit += 1
 
             # check if all players are at their final positions at the same time
 
@@ -195,8 +194,6 @@ class Level:
 
             self.light_system.lights["player" + str(i)].change_color(
                 player.color)  # this will regenerate the lighting mask when the previous color is different
-
-        self.hit = int (int(self.hit) / len(self.players))
 
         if finished:  # if yes, trigger an event to tell the game to stop the current level after a certain delay
             if self.victory_timer > self.victory_delay:
