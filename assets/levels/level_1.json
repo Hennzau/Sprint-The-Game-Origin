@@ -7,8 +7,11 @@
         [2, 3, "yellow", true],
         [14, 0, "darkgrey"],
 
-        [8, 8, "yellow"],
-        [8, 9, "yellow"],
+        [6, 8, "yellow"],
+        [6, 9, "yellow"],
+
+        [8, 8, "darkgrey"],
+        [8, 9, "darkgrey"],
 
         [4, 2, "darkgrey"],
         [5, 2, "darkgrey"],
