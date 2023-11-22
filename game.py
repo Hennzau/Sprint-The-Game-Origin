@@ -159,25 +159,21 @@ class Game:
                                 is_moving = True
 
                         if event.key == pygame.K_LEFT:
-                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_left(self.levels[self.cursor].grid)
                         if event.key == pygame.K_RIGHT:
-                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_right(self.levels[self.cursor].grid)
                         if event.key == pygame.K_UP:
-                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_up(self.levels[self.cursor].grid)
                         if event.key == pygame.K_DOWN:
-                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
