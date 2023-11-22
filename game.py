@@ -103,6 +103,16 @@ class Game:
             pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
             pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 142, 92))
             pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
+            
+            # create the box of the hit_counter, at the left of the level frame
+
+            x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 100
+            y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) + 150
+
+            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x, y, 200, 100))
+            pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 196, 96))
+            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 192, 92))
+            pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 190, 90))
 
             # print the current level
             current_level = "Level " + str(self.cursor + 1)
@@ -149,21 +159,25 @@ class Game:
                                 is_moving = True
 
                         if event.key == pygame.K_LEFT:
+                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_left(self.levels[self.cursor].grid)
                         if event.key == pygame.K_RIGHT:
+                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_right(self.levels[self.cursor].grid)
                         if event.key == pygame.K_UP:
+                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_up(self.levels[self.cursor].grid)
                         if event.key == pygame.K_DOWN:
+                            self.levels[self.cursor].hit +=1
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
@@ -234,6 +248,22 @@ class Game:
 
             self.surface.py_surface.blit(timer, (
                 (2 * x + 150) / 2 - timer.get_width() / 2, (2 * y + 100) / 2 - timer.get_height() / 2))
+            
+            # print the hit_counter
+
+            x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
+            y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) + 150
+            y_bis = ((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) + 130 + \
+                    self.levels[self.cursor].grid.size[1] * pixel_size
+
+            hit = self.levels[self.cursor].hit
+
+            hit_counter_string = "hit:" + str(hit)
+
+            hit_counter = self.time_font.render(hit_counter_string, True, colors["ivory"])
+
+            self.surface.py_surface.blit(hit_counter, (
+                (2 * x + 150) / 2 - hit_counter.get_width() / 2, (2 * y + 100) / 2 - hit_counter.get_height() / 2))
 
             # when the user wants to reload the current level or go to the main menu, draw the text with color progress
 

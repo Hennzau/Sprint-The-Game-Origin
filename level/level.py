@@ -52,6 +52,8 @@ class Level:
         self.reload_timer = 0
         self.time = 0  # a level can have the concept of time : it helps to make dynamic things
 
+        self.hit = 0 
+        
         self.victory_delay = 0.5
         self.victory_timer = 0
 
@@ -100,7 +102,8 @@ class Level:
         self.particle_system.clear()
         self.victory_timer = 0
         self.time = 0
-
+        self.hit = 0
+        
         for k in range(
                 len(self.initial_positions)):
 
@@ -232,6 +235,7 @@ class Level:
             self.ask_for_reload = False
             self.reload_timer = 0
             self.time = 0
+            self.hit = 0
 
         # at the end we update the particle system : it manages the position of all particles and their lifetime
         self.particle_system.update(delta_time)
