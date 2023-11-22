@@ -186,9 +186,6 @@ class Game:
                 self.is_open = False
             # when there is a victory event, reload the current level and go to end menu
             if event.type == victory_event.type:
-                print(self.levels[self.cursor].high_score)
-                print(self.levels[self.cursor].score)
-
                 if self.levels[self.cursor].high_score < self.levels[self.cursor].score:
                     self.levels[self.cursor].high_score = self.levels[self.cursor].score
 
@@ -321,7 +318,7 @@ class Game:
             x = self.levels[self.cursor].grid.size[0] * pixel_size + (self.surface.width -
                                                                       self.levels[self.cursor].grid.size[
                                                                           0] * pixel_size) / 2 + (
-                        self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8 
+                        self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8
             y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
             hit = int(self.levels[self.cursor].hit)

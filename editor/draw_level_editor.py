@@ -253,7 +253,7 @@ def draw_level_editor(level_editor, surface, game):
     exit_width = exit_button.get_width()
     exit_height = exit_button.get_height()
     x_rect6 = surface.width - save_width - 50
-    y_rect6 = surface.height - 100
+    y_rect6 = surface.height - 90
 
     draw_empty_box(surface.py_surface, x_rect6, y_rect6, exit_width + 30, exit_height + 30)
     surface.py_surface.blit(exit_button, (x_rect6 + 15, y_rect6 + 15))
