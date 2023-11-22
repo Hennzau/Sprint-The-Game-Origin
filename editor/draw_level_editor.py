@@ -105,7 +105,7 @@ def draw_level_editor(level_editor, surface, game):
         if pygame.mouse.get_pressed()[2] and not level_editor.select_add_player :
             i = int(pygame.mouse.get_pos()[0] / pixel_size)
             j = int(pygame.mouse.get_pos()[1] / pixel_size)
-            if not level_editor.level.grid.obstacles[
+            if level_editor.level.grid.obstacles[i,j] is not None and not level_editor.level.grid.obstacles[
                 i, j].end and not level_editor.level.grid.obstacles[i, j].start:
                 level_editor.erase_tile((i, j))
 
