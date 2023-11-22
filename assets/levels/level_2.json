@@ -1,66 +1,233 @@
 {
-    "size":[20,12],
-    "initial_positions":[[3,4]],
-    "final_positions":[[0, 11]],
-    "initial_colors":["red"],
-    "obstacles":[
-        [16, 10, "darkgrey"],
-        [16, 11, "darkgrey"],
-
-        [19, 4, "darkgrey"],
-
-        [12, 10, "darkgrey"],
-
-        [4, 0, "green"],
-        
-
-        [0, 9, "green"],
-        [1, 9, "green"],
-
-        [9, 0, "green"],
-
-        [12, 7, "green"],
-        [13, 7, "green"],
-        [14, 7, "green"],
-        [15, 7, "green"],
-
-        [11,0, "blue"],
-        [11,1, "blue"],
-        [11,2, "blue"],
-        [11,3, "blue"],
-
-        [7, 9 , "red"],
-        [7, 10, "red"],
-        [7, 11, "red"],
-
-        [2, 9, "yellow"],
-        [3, 9, "yellow"],
-        [4, 9, "yellow"],
-        [5, 9, "yellow"],
-        [6, 9, "yellow"],
-
-        [3, 2, "darkgrey"],
-        [4, 2, "darkgrey"],
-        [5, 2, "darkgrey"],
-
-        [5, 3, "darkgrey"],
-        [5, 4, "darkgrey"],
-        [5, 5, "darkgrey"],
-
-        [7, 8, "darkgrey"],
-
-        [1, 3, "blue"],
-        [1, 4, "blue"],
-        [1, 5, "blue"],
-        [1, 6, "blue"],
-
-        [2, 6, "blue"],
-        [3, 6, "blue"],
-
-        [16, 9, "yellow", true],
-        [6, 5, "blue", true],
-        [8, 11, "green", true],
-        [8, 0, "red", true]
+  "size": [
+    20,
+    12
+  ],
+  "high_score": 0,
+  "initial_positions": [
+    [
+      3,
+      4
     ]
-
+  ],
+  "final_positions": [
+    [
+      0,
+      11
+    ]
+  ],
+  "initial_colors": [
+    "red"
+  ],
+  "obstacles": [
+    [
+      16,
+      10,
+      "darkgrey"
+    ],
+    [
+      16,
+      11,
+      "darkgrey"
+    ],
+    [
+      19,
+      4,
+      "darkgrey"
+    ],
+    [
+      12,
+      10,
+      "darkgrey"
+    ],
+    [
+      4,
+      0,
+      "green"
+    ],
+    [
+      0,
+      9,
+      "green"
+    ],
+    [
+      1,
+      9,
+      "green"
+    ],
+    [
+      9,
+      0,
+      "green"
+    ],
+    [
+      12,
+      7,
+      "green"
+    ],
+    [
+      13,
+      7,
+      "green"
+    ],
+    [
+      14,
+      7,
+      "green"
+    ],
+    [
+      15,
+      7,
+      "green"
+    ],
+    [
+      11,
+      0,
+      "blue"
+    ],
+    [
+      11,
+      1,
+      "blue"
+    ],
+    [
+      11,
+      2,
+      "blue"
+    ],
+    [
+      11,
+      3,
+      "blue"
+    ],
+    [
+      7,
+      9,
+      "red"
+    ],
+    [
+      7,
+      10,
+      "red"
+    ],
+    [
+      7,
+      11,
+      "red"
+    ],
+    [
+      2,
+      9,
+      "yellow"
+    ],
+    [
+      3,
+      9,
+      "yellow"
+    ],
+    [
+      4,
+      9,
+      "yellow"
+    ],
+    [
+      5,
+      9,
+      "yellow"
+    ],
+    [
+      6,
+      9,
+      "yellow"
+    ],
+    [
+      3,
+      2,
+      "darkgrey"
+    ],
+    [
+      4,
+      2,
+      "darkgrey"
+    ],
+    [
+      5,
+      2,
+      "darkgrey"
+    ],
+    [
+      5,
+      3,
+      "darkgrey"
+    ],
+    [
+      5,
+      4,
+      "darkgrey"
+    ],
+    [
+      5,
+      5,
+      "darkgrey"
+    ],
+    [
+      7,
+      8,
+      "darkgrey"
+    ],
+    [
+      1,
+      3,
+      "blue"
+    ],
+    [
+      1,
+      4,
+      "blue"
+    ],
+    [
+      1,
+      5,
+      "blue"
+    ],
+    [
+      1,
+      6,
+      "blue"
+    ],
+    [
+      2,
+      6,
+      "blue"
+    ],
+    [
+      3,
+      6,
+      "blue"
+    ],
+    [
+      16,
+      9,
+      "yellow",
+      true
+    ],
+    [
+      6,
+      5,
+      "blue",
+      true
+    ],
+    [
+      8,
+      11,
+      "green",
+      true
+    ],
+    [
+      8,
+      0,
+      "red",
+      true
+    ]
+  ]
 }

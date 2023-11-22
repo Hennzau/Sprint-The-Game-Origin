@@ -1,7 +1,7 @@
 import numpy as np
 import pygame
 
-from level.obstacle import pixel_size
+from level.obstacle import pixel_size, colors
 
 
 def draw_player(player, surface):
@@ -40,3 +40,13 @@ def draw_player(player, surface):
     pygame.draw.rect(surface, player.color,
                      pygame.Rect(player.render_position[0] + pixel_size / 10,
                                  player.render_position[1] + pixel_size / 10, pixel_size * 8 / 10, pixel_size * 8 / 10))
+
+    pygame.draw.rect(surface, (player.color[0] / 2, player.color[1] / 2, player.color[2] / 2),
+                     pygame.Rect(player.render_position[0] + pixel_size / 2 - pixel_size / 8 - pixel_size / 20,
+                                 player.render_position[1] + pixel_size / 2 - pixel_size / 8 - pixel_size / 20,
+                                 pixel_size / 4 + pixel_size / 10, pixel_size / 4 + pixel_size / 10))
+
+    pygame.draw.rect(surface, player.initial_color,
+                     pygame.Rect(player.render_position[0] + pixel_size / 2 - pixel_size / 8,
+                                 player.render_position[1] + pixel_size / 2 - pixel_size / 8,
+                                 pixel_size / 4, pixel_size / 4))

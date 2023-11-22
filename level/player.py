@@ -30,6 +30,7 @@ class Player:
         y_init (int): the initial y position of the player on the surface (in 0...grid.size[1] * pixel_size)
         """
         self.color = color
+        self.initial_color = color
 
         self.position = np.array([x_init, y_init])
         self.render_position = np.array([x_init, y_init])

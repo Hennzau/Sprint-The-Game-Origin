@@ -1,5 +1,5 @@
 # Imports
-
+import json
 import os
 import pygame
 
@@ -30,6 +30,8 @@ class Game:
 
         self.levels = []
         self.levels_render = []
+        self.levels_names = []
+
         self.cursor = None
         self.last_level = None  # cursor that points on the last played level
         self.stage = "Main Menu"
@@ -50,6 +52,7 @@ class Game:
 
         self.time_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 50)
         self.font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
+        self.score_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 20)
 
         self.play_again_button = self.font.render("Hold R to Reload", True, colors["ivory"])
         self.return_to_menu = self.font.render("Hold E to go back", True, colors["ivory"])
@@ -69,6 +72,7 @@ class Game:
         """
         self.levels = []
         self.levels_render = []
+        self.levels_names = []
 
         # build levels from JSON format, first the levels of the game and next the customs levels
 
@@ -83,6 +87,7 @@ class Game:
 
                 self.levels.append(build_level(path))
                 self.levels_render.append(LevelRender(self.levels[-1]))
+                self.levels_names.append(path)
 
         n = len(os.listdir("assets/levels/customs"))
         for i in range(1, n + 1):
@@ -94,6 +99,7 @@ class Game:
 
                 self.levels.append(build_level(path))
                 self.levels_render.append(LevelRender(self.levels[-1]))
+                self.levels_names.append(path)
 
     def load_interface(self):
         """
@@ -180,9 +186,23 @@ class Game:
                 self.is_open = False
             # when there is a victory event, reload the current level and go to end menu
             if event.type == victory_event.type:
-                self.levels[self.cursor].reload_level()
+                print(self.levels[self.cursor].high_score)
+                print(self.levels[self.cursor].score)
+
+                if self.levels[self.cursor].high_score < self.levels[self.cursor].score:
+                    self.levels[self.cursor].high_score = self.levels[self.cursor].score
+
+                    with open(self.levels_names[self.cursor], "r") as jsonFile:
+                        data = json.load(jsonFile)
+
+                    data["high_score"] = int(self.levels[self.cursor].score)
+
+                    with open(self.levels_names[self.cursor], "w") as jsonFile:
+                        json.dump(data, jsonFile)
 
                 self.last_level = self.cursor
+                self.levels[self.cursor].reload_level()
+
                 self.cursor = None
                 self.stage = "End Menu"
 
@@ -313,6 +333,24 @@ class Game:
             self.surface.py_surface.blit(hit_counter, (
                 (2 * x + 150) / 2 - hit_counter.get_width() / 2, (2 * y + 100) / 2 - hit_counter.get_height() / 2))
 
+            # print the score and high score
+
+            high_score = self.score_font.render("High score: " + str(self.levels[self.cursor].high_score), True,
+                                                colors["ivory"])
+
+            your_score = self.score_font.render("Your score: " + str(self.levels[self.cursor].score), True,
+                                                colors["ivory"])
+
+            y_bis = ((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 20 + \
+                    self.levels[self.cursor].grid.size[1] * pixel_size
+
+            self.surface.py_surface.blit(high_score, (self.surface.width / 2 - self.play_again_button.get_width() / 2
+                                                      - self.play_again_button.get_width(),
+                                                      (720 + y_bis) / 2))
+
+            self.surface.py_surface.blit(your_score, (self.surface.width / 2 - self.play_again_button.get_width() / 2
+                                                      + self.play_again_button.get_width() + your_score.get_width() / 2,
+                                                      (720 + y_bis) / 2))
             # when the user wants to reload the current level or go to the main menu, draw the text with color progress
 
             if self.levels[self.cursor].ask_for_reload:
