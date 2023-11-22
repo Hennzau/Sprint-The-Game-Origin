@@ -84,9 +84,9 @@ class Game:
                 self.levels.append(build_level(path))
                 self.levels_render.append(LevelRender(self.levels[-1]))
 
-        n = len(os.listdir("assets/levels/custom"))
+        n = len(os.listdir("assets/levels/customs"))
         for i in range(1, n + 1):
-            path = "assets/levels/custom/level_" + str(i) + ".json"
+            path = "assets/levels/customs/level_" + str(i) + ".json"
             if os.path.isfile(path):
                 # there are two different classes : a Logical object 'Level' that represents the level,
                 # and a Rendering object 'LevelRender' that manages the rendering of the level
