@@ -35,6 +35,7 @@ def draw_end_menu(surface, game):
     # fonts
     font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 60)
     font_buttons = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
+    score_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 20)
 
     # title
     title = font.render('VICTORY', True, colors["ivory"])
@@ -94,6 +95,11 @@ def draw_end_menu(surface, game):
 
     draw_empty_box(surface.py_surface, x_rect3, y_rect3, button_width, button_height)
     surface.py_surface.blit(next_level, (x_button3, y_button3))
+
+    # Score
+
+    your_score = score_font.render("Your score: " + str(game.levels[game.last_level].score), True, colors["ivory"])
+    surface.py_surface.blit(your_score, (x_button3, y_button3 - 160))
 
     if pygame.Rect(x_rect1, y_rect1, button_width, button_height).collidepoint(pygame.mouse.get_pos()):
         draw_covered_box(surface.py_surface, x_rect1, y_rect1, button_width, button_height)
