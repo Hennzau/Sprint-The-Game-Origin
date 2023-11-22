@@ -116,7 +116,13 @@ class Game:
             pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
             pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 142, 92))
             pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
-            
+
+            # print the current level
+            current_level = "Level " + str(self.cursor + 1)
+            level = self.font.render(current_level, True, colors["ivory"])
+            self.image.blit(level, (
+                self.surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
+
             # create the box of the hit_counter, at the left of the level frame
 
             x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 100
@@ -126,12 +132,6 @@ class Game:
             pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 196, 96))
             pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 192, 92))
             pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 190, 90))
-
-            # print the current level
-            current_level = "Level " + str(self.cursor + 1)
-            level = self.font.render(current_level, True, colors["ivory"])
-            self.image.blit(level, (
-                self.surface.width / 2 - level.get_width() / 2, y / 2 - level.get_height() / 2))
 
             # create the two options in the level : Reload the level and return to main menu
 
@@ -262,8 +262,6 @@ class Game:
 
             x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
             y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) + 150
-            y_bis = ((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) + 130 + \
-                    self.levels[self.cursor].grid.size[1] * pixel_size
 
             hit = self.levels[self.cursor].hit
 
