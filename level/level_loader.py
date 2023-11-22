@@ -25,6 +25,7 @@ def build_level(level_json):
     initial_positions_table = data["initial_positions"]
     final_positions_table = data["final_positions"]
     initial_colors = data["initial_colors"]
+    high_score = int(data["high_score"])
 
     # creation of the lists of tuples for initial and final positions
     initial_positions_tuple = [(initial_positions_table[i][0], initial_positions_table[i][1]) for i in
@@ -33,7 +34,7 @@ def build_level(level_json):
                              range(len(final_positions_table))]
 
     # creation of the level
-    level = Level(size, initial_positions_tuple, initial_colors, final_positions_tuple)
+    level = Level(size, initial_positions_tuple, initial_colors, final_positions_tuple, high_score)
 
     # creation of the obstacles
     for obstacle in data["obstacles"]:

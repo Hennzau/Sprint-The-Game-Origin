@@ -24,7 +24,7 @@ class Level:
     # Those parameters define the size of the grid that belongs to this level and also all the parameters for the
     # players (the count, their colors at the beginning, their initial positions and event the final position they
     # have to go to)
-    def __init__(self, size, initial_positions, initial_colors, final_positions):
+    def __init__(self, size, initial_positions, initial_colors, final_positions, high_score):
         """
         The Level __init__ function will generate a new complete Level giving a certain player condition and a size
 
@@ -38,6 +38,8 @@ class Level:
 
         final_positions (list[(int,int),...]):  a python list containing tuples that represents the position of
                                                 the player IN THE GRID (in 0...size[0] and 0...size[1])
+
+        high_score (int): the current highest score registered for this level
         """
 
         self.grid = Grid(size)
@@ -46,6 +48,9 @@ class Level:
         self.final_positions = final_positions
         self.initial_positions = initial_positions
         self.initial_colors = initial_colors
+        self.high_score = high_score
+        self.score = 0
+
         self.finished = False  # it's an indicator of the state of the level
 
         self.ask_for_reload = False
@@ -236,6 +241,10 @@ class Level:
             self.reload_timer = 0
             self.time = 0
             self.hit = 0
+
+        # we update the score of the user
+
+        self.score = int((600 - int(self.time)) * (100 - self.hit))
 
         # at the end we update the particle system : it manages the position of all particles and their lifetime
         self.particle_system.update(delta_time)
