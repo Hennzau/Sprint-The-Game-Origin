@@ -19,10 +19,19 @@ class Game:
     """
 
     def __init__(self, surface):
+        '''
+        The __init__ method initializes all the variables that are needed by the game object. 
+      
+        is_open is True while the player has not quit
+
+        Parameters : 
+        surface (Surface) : the surface on which the game is drawn
+
+        '''
         self.levels = []
         self.levels_render = []
         self.cursor = None
-        self.last_level = None
+        self.last_level = None #cursor that points on the last played level
         self.stage = "Main Menu"
         self.is_open = True
         self.surface = surface
@@ -47,12 +56,17 @@ class Game:
 
         self.image = None
 
-        # the load interface generate the mask image of the statis interface : it helps not calculate again and again
+        # the load interface generates the mask image of the static interface : it helps to not calculate again and again
         # the image to render
 
         self.load_interface()
 
     def load_levels(self):
+        '''
+        The load_levels method pulls the levels in json format and builds them in the Level format.
+        The levels are stored in self.levels. Their associated LevelRenders are stored in self.levels_render. 
+        
+        '''
         self.levels = []
         self.levels_render = []
 
@@ -69,6 +83,11 @@ class Game:
                 self.levels_render.append(LevelRender(self.levels[-1]))
 
     def load_interface(self):
+        '''
+        The load_interface creates all the images that are static : the buttons, the name of the current level...
+
+        '''
+
         self.image = pygame.Surface((self.surface.width, self.surface.height))
 
         if self.cursor is not None:
@@ -122,7 +141,16 @@ class Game:
                 self.surface.width / 2 - self.play_again_button.get_width() / 2,
                 (720 + y_bis) / 2 - self.play_again_button.get_height() / 2 + self.return_to_menu.get_height()))
 
-    def update(self, delta_time):  # the update function manages everything
+    def update(self, delta_time): 
+        '''
+        The update method manages everything that is not static: key management, players, timer...
+        It is called 60 or 120 times each second.
+
+        Parameters :
+        delta_time (float): time between 2 executions of the loop
+        '''
+
+
         for event in events():
             if event.type == pygame.QUIT:
                 self.is_open = False
@@ -194,6 +222,12 @@ class Game:
                 self.main_menu_timer = 0
 
     def render(self):
+        '''
+        The render method creates the pygame images of the game 
+        (those that were not considered static and created by load_interface)
+        '''
+
+
         if self.cursor is not None:
             # print the level on a surface (black surface)
 
