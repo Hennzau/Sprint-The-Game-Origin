@@ -301,7 +301,7 @@ class Game:
             x = self.levels[self.cursor].grid.size[0] * pixel_size + (self.surface.width -
                                                                       self.levels[self.cursor].grid.size[
                                                                           0] * pixel_size) / 2 + (
-                        self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8
+                        self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8 
             y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
             hit = int(self.levels[self.cursor].hit)

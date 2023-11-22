@@ -50,20 +50,29 @@ def draw_main_menu(surface, menu, game):
     surface.py_surface.blit(start_button, (width / 2 - start_button.get_width() /
                                            2, height / 2 + start_button.get_height() / 2 - 175))
 
+    # Draw buttons to switch row of levels
+    
+    
     # Draw the levels button, up to 5 per line and 2 lines
 
-    n = len(game.levels)
-    if n % 2 == 1:
-        p = int(n / 2) + 1
+    m = len(game.levels) // 10
+
+    if menu.level_cursor < m:
+        n = 10
+        p = 5
     else:
-        p = int(n / 2)
+        n = len(game.levels[menu.level_cursor * 10:])
+        if n % 2 == 1:
+            p = int(n / 2) + 1
+        else:
+            p = int(n / 2)
 
     sound = True  # Check if we have to play the sound when we're over a button
 
     # Draw the first line
 
     for i in range(p):
-        level = f"Level " + str(i + 1)
+        level = f"Level " + str(i + 1 + menu.level_cursor * 10)
         levels_button = font_levels.render(level, True, colors["ivory"])
         k = width / 2 - 131 / 2 + (- p + 2 * i) * 131 + 131
 
@@ -85,7 +94,7 @@ def draw_main_menu(surface, menu, game):
             # We check is the button is pressed and switch to the according game.stage 
 
             if pygame.mouse.get_pressed()[0]:
-                menu.level_selected = i
+                menu.level_selected = i + menu.level_cursor * 10
                 menu.start_game = True
                 menu.launch_game(game)
                 sound_game_launched()
@@ -94,7 +103,7 @@ def draw_main_menu(surface, menu, game):
 
     if (n - p) > 0:
         for i in range(n - p):
-            level = f"Level " + str(i + p + 1)
+            level = f"Level " + str(i + p + 1 + menu.level_cursor * 10)
             levels_button = font_levels.render(level, True, colors["ivory"])
             k = width / 2 - 131 / 2 + (-(n - p) + 2 * i) * 131 + 131
             draw_empty_box(surface.py_surface, k - 26, height / 2 - (levels_button.get_height() / 2 - 225) - 26,
@@ -111,7 +120,7 @@ def draw_main_menu(surface, menu, game):
                 sound = False
 
                 if pygame.mouse.get_pressed()[0]:
-                    menu.level_selected = i + p
+                    menu.level_selected = i + p + menu.level_cursor * 10
                     menu.start_game = True
                     menu.launch_game(game)
                     sound_game_launched()
