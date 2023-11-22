@@ -50,9 +50,6 @@ class Level:
 
         self.ask_for_reload = False
         self.reload_timer = 0
-        self.ask_for_pause = False
-        self.pause_timer = 0
-        
         self.time = 0  # a level can have the concept of time : it helps to make dynamic things
 
         self.victory_delay = 0.5
@@ -126,12 +123,6 @@ class Level:
             self.particle_system.add(particles)
 
         self.finished = False
-    
-    def pause_level(self):
-        """
-        the 'pause_level' function stop the level's timer and stock the game (players position, timer, etc.)
-        """
-        
 
     def update(self, delta_time):
         """
@@ -231,12 +222,6 @@ class Level:
             self.reload_timer += delta_time
         else:
             self.reload_timer = 0
-        
-        #if the user ask for pause, increment the progress bar
-        if self.ask_for_pause:
-            self.pause_timer += delta_time
-        else :
-            self.pause_timer = 0
 
         # finally reload the level
         if self.reload_timer >= 1:
@@ -244,16 +229,6 @@ class Level:
             self.ask_for_reload = False
             self.reload_timer = 0
             self.time = 0
-        
-        # finally pause the level
-        if self.pause_timer >= 1:
-            self.pause_level()
-            self.ask_for_pause = False
-            self.pause_timer = 0
-            self.time = 0
 
         # at the end we update the particle system : it manages the position of all particles and their lifetime
         self.particle_system.update(delta_time)
-
-        
-        
