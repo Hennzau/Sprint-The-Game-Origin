@@ -19,7 +19,7 @@ def events():
 
 class Surface:
     """
-    It's easier to manipulate a custom Surface object instead of a raw py_surface object
+    It's easier to manipulate a customs Surface object instead of a raw py_surface object
     """
 
     def __init__(self, width, height, title):

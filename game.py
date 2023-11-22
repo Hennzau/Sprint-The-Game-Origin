@@ -70,7 +70,7 @@ class Game:
         self.levels = []
         self.levels_render = []
 
-        # build levels from JSON format, first the levels of the game and next the custom levels
+        # build levels from JSON format, first the levels of the game and next the customs levels
 
         n = len(os.listdir("assets/levels/"))
 
@@ -205,21 +205,25 @@ class Game:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_left(self.levels[self.cursor].grid)
+                                    self.levels[self.cursor].hit += 1 / len(self.levels[self.cursor].players)
                         if event.key == pygame.K_RIGHT:
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_right(self.levels[self.cursor].grid)
+                                    self.levels[self.cursor].hit += 1 / len(self.levels[self.cursor].players)
                         if event.key == pygame.K_UP:
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_up(self.levels[self.cursor].grid)
+                                    self.levels[self.cursor].hit += 1 / len(self.levels[self.cursor].players)
                         if event.key == pygame.K_DOWN:
                             for player in (self.levels[self.cursor]).players:
                                 if not is_moving:
                                     sound_swipe()
                                     player.move_down(self.levels[self.cursor].grid)
+                                    self.levels[self.cursor].hit += 1 / len(self.levels[self.cursor].players)
 
             if event.type == pygame.KEYUP:
                 if self.cursor is not None:
@@ -300,7 +304,7 @@ class Game:
                         self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8
             y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
-            hit = self.levels[self.cursor].hit
+            hit = int(self.levels[self.cursor].hit)
 
             hit_counter_string = str(hit)
 
