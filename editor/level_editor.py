@@ -28,7 +28,7 @@ class LevelEditor:
         """
 
         self.size = size
-        self.level = Level(size, [], [], [])
+        self.level = Level(size, [], [], [], 0)
         self.edit = edit
 
         if edit is not None:
@@ -106,7 +106,8 @@ class LevelEditor:
 
         level_json = {
             "size": [self.size[0], self.size[1]],  # size
-            "initial_positions": []
+            "initial_positions": [],
+            "high_score": self.level.high_score
         }
 
         # initial positions
