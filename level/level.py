@@ -52,8 +52,8 @@ class Level:
         self.reload_timer = 0
         self.time = 0  # a level can have the concept of time : it helps to make dynamic things
 
-        self.hit = 0 
-        
+        self.hit = 0
+
         self.victory_delay = 0.5
         self.victory_timer = 0
 
@@ -103,7 +103,7 @@ class Level:
         self.victory_timer = 0
         self.time = 0
         self.hit = 0
-        
+
         for k in range(
                 len(self.initial_positions)):
 
@@ -181,8 +181,6 @@ class Level:
                 self.particle_system.add(particles)
                 self.hit += 1
 
-            
-
             # check if all players are at their final positions at the same time
 
             if int(player.position[0] / pixel_size) != self.final_positions[i][0] or int(
@@ -197,9 +195,9 @@ class Level:
 
             self.light_system.lights["player" + str(i)].change_color(
                 player.color)  # this will regenerate the lighting mask when the previous color is different
-        
-        self.hit = int(self.hit/len(self.players))
-        
+
+        self.hit = int (int(self.hit) / len(self.players))
+
         if finished:  # if yes, trigger an event to tell the game to stop the current level after a certain delay
             if self.victory_timer > self.victory_delay:
                 pygame.event.post(victory_event)

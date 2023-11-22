@@ -143,13 +143,16 @@ class Game:
 
             # create the box of the hit_counter, at the left of the level frame
 
-            x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 100
-            y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) + 150
+            x = self.levels[self.cursor].grid.size[0] * pixel_size + (self.surface.width -
+                                                                      self.levels[self.cursor].grid.size[
+                                                                          0] * pixel_size) / 2 + (
+                        self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8
+            y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
-            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x, y, 200, 100))
-            pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 196, 96))
-            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 192, 92))
-            pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 190, 90))
+            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x, y, 150, 100))
+            pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
+            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 142, 92))
+            pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
 
             # create the two options in the level : Reload the level and return to main menu
 
@@ -291,12 +294,15 @@ class Game:
 
             # print the hit_counter
 
-            x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
-            y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) + 150
+            x = self.levels[self.cursor].grid.size[0] * pixel_size + (self.surface.width -
+                                                                      self.levels[self.cursor].grid.size[
+                                                                          0] * pixel_size) / 2 + (
+                        self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8
+            y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
             hit = self.levels[self.cursor].hit
 
-            hit_counter_string = "hit:" + str(hit)
+            hit_counter_string = str(hit)
 
             hit_counter = self.time_font.render(hit_counter_string, True, colors["ivory"])
 
