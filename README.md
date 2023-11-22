@@ -1,43 +1,39 @@
 # CodingWeeks2-jeeth (Juliette, Emmanuel, Enzo, Thomas, Henrik)
 
-Pour cette deuxième semaine, nous avons voulu créer un jeu type puzzle, basé sur deux jeux que nous aimions beaucoup.
+For this second week, we wanted to create a puzzle-type game, based on two games that we really enjoy.
 
-Le but est simple, il est constitué d'une grille, et de un ou plusieurs personnages controlés simultanéments par
-l'utilisateur.
+The goal is simple: it consists of a grid and one or more characters controlled simultaneously by the user.
 
-Un personnage c'est :
+A character is:
 
-- représenté par un carré qui se déplace dans la grille
-- d'une couleur qui peut changer pendant le jeu
+-represented by a square that moves within the grid
+-of a color that can change during the game
 
-La grille contient :
+The grid contains:
 
-- un ensemble de murs de différentes couleurs
-- un point de départ pour chaque personnage
-- un point d'arrivé attribué à chaque personnage
-- des 'color switcher' qui permettent de changer la couleur du joueur lorsque ce dernier passe dessus
+-a set of walls of different colors
+-a starting point for each character
+-a destination point assigned to each character
+-'color switchers' that allow changing the player's color when the player passes over them
 
-L'objectif de l'utilisateur est de positionner tous les personnages sur leur point d'arrivé, sachant qu'un personnage
-traverse les murs de sa couleur.
+The user's objective is to position all the characters on their destination point, knowing that a character can move through walls of its color.
 
-Ceci est le MVP réalisé dans le cadre des coding weeks de CentraleSupélec :
+This is the MVP achieved as part of the coding weeks at CentraleSupélec.
+
 
 ![](./illustrations/1.png)
 
 ## Getting started
 
-Vous voulez tester ce MVP ? Voici ce qu'il faut faire :
+Would you like to test this MVP? Here's what you need to do:
 
-- Cloner cette branch de notre repository sur votre ordinateur:
+-Clone this branch from our repository to your computer:
 
 ```
 git clone -b MVP-demo https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth.git
 ```
 
-- Le jeu a été développé sous Python 3.11.5, mais il doit être compatible avec toute version de python >3.11 sur MacOS
-  et
-  Window. Assurez vous donc d'avoir une telle version avec la commande qui suit. Si ce n'est pas le cas vous pouvez
-  télécharger et mettre à jour votre python au lien suivant:
+-The game has been developed under Python 3.11.5, but it should be compatible with any version of Python >3.11 on both MacOS and Windows. Therefore, make sure you have such a version with the following command. If not, you can download and update your Python using the following link:
 
 ```
 python --version
@@ -46,10 +42,7 @@ python --version
 
 https://www.python.org/downloads/release/python-3115/
 
-- Il faut ensuite installer les bibliothèques utilisées dans ce projet, elles sont au nombre de deux, indiquées dans le
-  fichier 'requirements.txt'. Néanmoins pour ne pas compromettre votre installation globale de python, nous vous
-  proposons de travailler avec un environnement virtuel. C'est à dire un second python et un second pip directement
-  intégrés dans le projet. Ouvrez alors un terminal dans le dossier cloné:
+- Next, you need to install the libraries used in this project, which are two in number and specified in the 'requirements.txt' file. However, to avoid compromising your global Python installation, we suggest working with a virtual environment. This means having a separate Python and pip integrated directly into the project. Open a terminal in the cloned folder:
 
 ```
 python -m venv venv
@@ -57,47 +50,42 @@ python -m venv venv
 .\venv\Scripts\pip install -r requirements.txt (sur windows)
 ```
 
-- Vous pouvez alors lancer le jeu en faisant :
+-You can then launch the game by executing:
 
 ```
 .\venv\Scripts\python main.py (sur python)
 ```
 
-- Une fenêtre Pygame noire s'ouvre alors, et le terminal vous demande de sélectionner le numéro du niveau auquel vous
-  voulez jouer, pour le moment il n'y a rien d'autre que le niveau '0'. Rentre donc '0'
+-A black Pygame window will then open, and the terminal will prompt you to select the level number you want to play. For now, there's only the '0' level, so enter '0'.
 
 ![](./illustrations/0.png)
 
-- Vous pouvez alors vous déplacer avec les touches LEFT,RIGHT,UP,DOWN du clavier, sachant que vous êtes le petit carré
-  rouge en haut à gauche de l'écran, et que votre but est d'atteindre le point en bas à droite de la grille en vous
-  déplaçant.
+-You can then move using the LEFT, RIGHT, UP, DOWN keys on the keyboard. You control the small red square in the top-left corner of the screen, and your goal is to reach the point at the bottom-right of the grid by moving.
 
 ![](./illustrations/2.png)
 
-- Il y'a deux colors switcher dans ce niveau qui sont ici :
+-There are two color switchers in this level, shown here:
 
 ![](./illustrations/5.png)
 
-- à votre victoire il vous sera demandé de répondre dans le terminal:
+-Upon your victory, you will be asked to respond in the terminal:
 
 ![](./illustrations/4.png)
 
-## Points d'attention
+## Note to the user
 
-Nous tenons à vous signaler que si vous avez suivis les étapes de l'installation, vous vous retrouvez avec un
-environnement python dans votre dossier, avec seulement les bibliothèques numpy et pygame. Le dossier peut alors être
-lourd.
+We would like to inform you that if you have followed the installation steps, you now have a Python environment in your folder with only the numpy and pygame libraries. The folder can be heavy.
 
-Ceci est un MVP, dont voici les points d'améliorations pour le produit final:
+This is an MVP, and here are the points for improvement for the final product:
 
-- Le personnage n'est pas reconnaissable
-- Le personnage est trop lent
-- Les color switchers ne sont pas reconnaissable
-- le point de départ n'est pas marqué dans la grille, et même si ce n'est pas vital il faut marquer le point d'arrivé
-- la grille n'est pas centrée dans la fenêtre
-- il faudrait une interface graphique pour sélectionner un niveau ou retenter le niveau, pas dans un terminal
-- le jeu est trop 'static' : rien ne bouge et il n'y a pas d'effet particulier
+-The character is not easily recognizable.
+-The character is too slow.
+-The color switchers are not easily recognizable.
+-The starting point is not marked on the grid, and while it's not vital, marking the destination point is necessary.
+-The grid is not centered in the window.
+-An graphical interface is needed to select a level or retry the level, not in a terminal.
+-The game is too static: nothing moves, and there are no special effects.
 
-Tous ces points d'améliorations ont été traités, vous pouvez le retrouver dans la branch principale :
+All these points of improvement have been addressed, and you can find them in the main branch:
 
 https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth
