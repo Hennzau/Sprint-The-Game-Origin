@@ -102,10 +102,12 @@ def draw_level_editor(level_editor, surface, game):
                     level_editor.level.grid.obstacles[i, j].start):
                 level_editor.new_tile((i, j))
 
-        if pygame.mouse.get_pressed()[2] and not level_editor.select_add_player:
+        if pygame.mouse.get_pressed()[2] and not level_editor.select_add_player :
             i = int(pygame.mouse.get_pos()[0] / pixel_size)
             j = int(pygame.mouse.get_pos()[1] / pixel_size)
-            level_editor.erase_tile((i, j))
+            if not level_editor.level.grid.obstacles[
+                i, j].end and not level_editor.level.grid.obstacles[i, j].start:
+                level_editor.erase_tile((i, j))
 
     # type choice
     font_buttons = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
