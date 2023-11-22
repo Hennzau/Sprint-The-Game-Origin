@@ -49,8 +49,8 @@ class Game:
         # load fonts and base model image of the game interface (things that do not change)
 
         self.time_font = pygame.font.Font("assets/fonts/MotomangucodeBold-3zde3.ttf", 50)
-
         self.font = pygame.font.Font("assets/fonts/BulletTrace7-rppO.ttf", 30)
+
         self.play_again_button = self.font.render("Hold R to Reload", True, colors["ivory"])
         self.return_to_menu = self.font.render("Hold E to go back", True, colors["ivory"])
 
