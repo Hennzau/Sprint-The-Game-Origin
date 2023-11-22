@@ -29,6 +29,7 @@ class LevelEditor:
 
         self.size = size
         self.level = Level(size, [], [], [])
+        self.edit = edit
 
         if edit is not None:
             self.level = build_level(edit)
@@ -138,16 +139,19 @@ class LevelEditor:
         level_in_json = json.dumps(level_json, indent=4)
 
         # Writing to JSON file
-        
-        n = None
-        for i in range(1, len(os.listdir("assets/levels/custom")) + 2):
-            path = "assets/levels/custom/level_" + str(i) + ".json"
-            if not os.path.isfile(path):
-                n = i
-                break
+        if self.edit is None:
+            n = None
+            for i in range(1, len(os.listdir("assets/levels/custom")) + 2):
+                path = "assets/levels/custom/level_" + str(i) + ".json"
+                if not os.path.isfile(path):
+                    n = i
+                    break
 
-        if n is not None:
-            path = "assets/levels/custom/level_" + str(n) + ".json"
+            if n is not None:
+                path = "assets/levels/custom/level_" + str(n) + ".json"
 
-            with open(path, "w") as outfile:
+                with open(path, "w") as outfile:
+                    outfile.write(level_in_json)
+        else:
+            with open(self.edit, "w") as outfile:
                 outfile.write(level_in_json)

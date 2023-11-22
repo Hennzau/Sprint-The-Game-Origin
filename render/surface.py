@@ -32,6 +32,9 @@ class Surface:
         title (str): the title of the window
         """
 
+        icon = pygame.image.load('assets/images/Sprint_Icon.png')
+        pygame.display.set_icon(icon)
+
         pygame.init()
         pygame.font.init()
 

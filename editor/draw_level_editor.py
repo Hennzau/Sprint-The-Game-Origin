@@ -172,7 +172,7 @@ def draw_level_editor(level_editor, surface, game):
     add_player_button = font_buttons.render("Add player", True, colors["ivory"])
     add_player_width = add_player_button.get_width()
     add_player_height = add_player_button.get_height()
-    x_rect3 = 100
+    x_rect3 = 50
     y_rect3 = surface.height - 200
 
     draw_empty_box(surface.py_surface, x_rect3, y_rect3, add_player_width + 30, add_player_height + 30)
@@ -212,8 +212,8 @@ def draw_level_editor(level_editor, surface, game):
     delete_player_button = font_buttons.render("Delete player", True, colors["ivory"])
     delete_player_width = delete_player_button.get_width()
     delete_player_height = delete_player_button.get_height()
-    x_rect4 = 100
-    y_rect4 = surface.height - 100
+    x_rect4 = 50 + add_player_width + 50
+    y_rect4 = surface.height - 200
 
     draw_empty_box(surface.py_surface, x_rect4, y_rect4, delete_player_width + 30, delete_player_height + 30)
     surface.py_surface.blit(delete_player_button, (x_rect4 + 15, y_rect4 + 15))

@@ -18,14 +18,13 @@ from editor.level_editor import LevelEditor
 def main():
     # The main() function is the one we execute to play the game, it manages the different game stage
 
-    # First we inititalize the surface, the game icon, the window's name, the soundtrack and the different objects
+    # First we initialize the surface, the game icon, the window's name, the soundtrack and the different objects
 
-    icon = pygame.image.load('assets/images/Sprint_Icon.png')
-    pygame.display.set_icon(icon)
     surface = Surface(1280, 720, "Sprint The Game")
 
     game = Game(surface)
     level_editor = LevelEditor((20, 12))
+
     menu = MainMenu()
 
     clock = pygame.time.Clock()
