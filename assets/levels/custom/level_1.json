@@ -1,0 +1,33 @@
+{
+    "size":[15,10],
+    "initial_positions":[[0,0]],
+    "final_positions":[[14, 9]],
+    "initial_colors":["blue"],
+    "obstacles":[
+        [2, 3, "yellow", true],
+        [14, 0, "darkgrey"],
+
+        [8, 8, "yellow"],
+        [8, 9, "yellow"],
+
+        [4, 2, "darkgrey"],
+        [5, 2, "darkgrey"],
+        [6, 2, "darkgrey"],
+        [7, 2, "darkgrey"],
+
+        [10, 2, "blue"],
+        [10, 3, "blue"],
+        [10, 4, "blue"],
+
+        [8, 0, "blue"],
+        [8, 1, "blue"],
+        [8, 2, "blue"],
+
+        [4, 0, "blue", true],
+
+        [14, 6, "darkgrey"],
+        [13, 6, "darkgrey"],
+        [12, 6, "darkgrey"],
+        [11, 6, "darkgrey"]
+    ]
+}

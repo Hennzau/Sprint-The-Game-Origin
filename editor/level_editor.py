@@ -138,18 +138,16 @@ class LevelEditor:
         level_in_json = json.dumps(level_json, indent=4)
 
         # Writing to JSON file
-
+        
         n = None
-        for i in range(1, 11):
-            path = "assets/levels/level_" + str(i) + ".json"
+        for i in range(1, len(os.listdir("assets/levels/custom")) + 2):
+            path = "assets/levels/custom/level_" + str(i) + ".json"
             if not os.path.isfile(path):
                 n = i
                 break
 
         if n is not None:
-            path = "assets/levels/level_" + str(n) + ".json"
+            path = "assets/levels/custom/level_" + str(n) + ".json"
 
             with open(path, "w") as outfile:
                 outfile.write(level_in_json)
-        else:
-            print("assets/levels full! Max 10 levels are supported")

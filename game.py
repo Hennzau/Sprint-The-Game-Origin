@@ -56,10 +56,23 @@ class Game:
         self.levels = []
         self.levels_render = []
 
-        # build levels from JSON format (max 10 levels)
+        # build levels from JSON format, first the levels of the game and next the custom levels
 
-        for i in range(1, 11):
+        n = len(os.listdir("assets/levels/"))
+
+        for i in range(1, n + 1):
             path = "assets/levels/level_" + str(i) + ".json"
+            if os.path.isfile(path):
+                # there are two different classes : a Logical object 'Level' that represents the level,
+                # and a Rendering object 'LevelRender' that manages the rendering of the level
+                # (pre-calculated images etc...)
+
+                self.levels.append(build_level(path))
+                self.levels_render.append(LevelRender(self.levels[-1]))
+
+        n = len(os.listdir("assets/levels/custom"))
+        for i in range(1, n + 1):
+            path = "assets/levels/custom/level_" + str(i) + ".json"
             if os.path.isfile(path):
                 # there are two different classes : a Logical object 'Level' that represents the level,
                 # and a Rendering object 'LevelRender' that manages the rendering of the level
