@@ -82,4 +82,36 @@ La fonction **main** va alors créer tous les objets dont nous avons besoin : c'
 
 ## Les effets
 
-Comme vous pouvez le voir sur la démo du jeu, il y'a de nombreux effets présents dans Sprint The Game, que ce soit au niveau sonore ou au niveau visuel. Tout ceci est fait dans un package **effects** et un module **sound.py** 
+Comme vous pouvez le voir sur la démo du jeu, il y'a de nombreux effets présents dans Sprint The Game, que ce soit au niveau sonore ou au niveau visuel. Tout ceci est fait dans un package **effects** et un module **sound.py** qui permettent de manipuler un objet **LightSystem**, un objet **ParticleSystem** ainsi que des fonctions comme **sound_collision**. Ces différents éléments sont utilisés intelligemment dans les class **Level et Player**. 
+
+# Les tests unitaires
+
+La gestion des tests unitaires a concerné la grille et les déplacements du joueur dans la grille. Pour cela nous avons créé un module **tests.py** qui contient différentes fonctions de test avec des fonctions `assert` pour observer le bon comportement d'un joueur dans une grille 3x3, ou encore différentes fonctions pour être sur que l'ajout d'obstacles dans le niveau fonctionne
+
+# Lancer le jeu
+D'abord nous tenons à vous informer que le présent README concerne la version finale du jeu, si vous souhaitez voir et lancer le MVP associé à ce projet ainsi que les notes à l'utilisateur, merci de vous rendre dans la branch **MVP-demo** : [branch MVP-demo](https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth/-/tree/MVP-demo?ref_type=heads)
+
+Les instructions de lancement du jeu final sont similaire à celle du MVP :
+
+Here's what you need to do:
+- Clone this branch from our repository to your computer:
+```
+git clone https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth.git
+```
+- The game has been developed under Python 3.11.5, but it should be compatible with any version of Python >3.11 on both MacOS and Windows. Therefore, make sure you have such a version with the following command. If not, you can download and update your Python using the following link:
+```
+python --version
+```
+https://www.python.org/downloads/release/python-3115/
+- Next, you need to install the libraries used in this project, which are two in number and specified in the 'requirements.txt' file. However, to avoid compromising your global Python installation, we suggest working with a virtual environment. This means having a separate Python and pip integrated directly into the project. Open a terminal in the cloned folder:
+```
+python -m venv venv
+.\venv\Scripts\pip install -r requirements.txt
+```
+- You can then launch the game by executing:
+```
+.\venv\Scripts\python main.py
+```
+Tout est alors faisable directement dans l'interface graphique, plus besoin de switcher entre terminal et fenêtre du jeu.
+
+
