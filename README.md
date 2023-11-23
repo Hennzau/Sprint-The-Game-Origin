@@ -114,4 +114,4 @@ python -m venv venv
 ```
 Tout est alors faisable directement dans l'interface graphique, plus besoin de switcher entre terminal et fenêtre du jeu.
 
-
+# Répartition du travail
