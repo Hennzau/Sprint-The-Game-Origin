@@ -122,6 +122,10 @@ class Player:
                     i = j - x
                     continue
 
+                if grid.obstacles[j, y].color == active_color:
+                    i = j - x
+                    continue
+
                 # if it's a basic obstacle let's break the loop : the player can't go on this tile
                 if not grid.obstacles[j, y].color_switcher and not grid.obstacles[j, y].start and not grid.obstacles[
                     j, y].end and not (
@@ -165,6 +169,10 @@ class Player:
                     continue
 
                 if grid.obstacles[x, j].end:
+                    i = j - y
+                    continue
+
+                if grid.obstacles[x, j].color == active_color:
                     i = j - y
                     continue
 
@@ -340,8 +348,7 @@ class Player:
         # the player is on a color_switcher
 
         x, y = self.level_position()
-        
-        
+
         if grid.obstacles[x, y] is not None:
             if grid.obstacles[x, y].color_switcher:
                 self.color = grid.obstacles[x, y].color
@@ -351,4 +358,3 @@ class Player:
 
         else:
             self.played = False
-
