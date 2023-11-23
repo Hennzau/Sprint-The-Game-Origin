@@ -4,7 +4,7 @@
 import numpy as np
 from level.grid import Grid
 from level.obstacle import Obstacle, pixel_size
-from sound import sound_collision
+from sound import sound_collision, sound_color_switch
 
 from effects.particle_system import ParticleSystem
 from effects.point_particle import PointParticle
@@ -31,7 +31,7 @@ class Player:
         """
         self.color = color
         self.initial_color = color
-
+        self.played = False
         self.position = np.array([x_init, y_init])
         self.render_position = np.array([x_init, y_init])
 
@@ -340,7 +340,15 @@ class Player:
         # the player is on a color_switcher
 
         x, y = self.level_position()
-
+        
+        
         if grid.obstacles[x, y] is not None:
             if grid.obstacles[x, y].color_switcher:
                 self.color = grid.obstacles[x, y].color
+                if not self.played:
+                    sound_color_switch()
+                    self.played = True
+
+        else:
+            self.played = False
+
