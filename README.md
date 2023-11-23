@@ -12,7 +12,7 @@ The ambition of the project led us to envision an interesting and adaptable stru
 ```markdown
 ├── assets
 | 	├── fonts 	# contains fonts downloaded on internet
-│   ├── sounds 	# contains sounds created by Emmanuel
+|   ├── sounds 	# contains sounds created by Emmanuel
 |	├── images 	# contains images created by Emmanuel
 |	├── levels	# contains JSON format of each level
 ├── level	# a package full of module
