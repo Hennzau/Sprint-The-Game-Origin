@@ -47,13 +47,13 @@ https://www.python.org/downloads/release/python-3115/
 ```
 python -m venv venv
 
-.\venv\Scripts\pip install -r requirements.txt (sur windows)
+.\venv\Scripts\pip install -r requirements.txt
 ```
 
 - You can then launch the game by executing:
 
 ```
-.\venv\Scripts\python main.py (sur python)
+.\venv\Scripts\python main.py
 ```
 
 - A black Pygame window will then open, and the terminal will prompt you to select the level number you want to play. For now, there's only the '0' level, so enter '0'.
