@@ -9,7 +9,7 @@
             0
         ]
     ],
-    "high_score": 21684,
+    "high_score": 28224,
     "final_positions": [
         [
             19,
@@ -530,7 +530,7 @@
         [
             13,
             9,
-            "darkgrey"
+            "yellow"
         ],
         [
             14,
@@ -659,6 +659,11 @@
         ],
         [
             17,
+            4,
+            "green"
+        ],
+        [
+            17,
             5,
             "darkgrey"
         ],
@@ -697,6 +702,12 @@
             18,
             3,
             "darkgrey"
+        ],
+        [
+            18,
+            5,
+            "yellow",
+            true
         ],
         [
             18,
