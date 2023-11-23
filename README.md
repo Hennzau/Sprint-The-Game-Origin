@@ -6,15 +6,15 @@ The goal is simple: it consists of a grid and one or more characters controlled 
 
 A character is:
 
--represented by a square that moves within the grid
--of a color that can change during the game
+- represented by a square that moves within the grid
+- of a color that can change during the game
 
 The grid contains:
 
--a set of walls of different colors
--a starting point for each character
--a destination point assigned to each character
--'color switchers' that allow changing the player's color when the player passes over them
+- a set of walls of different colors
+- a starting point for each character
+- a destination point assigned to each character
+- 'color switchers' that allow changing the player's color when the player passes over them
 
 The user's objective is to position all the characters on their destination point, knowing that a character can move through walls of its color.
 
@@ -27,13 +27,13 @@ This is the MVP achieved as part of the coding weeks at CentraleSupélec.
 
 Would you like to test this MVP? Here's what you need to do:
 
--Clone this branch from our repository to your computer:
+- Clone this branch from our repository to your computer:
 
 ```
 git clone -b MVP-demo https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth.git
 ```
 
--The game has been developed under Python 3.11.5, but it should be compatible with any version of Python >3.11 on both MacOS and Windows. Therefore, make sure you have such a version with the following command. If not, you can download and update your Python using the following link:
+- The game has been developed under Python 3.11.5, but it should be compatible with any version of Python >3.11 on both MacOS and Windows. Therefore, make sure you have such a version with the following command. If not, you can download and update your Python using the following link:
 
 ```
 python --version
@@ -50,25 +50,25 @@ python -m venv venv
 .\venv\Scripts\pip install -r requirements.txt (sur windows)
 ```
 
--You can then launch the game by executing:
+- You can then launch the game by executing:
 
 ```
 .\venv\Scripts\python main.py (sur python)
 ```
 
--A black Pygame window will then open, and the terminal will prompt you to select the level number you want to play. For now, there's only the '0' level, so enter '0'.
+- A black Pygame window will then open, and the terminal will prompt you to select the level number you want to play. For now, there's only the '0' level, so enter '0'.
 
 ![](./illustrations/0.png)
 
--You can then move using the LEFT, RIGHT, UP, DOWN keys on the keyboard. You control the small red square in the top-left corner of the screen, and your goal is to reach the point at the bottom-right of the grid by moving.
+- You can then move using the LEFT, RIGHT, UP, DOWN keys on the keyboard. You control the small red square in the top-left corner of the screen, and your goal is to reach the point at the bottom-right of the grid by moving.
 
 ![](./illustrations/2.png)
 
--There are two color switchers in this level, shown here:
+- There are two color switchers in this level, shown here:
 
 ![](./illustrations/5.png)
 
--Upon your victory, you will be asked to respond in the terminal:
+- Upon your victory, you will be asked to respond in the terminal:
 
 ![](./illustrations/4.png)
 
@@ -78,13 +78,13 @@ We would like to inform you that if you have followed the installation steps, yo
 
 This is an MVP, and here are the points for improvement for the final product:
 
--The character is not easily recognizable.
--The character is too slow.
--The color switchers are not easily recognizable.
--The starting point is not marked on the grid, and while it's not vital, marking the destination point is necessary.
--The grid is not centered in the window.
--An graphical interface is needed to select a level or retry the level, not in a terminal.
--The game is too static: nothing moves, and there are no special effects.
+- The character is not easily recognizable.
+- The character is too slow.
+- The color switchers are not easily recognizable.
+- The starting point is not marked on the grid, and while it's not vital, marking the destination point is necessary.
+- The grid is not centered in the window.
+- An graphical interface is needed to select a level or retry the level, not in a terminal.
+- The game is too static: nothing moves, and there are no special effects.
 
 All these points of improvement have been addressed, and you can find them in the main branch:
 
