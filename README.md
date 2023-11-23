@@ -115,3 +115,15 @@ python -m venv venv
 Tout est alors faisable directement dans l'interface graphique, plus besoin de switcher entre terminal et fenêtre du jeu.
 
 # Répartition du travail
+
+Nous avons procédé à une organisation en différents Sprints, où nous avons tous pu toucher à toutes les parties du jeu. Néanmoins voici en globalité les différents sujets que nous avons abordé :
+
+- Emmanuel : main loop, gestion des sons, affichage des menus, menu principal, interface ingame, trie des niveaux par difficultés
+
+- Henrik : la création des niveaux, les tests, le bouton next_level, des effets de particules
+
+- Thomas : la création des niveaux, l'encapsulation Surface, hit counter, affichage des cases spéciales
+
+- Juliette : Obstacle, affichage de la grille, des color switcher, menu de victoire, interface ingame, level loader et level editor
+
+- Enzo : Penser la structure du jeu, affichage du joueur, gestion des déplacements et destinations du joueur. Effets sur le joueur, Effets de lumière, de particules
