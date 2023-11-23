@@ -118,7 +118,7 @@ Tout est alors faisable directement dans l'interface graphique, plus besoin de s
 
 Nous avons procédé à une organisation en différents Sprints, où nous avons tous pu toucher à toutes les parties du jeu. Néanmoins voici en globalité les différents sujets que nous avons abordé :
 
-- Emmanuel : main loop, gestion des sons, affichage des menus, menu principal, interface ingame, trie des niveaux par difficultés
+- Emmanuel : main loop, gestion des sons, choix du design, gestion du timer, affichage des menus, gestion du menu principal, interface ingame, trie des niveaux par difficultés
 
 - Henrik : la création des niveaux, les tests, le bouton next_level, des effets de particules
 
