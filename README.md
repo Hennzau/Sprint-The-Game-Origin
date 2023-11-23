@@ -1,25 +1,24 @@
 # CodingWeeks2-jeeth  
   
-## Nom du jeu : Sprint  The Game
+## Name of the game : Sprint  The Game
   
-### Description :   
-Notre jeu est inspiré des jeux activeneurons2 et color switch.  
-Le personnage est un carré qui évolue sur un plan en 2D composé de murs de différentes couleurs. Lorsqu'une touche directionnelle est pressée, le personnage se déplace dans la direction correspondante jusqu'à atteindre un obstacle (impossible de s'arrêter avant de rencontrer un tel obstacle). Est considéré comme un obstacle un mur qui n'est pas de la même couleur que le joueur (le joueur passe à travers les murs de sa couleur). Des "color switchers" sont disposés sur le plan : quand le joueur les rencontre, sa couleur devient celle du color switcher (le joueur passe à travers les color switcher). Le but est de trouver le bon chemin pour atteindre le point d'arrivée.
+### Description:   
+Our game is inspired by the games ActiveNeurons2 and Color Switch. The character is a square navigating a 2D plane made up of walls of different colors. When a directional key is pressed, the character moves in the corresponding direction until it reaches an obstacle (it's impossible to stop before encountering such an obstacle). An obstacle is considered to be a wall that is not the same color as the player (the player can pass through walls of their own color). 'Color switchers' are placed on the plane: when the player encounters them, their color changes to that of the color switcher (the player can pass through color switchers). The goal is to find the right path to reach the endpoint.
 
-# Structuration du projet
+# Structure of the project
 
-L'ambition du projet a fait que nous devions dès le début imaginer une structure intéressante et modulable sur laquelle nous pouvions travailler à plusieurs sans rentrer dans d'incessants conflits. Voici ce que nous avons proposé :
+The ambition of the project led us to envision an interesting and adaptable structure from the outset, one that would allow us to work together without getting into incessant conflicts. Here is what we proposed:
 
 ```markdown
 ├── assets
-| 	├── fonts 	# contient les fonts récupérées sur internet
-│   ├── sounds 	# contient les sons créés par Emmanuel
-|	├── images 	# contient les illustrations créées par Emmanuel
-|	├── levels	# contient la liste des niveaux au format JSON
-├── level	# un package contenant des modules
-├── render	# un package contenant des modules
-├── effects	# un package contenant des modules
-├── editor	# un package contenant des modules
+| 	├── fonts 	# contains fonts downloaded on internet
+│   ├── sounds 	# contains sounds created by Emmanuel
+|	├── images 	# contains images created by Emmanuel
+|	├── levels	# contains JSON format of each level
+├── level	# a package full of module
+├── render	# a package full of module
+├── effects	# a package full of module
+├── editor	# a package full of module
 ├── game.py
 ├── main_menu.py
 ├── sound.py
@@ -27,7 +26,7 @@ L'ambition du projet a fait que nous devions dès le début imaginer une structu
 ├── *main.py*
 └── .gitignore
 ```
-### Le package 'level'
+### The 'level' package
 ```markdown
 ├── level	
 |	├── obstacle.py
@@ -37,22 +36,21 @@ L'ambition du projet a fait que nous devions dès le début imaginer une structu
 |	├── level_loader.py
 └── 
 ```
-Chacun des modules présents dans le package **'level'** permet de représenter un élément du jeu. D'abord ce qu'est un obstacle dans le module obstacle.py: c'est à dire une couleur, et ce qu'il fait au joueur (est ce que c'est une case de départ, de fin, est-ce que c'est un **color_switcher** ?). 
+Each of the modules within the **'level'** package serves to represent an element of the game. Firstly, in the module obstacle.py, there is a representation of what an obstacle is: that is, a color, and what it does to the player (whether it's a starting point, an endpoint, or a **color_switcher**).
 
-Cette description est représentée dans une class **Obstacle** qui sera ensuite instanciées plusieurs fois afin de remplir un **np.array** obstacles présent dans l'objet **Grid** dumodule 'grid.py'. Cette grille contient aussi un autre attribut **'size'** qui est un tupple représentant le nombre de cases en longueur et en largeur de la grille.
+This description is depicted within a Obstacle class, which will then be instantiated multiple times to populate an **np.array** of obstacles found in the Grid object from the 'grid.py' module. This grid also contains another attribute, **'size'**, which is a tuple representing the number of squares in length and width of the grid.
 
-De manière indépendante nous avons créé une class **'Player'** dans le module player.py. qui se charge de manipuler un joueur qui a une **position**, une **couleur** et une **destination**. Cet objet est alors manipulable par différente fonctions :
+Independently, we have created a **'Player'** class in the player.py module, responsible for handling a player who possesses a position, a color, and a destination. This object can then be manipulated by various functions:
+
 ```
-player.move_up (grid) # bouge le joueur vers le haut dans la grille 'grid'
+player.move_up (grid) # move the player up the grid
 player.move_down () #...
 player.move_right () #...
 player.move_left () #...
 ...
-player.update (delta_time) # fonction appelée n fois par secondes 
-# (main loop) qui vient déplacer le joueur vers sa destination 
-# de manière dynamique et smooth
+player.update (delta_time) # A function called 'n' times per second (main loop) that dynamically and smoothly moves the player toward its destination de manière dynamique et smooth
 ```
-Enfin l'objet qui vient englober les précécents afin de faire le jeu est l'objet **Level** qui possède sa propre **Grid** en attribut ainsi qu'il liste de **Player** que l'utilisateur manipulera. Tout est mis à jour grâce à la méthode 'update' de la class **Level** qui s'occupe entre autre de vérifier si l'utilisateur est en position gagnante pour lancer l'écran de victoire du jeu.
+Finally, the object that encompasses the aforementioned elements to create the game is the **Level** object, which has its own **Grid** as an attribute along with a list of **Player** objects that the user will manipulate. Everything is updated using the 'update' method of the **Level** class, which, among other tasks, checks if the user is in a winning position to trigger the game's victory screen.
 
 ### Le package 'render'
 ```markdown
@@ -66,32 +64,35 @@ Enfin l'objet qui vient englober les précécents afin de faire le jeu est l'obj
 |	├── box.py
 └── 
 ```
-Chacun de ses modules permet l'affichage du jeu dans une fenêtre **Pygame**, l'object **Surface** encapsule l'objet Surface proposé nativement par PyGame afin de faciliter certaines fonctions, surtout au niveau de la création de la fenêtre. Le module **box.py** contient 3 fonctions permettant de dessiner des boîtes simplement dans la gamme de couleur de notre jeu, ce module est destiné à être utilisé dans les modules draw_main_menu.py et draw_end_menu.py, qui permettent d'afficher un menu et de les gérer. de même pour le **Level** sont présents un objet **LevelRender**, et **GridRender** qui gère l'affichage du niveau grâce à une fonction render
+Each of these modules enables the display of the game within a **Pygame** window. The Surface object encapsulates the Surface object provided natively by PyGame to simplify certain functions, particularly in window creation. The box.py module contains three functions for easily drawing boxes in the color scheme of our game. This module is intended to be used within the modules draw_main_menu.py and draw_end_menu.py, responsible for displaying and managing menus, respectively.
+
+Similar to the above, for the **Level** module, there exist objects such as **LevelRender** and **GridRender** which handle the visual rendering of the level using a render function.
+
 ```
 level_render.render (surface)
 ```
-Il a été important de séparer la partie rendu de la partie logique afin que l'on puisse se répartir le travail intélligemment sans se marcher sur les pieds.
+It was important to separate the rendering aspect from the logical part so that we could intelligently distribute the work without stepping on each other's toes.
 
-## L'objet game et le module main.py
+## The Game object and the main.py module
 
-Avec ce que nous avons vu plus haut nous avons accès à deux packages permettant à la fois de représenter un niveau en python et de l'afficher dans une fenêtre pygame. Il faut donc les assembler afin de créer notre jeu. Le module main.py contient la fonction **main** de notre programme, qui doit être éxécutée pour lancer notre programme python (Voir les indications de lancement qui suivront la structuration du projet). 
+With what we've seen above, we have access to two packages that both represent a level in Python and display it in a **Pygame** window. Thus, we need to assemble them to create our game. The module main.py contains the main function of our program, which needs to be executed to launch our Python program (See the launch instructions following the project structure).
 
-Un objet game de la class **Game** charge en mémoire les différents niveaux présents dans le jeu, enregistrés au format JSON et chargées grâce à une fonction **build_level** dans le module **level/level_loader.py**. Il s'occupe alors de mettre à jour, d'afficher et de gérer les entrées claviers pour un niveau que nous pouvons lui spécifier (grâce au main menu par exemple). En même temps que d'afficher le niveau, l'objet game s'occupe également d'afficher l'interface du jeu, c'est à dire le timer, le nom du niveau, le score actuel du joueur et le score max enregistré sur le niveau.
+An object 'game' of the **Game** class loads the various levels present in the game, saved in JSON format and loaded using a build_level function in the **level/level_loader.py** module. It then handles updating, displaying, and managing keyboard inputs for a specified level (thanks to the main menu, for example). Alongside displaying the level, the 'game' object also manages the game interface, including the timer, level name, the player's current score, and the maximum score recorded for the level.
 
-La fonction **main** va alors créer tous les objets dont nous avons besoin : c'est à dire une **Surface** et un **Game** et créer la boucle principale (c'est à dire la main_loop)
+The main function will then create all the necessary objects: a **Surface** and a **Game**, and create the **main loop**.
 
-## Les effets
+## Effects
 
-Comme vous pouvez le voir sur la démo du jeu, il y'a de nombreux effets présents dans Sprint The Game, que ce soit au niveau sonore ou au niveau visuel. Tout ceci est fait dans un package **effects** et un module **sound.py** qui permettent de manipuler un objet **LightSystem**, un objet **ParticleSystem** ainsi que des fonctions comme **sound_collision**. Ces différents éléments sont utilisés intelligemment dans les class **Level et Player**. 
+As you can see in the game demo, there are numerous effects present in **Sprint The Game**, both in terms of sound and visuals. All of these are managed within a package called effects and a module named sound.py, which enable manipulation of a **LightSystem** object, a **ParticleSystem** object, as well as functions like sound_collision. These various elements are intelligently utilized within the Level and Player classes.
 
-# Les tests unitaires
+# Tests
 
-La gestion des tests unitaires a concerné la grille et les déplacements du joueur dans la grille. Pour cela nous avons créé un module **tests.py** qui contient différentes fonctions de test avec des fonctions `assert` pour observer le bon comportement d'un joueur dans une grille 3x3, ou encore différentes fonctions pour être sur que l'ajout d'obstacles dans le niveau fonctionne
+The unit testing management focused on the grid and player movements within the grid. For this purpose, we created a module tests.py containing various test functions with assert functions to observe the correct behavior of a player in a 3x3 grid. Additionally, there are different functions to ensure that adding obstacles to the level functions correctly.
 
-# Lancer le jeu
-D'abord nous tenons à vous informer que le présent README concerne la version finale du jeu, si vous souhaitez voir et lancer le MVP associé à ce projet ainsi que les notes à l'utilisateur, merci de vous rendre dans la branch **MVP-demo** : [branch MVP-demo](https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth/-/tree/MVP-demo?ref_type=heads)
+# Launch the game
+Firstly, we would like to inform you that this README pertains to the final version of the game. If you wish to view and launch the associated MVP (Minimum Viable Product) of this project along with user notes, please proceed to the **MVP-demo** branch : [branch MVP-demo](https://gitlab-student.centralesupelec.fr/enzo.le-van/codingweeks2-jeeth/-/tree/MVP-demo?ref_type=heads)
 
-Les instructions de lancement du jeu final sont similaire à celle du MVP :
+Instructions for launching the final game are similar to those of the MVP :
 
 Here's what you need to do:
 - Clone this branch from our repository to your computer:
@@ -112,18 +113,18 @@ python -m venv venv
 ```
 .\venv\Scripts\python main.py
 ```
-Tout est alors faisable directement dans l'interface graphique, plus besoin de switcher entre terminal et fenêtre du jeu.
+Everything is achievable directly within the graphical interface, eliminating the need to switch between the terminal and the game window.
 
-# Répartition du travail
+# Work distribution
 
-Nous avons procédé à une organisation en différents Sprints, où nous avons tous pu toucher à toutes les parties du jeu. Néanmoins voici en globalité les différents sujets que nous avons abordé :
+We proceeded with organization in different sprints, where each of us was able to work on various aspects of the game. However, here is an overview of the different topics we covered:
 
-- Emmanuel : main loop, gestion des sons, choix du design, gestion du timer, affichage des menus, gestion du menu principal, interface ingame, trie des niveaux par difficultés
+Emmanuel: Main loop, sound management, design choices, timer handling, menu display, main menu management, in-game interface, sorting levels by difficulty.
 
-- Henrik : la création des niveaux, les tests, le bouton next_level, des effets de particules
+Henrik: Level creation, testing, next_level button, particle effects.
 
-- Thomas : la création des niveaux, l'encapsulation Surface, hit counter, affichage des cases spéciales
+Thomas: Level creation, Surface encapsulation, hit counter, display of special tiles.
 
-- Juliette : Obstacle, affichage de la grille, des color switcher, menu de victoire, interface ingame, level loader et level editor
+Juliette: Obstacle implementation, grid display, color switcher display, victory menu, in-game interface, level loader, and level editor.
 
-- Enzo : Penser la structure du jeu, affichage du joueur, gestion des déplacements et destinations du joueur. Effets sur le joueur, Effets de lumière, de particules
+Enzo: Game structure planning, player display, player movement and destination management, player effects, light effects, particle effects.
