@@ -9,6 +9,7 @@ from level.level_loader import build_level
 
 from render.surface import events
 from render.level_render import LevelRender
+from render.box import draw_empty_box, draw_covered_box
 
 from sound import sound_swipe
 
@@ -136,10 +137,7 @@ class Game:
             x = (((self.surface.width - (self.levels[self.cursor].grid.size[0]) * pixel_size) / 2) - 5) / 2 - 75
             y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
-            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x, y, 150, 100))
-            pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
-            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 142, 92))
-            pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
+            draw_empty_box(self.image, x, y, 150, 100)
 
             # print the current level
             current_level = "Level " + str(self.cursor + 1)
@@ -155,10 +153,7 @@ class Game:
                         self.surface.width - self.levels[self.cursor].grid.size[0] * pixel_size) / 8
             y = int((self.surface.height - (self.levels[self.cursor].grid.size[1]) * pixel_size) / 2) - 5
 
-            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x, y, 150, 100))
-            pygame.draw.rect(self.image, colors["Black"], pygame.Rect(x + 2, y + 2, 146, 96))
-            pygame.draw.rect(self.image, colors["ivory"], pygame.Rect(x + 4, y + 4, 142, 92))
-            pygame.draw.rect(self.image, colors["darkblue"], pygame.Rect(x + 5, y + 5, 140, 90))
+            draw_empty_box(self.image, x, y, 150, 100)
 
             # create the two options in the level : Reload the level and return to main menu
 
