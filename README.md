@@ -1,8 +1,8 @@
-# CodingWeeks2-jeeth  
-  
+# CodingWeeks2-jeeth
+
 ## Name of the game : Sprint  The Game
-  
-### Description:   
+
+### Description:
 Our game is inspired by the games ActiveNeurons2 and Color Switch. The character is a square navigating a 2D plane made up of walls of different colors. When a directional key is pressed, the character moves in the corresponding direction until it reaches an obstacle (it's impossible to stop before encountering such an obstacle). An obstacle is considered to be a wall that is not the same color as the player (the player can pass through walls of their own color). 'Color switchers' are placed on the plane: when the player encounters them, their color changes to that of the color switcher (the player can pass through color switchers). The goal is to find the right path to reach the endpoint.
 
 # Structure of the project
@@ -10,31 +10,31 @@ Our game is inspired by the games ActiveNeurons2 and Color Switch. The character
 The ambition of the project led us to envision an interesting and adaptable structure from the outset, one that would allow us to work together without getting into incessant conflicts. Here is what we proposed:
 
 ```markdown
-├── assets
-| 	├── fonts 	# contains fonts downloaded on internet
-|   ├── sounds 	# contains sounds created by Emmanuel
-|	├── images 	# contains images created by Emmanuel
-|	├── levels	# contains JSON format of each level
-├── level	# a package full of module
-├── render	# a package full of module
-├── effects	# a package full of module
-├── editor	# a package full of module
+.
+├── assets/
+│   ├── fonts/   # contains fonts downloaded from the internet
+│   ├── sounds/  # contains sounds created by Emmanuel
+│   ├── images/  # contains images created by Emmanuel
+│   └── levels/  # contains JSON files for each level
+├── level/     # package containing level-related modules
+├── render/    # package containing rendering modules
+├── effects/   # package containing effects modules
+├── editor/    # package containing editor modules
 ├── game.py
 ├── main_menu.py
 ├── sound.py
 ├── tests.py
-├── *main.py*
+├── main.py
 └── .gitignore
 ```
 ### The 'level' package
 ```markdown
-├── level	
-|	├── obstacle.py
-|	├── grid.py
-|	├── level.py
-|	├── player.py
-|	├── level_loader.py
-└── 
+level/
+├── obstacle.py
+├── grid.py
+├── level.py
+├── player.py
+└── level_loader.py
 ```
 Each of the modules within the **'level'** package serves to represent an element of the game. Firstly, in the module obstacle.py, there is a representation of what an obstacle is: that is, a color, and what it does to the player (whether it's a starting point, an endpoint, or a **color_switcher**).
 
@@ -62,7 +62,7 @@ Finally, the object that encompasses the aforementioned elements to create the g
 |	├── draw main menu.py
 |	├── draw end menu.py
 |	├── box.py
-└── 
+└──
 ```
 Each of these modules enables the display of the game within a **Pygame** window. The Surface object encapsulates the Surface object provided natively by PyGame to simplify certain functions, particularly in window creation. The box.py module contains three functions for easily drawing boxes in the color scheme of our game. This module is intended to be used within the modules draw_main_menu.py and draw_end_menu.py, responsible for displaying and managing menus, respectively.
 
